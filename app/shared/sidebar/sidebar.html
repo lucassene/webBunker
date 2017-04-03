@@ -1,0 +1,19 @@
+<button class="btn btn-default" id="toggle-sidebar" type="button" (click)="eventCalled()">
+	<span class="glyphicon glyphicon-menu-hamburger"></span>
+</button>
+<nav class="sidebar" [ngClass]="{sidebarPushRight: isActive}" id="sidebar-scroll">
+	<div class="sidebar-list-group">
+			<clanheader-cmp></clanheader-cmp>
+			<a routerLink="/main/home" routerLinkActive='active' class="sidebar-item"><img src="assets/img/ic_home.png" style="margin-right: 32px">Main</a>
+			<a routerLink="/main/new" routerLinkActive='active' class="sidebar-item"><img src="assets/img/ic_event_new.png" style="margin-right: 32px">Create event</a>
+			<a routerLink="/main/search" routerLinkActive='active' class="sidebar-item"><img src="assets/img/ic_event_search.png" style="margin-right: 32px">Search event</a>
+			<a routerLink="/main/my-events" routerLinkActive='active' class="sidebar-item"><img src="assets/img/ic_my_events.png" style="margin-right: 32px">My events</a>
+			<a routerLink="/main/history" routerLinkActive='active' class="sidebar-item"><img src="assets/img/ic_event_history.png" style="margin-right: 32px">History</a>
+			<div class="sidebar-divider">DATA</div>		
+			<a routerLink="/main/my-clan" routerLinkActive='active' class="sidebar-item"><img src="assets/img/ic_clan.png" style="margin-right: 32px">My clan</a>
+			<a routerLink="/main/profile" routerLinkActive='active' class="sidebar-item"><img src="assets/img/ic_person.png" style="margin-right: 32px">My profile</a>
+			<div class="sidebar-divider">OTHER</div>
+			<a routerLink="/main/about" routerLinkActive='active' class="sidebar-item"><img src="assets/img/ic_help.png" style="margin-right: 32px">About</a>
+			<a routerLink="/login" routerLinkActive='active' class="sidebar-item"><img src="assets/img/ic_exit.png" style="margin-right: 32px">Logout</a>	
+	</div>
+</nav>

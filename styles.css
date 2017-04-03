@@ -1,0 +1,407 @@
+htm{
+	height: 100%;
+}
+body {
+	background: #080e13;
+  	background: -webkit-radial-gradient(circle, #20272e, #080e13); /* Safari */
+  	background: -o-radial-gradient(circle, #20272e, #080e13); /* Opera 11.6 to 12.0 */
+  	background: -moz-radial-gradient(circle, #20272e, #080e13); /* Firefox 3.6 to 15 */
+  	background: radial-gradient(circle, #20272e, #080e13); /* Standard syntax */
+  	background-repeat: no-repeat;
+  	background-attachment: fixed;
+  	background-size: 100% 100%;
+  	height: 100%;
+}
+
+/* BOOTSTRAP MODIFICATIONS */
+.col-sm-4{
+	color: rgba(245,245,245,0.75);
+}
+
+a:visited, a:hover, a:active{
+	text-decoration: none;
+}
+
+.navbar, .navbar-inverse, .navbar-fixed-top{
+	background-color: transparent;
+	border-bottom: 3px solid #F5F5F5;
+	padding: 0;
+}
+
+.container-fluid{
+	padding-left: 0px;
+	padding-right: 0px;
+}
+
+/* CUSTOM ITENS */
+.mbtn{
+	border: 1px solid #9E9E9E;
+	padding: 16px 32px;
+	color: #F5F5F5;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	-webkit-transition-duration: 0.3s; /* Safari */
+    transition-duration: 0.3s;
+}
+
+.mbtn-psn{
+	background-color: #0288D1;
+	background-image: url("assets/img/ic_psn.png");
+	background-position: 16px;
+	background-repeat: no-repeat;
+	width: 100%;
+}
+
+.mbtn-psn:hover{
+	background-color: #005b8c;
+}
+
+.mbtn-psn:active{
+	-webkit-box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.6);
+	-moz-box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.6);
+	box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.6);
+	background-color: #0288D1;
+	border: 1px solid white;
+	-webkit-transition-duration: 0s; /* Safari */
+    transition-duration: 0s;
+}
+
+.mbtn-psn:focus{
+	border: 1px solid white;
+}
+
+.mbtn-live{
+	background-color: #388E3C;
+	background-image: url("assets/img/ic_live.png");
+	background-position: 16px;
+	background-repeat: no-repeat;
+	width: 100%;
+}
+
+.mbtn-live:hover{
+	background-color: #235b26;
+}
+
+.mbtn-live:active{
+	-webkit-box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.6);
+	-moz-box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.6);
+	box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.6);
+	background-color: #388E3C;
+	border: 1px solid white;
+	-webkit-transition-duration: 0s; /* Safari */
+    transition-duration: 0s;
+}
+
+.mbtn-live:focus{
+	border: 1px solid white;
+}
+
+.loader {
+	position: absolute;
+	left: 50%;
+  	top: 50%;
+  	border: 16px solid #080e13;
+  	border-radius: 50%;
+  	border-top: 16px solid #FF9100;
+  	width: 120px;
+  	height: 120px;
+  	-webkit-animation: spin 1.5s linear infinite;
+  	animation: spin 1.5s linear infinite;
+}
+
+@-webkit-keyframes spin {
+  	0% { -webkit-transform: rotate(0deg); }
+  	100% { -webkit-transform: rotate(360deg); }
+}
+
+@keyframes spin {
+  	0% { transform: rotate(0deg); }
+  	100% { transform: rotate(360deg); }
+}
+
+div.tab{
+	overflow: hidden;
+	background-color: transparent;
+	width: 100%
+}
+
+div.tab button{
+	background-color: transparent;
+	border: 0;
+	border-bottom: 3px solid transparent;
+	outline: none;
+	cursor: pointer;
+	padding: 16px;
+	width: 33.33%;
+	color: rgba(245,245,245,0.4);
+	letter-spacing: 2px;
+}
+
+div.tab button:hover{
+	background-color: rgba(158,158,158,0.1);
+	color: white;
+	border: none;
+	border-bottom: 3px solid rgb(158,158,158);	
+}
+
+div.tab button.active{
+	background-color: transparent;
+	color: white;
+	border: none;
+	border-bottom: 3px solid rgb(158,158,158);	
+}
+
+
+#toggle-sidebar{
+    position: fixed;
+    top: 11px;
+    left: 12px;
+    color: rgba(245,245,245,0.75);
+    background: none;
+    z-index: 3;
+    display: none;
+    border: none;
+    border-radius: 0;
+}
+
+#toggle-sidebar:hover{
+	background: rgba(158,158,158,0.1);
+	color: rgba(245,245,245,0.75);
+	border: 1px solid #9E9E9E;
+}
+
+.sidebar{
+  	border-radius: 0;
+  	position: fixed;
+    z-index: 3;
+    top: 50px;
+    margin-top: 3px;
+    left: 275px;
+    width: 275px;
+    margin-left: -275px;
+    border: none;
+    background: #bfbac1;
+    background: -webkit-linear-gradient(#6b7783, #959196); /* For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(#6b7783, #959196); /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(#6b7783, #959196); /* For Firefox 3.6 to 15 */
+    background: linear-gradient(#6b7783, #959196); /* Standard syntax */
+  	background-repeat: no-repeat;
+  	background-attachment: fixed;
+  	background-size: 100% 100%;
+    border-radius: 0;
+    overflow-y: auto;
+    bottom: 0;
+    overflow-x: hidden;
+    padding-bottom: 20px;
+    -webkit-transition: all 0.2s ease-in-out;
+       -moz-transition: all 0.2s ease-in-out;
+        -ms-transition: all 0.2s ease-in-out;
+         -o-transition: all 0.2s ease-in-out;
+            transition: all 0.2s ease-in-out;
+}
+
+.sidebar-list-group{
+	margin: 0;
+	padding: 0;
+	text-decoration: none;
+}
+
+.sidebar-item:link{
+	border: 0;
+	background-color: transparent;
+	color: rgb(245,245,245);
+	padding:16px 16px 16px 16px;
+	display: block;
+	text-decoration: none;
+}
+
+.sidebar-divider{
+	border-bottom: 2px solid white;
+	background-color: transparent;
+	padding: 16px 16px 4px 16px;
+	display: block;
+	color: rgba(245,245,245,0.5);
+	letter-spacing: 6px;
+	font-size: 1.1em;
+}
+
+.sidebar-item:visited{
+	color: rgb(255,255,255);
+	text-decoration: none;
+	background-color: rgba(28,34,40,0.4);
+}
+
+.sidebar-item:hover, .sidebar-item:active{
+	background-color: rgba(28,34,40,0.15);
+	text-decoration: none;
+	color: rgb(255,255,255);
+}
+
+.sidebar-item.active{
+	background-color: rgba(28,34,40,0.25);
+	text-decoration: none;
+	color: rgb(255,255,255);
+}
+
+.sidebarPushRight{
+    left: 275px !important;
+    z-index:10;
+}
+
+#sidebar-scroll::-webkit-scrollbar-track{
+	background: transparent;
+}
+
+#sidebar-scroll::-webkit-scrollbar{
+	width: 8px;
+	background-color: transparent;
+}
+
+#sidebar-scroll::-webkit-scrollbar-thumb{
+	background-color: rgba(28,34,40,0.4);
+}
+
+@font-face{
+	font-family: 'DestinyFont';
+	src: url('assets/font/d.ttf');
+}
+
+.page-title{
+	color: rgb(245,245,245);
+	text-align: center;
+	text-transform: uppercase;
+	height:50px;
+	margin: auto;
+	font-family: 'DestinyFont';
+	font-size: 1.4em;
+	overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    line-height: 50px;
+}
+
+.user-avatar {
+    border: 3px solid #FFF;
+    -webkit-border-radius: 50%;
+            border-radius: 50%;
+}
+
+.topnav{
+  	border-radius: 0;
+  	background-color: transparent;
+  	padding : 0;
+    z-index:2;
+	.text-center{
+    	text-align: center;
+    	padding-left : 0;
+    	cursor: pointer;
+	}    
+}
+
+.clanheader{
+	width: 100%;
+	height: 100px;
+	padding: 16px;
+	padding-top: 58px;
+	background-color: #560606;
+	background-image: url("assets/img/default_banner.jpg");
+	background-repeat: no-repeat;
+	background-position: center; 
+}
+
+.clan-logo{
+	max-width: 32px;
+	float: left;
+	display: inline-block;
+}
+
+.clan-info{
+	float: left;
+	display: inline-block;
+	margin-top: -3px;
+	padding-left: 22px;
+}
+
+.clan-name{
+	color: rgb(245,245,245);
+}
+
+.clan-motto{
+	color: rgba(245,245,245,0.75);
+	font-size: 0.8em;
+	display: block;
+}
+
+.main-container{
+  	margin: 50px 0 0 275px;
+    padding: 0px;
+    -ms-overflow-x: hidden;
+    overflow-x: hidden;
+    position: relative;
+    z-index: 1;
+}
+
+.mainContainerPushLeft{
+    margin : 55px 275px 0 0;
+}
+
+@media (min-width: 0){
+    .navbar-toggleable-xs {
+        display: block !important;
+    }
+}
+@media screen and (max-width: 600px) {
+    .topnav{
+        .text-center{
+            a{
+                font-size: 20px;
+            }
+        }
+    }
+    .page-title{
+    	font-size: 1em;
+    	padding-left: 32px;
+    }
+}
+@media screen and (max-width: 768px) {
+	.page-title{
+		font-size: 1.2em;
+	}
+    #toggle-sidebar{
+        display:block;
+    }
+    .topnav{
+        .text-center{
+            padding-left : 55px;
+        }
+    }
+    .top-right-nav{
+        display: none;
+    }
+    .navbar-brand{
+        float: none;
+        display: inline-block;
+        cursor: pointer;
+    }
+    
+    .show-name{
+        display: block !important;
+        z-index: 1;
+    }
+    .display-sm {
+        display:block;
+    }
+    .hide-sm{
+        display:none;
+    }
+    .sidebar{
+        left:0;
+    }
+    .main-container{
+        margin-left : 0;
+    }
+    .loading {
+        left: 39% !important;
+    }
+}
