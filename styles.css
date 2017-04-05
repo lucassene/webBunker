@@ -97,6 +97,14 @@ a:visited, a:hover, a:active{
 	border: 1px solid white;
 }
 
+.blue-title{
+	color: #0288D1;
+	padding-left: 16px;
+	margin: 0;
+	padding-top: 16px;
+	font-size: 1.1em;
+}
+
 .loader {
 	position: absolute;
 	left: 50%;
@@ -119,6 +127,8 @@ a:visited, a:hover, a:active{
   	0% { transform: rotate(0deg); }
   	100% { transform: rotate(360deg); }
 }
+
+/* TABS */
 
 div.tab{
 	overflow: hidden;
@@ -152,6 +162,81 @@ div.tab button.active{
 	border-bottom: 3px solid rgb(158,158,158);	
 }
 
+/* GAME LIST */
+
+div.game-list{
+	overflow: hidden;
+	background-color: transparent;
+	width: 100%;
+	padding: 8px;
+}
+
+div.game-list-left{
+	float: left;
+	padding-top: 4px;
+}
+
+div.game-list-right{
+	float: right;
+	padding-top: 4px;
+}
+
+div.game-list button{
+	background-color: rgba(158,158,158,0.05);
+	border: 1px solid #757575;
+	padding-top: 8px;
+	padding-bottom: 8px;
+	padding-right: 16px;
+	height: 72px;
+	outline: none;
+	cursor: pointer;
+	display: block;
+	width: 100%;
+	margin-top: 8px;
+	background-position: 8px 8px;
+	background-repeat: no-repeat;
+	background-size: 54px;
+}
+
+div.game-list button:hover{
+	background-color: rgba(158,158,158,0.2);
+}
+
+div.game-list-line{
+	display: inline block;
+	max-width: 18px;
+}
+
+p.item-title{
+	padding-left: 72px;
+	color: #FF9100;
+	line-height: 9px;
+	text-align: left;
+	text-overflow: ellipsis;
+}
+
+p.item-subtitle{
+	padding-left: 72px;
+	color: rgba(245,245,245,0.75);
+	line-height: 9px;
+	text-align: left;
+	text-overflow: ellipsis;
+}
+
+p.item-creator{
+	padding-left: 72px;
+	color: rgba(245,245,245,0.4);
+	line-height: 9px;
+	text-align: left;
+	text-overflow: ellipsis;
+}
+
+p.item-max, p.item-time, p.item-date{
+	color: rgba(245,245,245,0.75);
+	line-height: 8px;
+	text-align: right;
+	text-overflow: ellipsis;
+}
 
 #toggle-sidebar{
     position: fixed;
@@ -289,7 +374,7 @@ div.tab button.active{
 
 .topnav{
   	border-radius: 0;
-  	background-color: transparent;
+  	background-color: #080e13;
   	padding : 0;
     z-index:2;
 	.text-center{

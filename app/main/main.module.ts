@@ -29,7 +29,7 @@ import {ClanHeaderComponent} from '../shared/index';
       HistoryModule,
       MyClanModule,
       ProfileModule,
-      AboutModule
+      AboutModule,
     ],
     declarations: [MainComponent, TopNavComponent, ClanHeaderComponent, SidebarComponent],
     exports: [MainComponent, TopNavComponent, ClanHeaderComponent, SidebarComponent]
