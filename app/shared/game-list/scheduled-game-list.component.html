@@ -1,3 +1,4 @@
+<div class="fade-in">
 <h4 class="blue-title">Scheduled events</h4>
 <div class="game-list">
 	<button [ngStyle]="{'background-image': 'url(assets/img/'+ game.event.icon +')'}" *ngFor="let game of games | gameStatus: 0:true">
@@ -12,4 +13,5 @@
 		<p class="item-date">{{game.time}}</p>
 	</div>
 	</button>
+</div>
 </div>
