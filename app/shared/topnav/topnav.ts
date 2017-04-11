@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 declare var $: any;
 
@@ -8,6 +8,10 @@ declare var $: any;
 })
 
 export class TopNavComponent {
+  
+  @Input() pageTitle;
+  
+  
   rtl(): void {
     let body: any = $('body');
     body.toggleClass('rtl');

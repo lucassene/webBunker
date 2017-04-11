@@ -9,6 +9,9 @@ import { routes } from './app.routes';
 import { LoginModule } from './login/login.module';
 import { MainModule } from './main/main.module';
 
+import { InMemoryWebApiModule } from 'angular-in-memory-web-api';
+import { InMemoryDataService } from './services/in-memory-data.service';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -19,7 +22,8 @@ import { MainModule } from './main/main.module';
     HttpModule,
     RouterModule.forRoot(routes),
     LoginModule,
-    MainModule
+    MainModule,
+    InMemoryWebApiModule.forRoot(InMemoryDataService),
   ],
   providers: [],
   bootstrap: [AppComponent]

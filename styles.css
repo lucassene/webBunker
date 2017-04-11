@@ -11,6 +11,7 @@ body {
   	background-attachment: fixed;
   	background-size: 100% 100%;
   	height: 100%;
+  	min-height: 100%;
 }
 
 /* BOOTSTRAP MODIFICATIONS */
@@ -31,9 +32,30 @@ a:visited, a:hover, a:active{
 .container-fluid{
 	padding-left: 0px;
 	padding-right: 0px;
+	height: 100%;
 }
 
+.control-label{
+	color: rgba(245,245,245,0.75);
+}
+
+.form-control {
+	background-color: transparent;
+	color: rgba(245,245,245,0.5);
+}
+
+.form-horizontal {
+	padding-left: 16px;
+	padding-right: 16px;
+}
+
+
 /* CUSTOM ITENS */
+option{
+	background-color: #959196;
+	color: white;
+}
+
 .mbtn{
 	border: 1px solid #9E9E9E;
 	padding: 16px 32px;
@@ -133,7 +155,8 @@ a:visited, a:hover, a:active{
 div.tab{
 	overflow: hidden;
 	background-color: transparent;
-	width: 100%
+	width: 100%;
+	min-height: 100%;
 }
 
 div.tab button{
@@ -169,6 +192,7 @@ div.game-list{
 	background-color: transparent;
 	width: 100%;
 	padding: 8px;
+	height: 100%;
 }
 
 .fade-in {
@@ -347,6 +371,7 @@ p.item-max, p.item-time, p.item-date{
 .sidebarPushRight{
     left: 275px !important;
     z-index:10;
+    height: 100%;
 }
 
 #sidebar-scroll::-webkit-scrollbar-track{
@@ -379,6 +404,7 @@ p.item-max, p.item-time, p.item-date{
     text-overflow: ellipsis;
     white-space: nowrap;
     line-height: 50px;
+    letter-spacing: 12px;
 }
 
 .user-avatar {
@@ -440,6 +466,7 @@ p.item-max, p.item-time, p.item-date{
     overflow-x: hidden;
     position: relative;
     z-index: 1;
+    height: 100%;
 }
 
 .mainContainerPushLeft{
@@ -461,7 +488,7 @@ p.item-max, p.item-time, p.item-date{
     }
     .page-title{
     	font-size: 1em;
-    	padding-left: 32px;
+    	padding-left: 50px;
     }
 }
 @media screen and (max-width: 768px) {
@@ -500,6 +527,7 @@ p.item-max, p.item-time, p.item-date{
     }
     .main-container{
         margin-left : 0;
+        height: 100%;
     }
     .loading {
         left: 39% !important;

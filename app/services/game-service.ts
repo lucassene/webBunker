@@ -4,18 +4,19 @@ import { Headers, Http } from '@angular/http';
 import 'rxjs/add/operator/toPromise';
 
 import { Game } from '../models/game';
-import { GAMES } from './mock-games';
 
 @Injectable()
 export class GameService {
 
   private serverUrl = 'https://destiny-scheduler.herokuapp.com/';
   private gameEndpoint = 'api/game';
+  private url = 'api/games';
 
   constructor(private http: Http) { }
 
   getGamesFromServer(): Promise<Game[]> {
-    const headers = new Headers();
+    
+    /*const headers = new Headers();
     headers.append('membership', '4611686018437203239');
     headers.append('platform', '2');
     headers.append('zoneId', 'America/Sao_Paulo');
@@ -28,7 +29,9 @@ export class GameService {
     return this.http.get(url, {headers: headers})
       .toPromise()
       .then(response => response.json().data as Game[])
-      .catch(this.handleError);
+      .catch(this.handleError); */
+    
+    return null;
   }
 
   private handleError(error: any): Promise<any> {
@@ -42,9 +45,12 @@ export class GameService {
     setTimeout(() => resolve(this.getGamesFromServer()), 1000);
   });
   }
-
-  getAllGames(): Game[] {
-    return GAMES;
-  }
+  
+  getGamesFromWebAPI() {
+    return this.http.get(this.url)
+      .toPromise()
+      .then(response => response.json().data as Game[])
+      .catch(this.handleError);
+  }    
 
 }

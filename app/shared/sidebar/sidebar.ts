@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'sidebar-cmp',
@@ -6,6 +6,10 @@ import { Component } from '@angular/core';
 })
 
 export class SidebarComponent {
+  
+  @Output()
+  changeTitleString = new EventEmitter<string>();
+  
   isActive = false;
   showMenu: string = '';
   eventCalled() {
@@ -18,4 +22,9 @@ export class SidebarComponent {
       this.showMenu = element;
     }
   }
+  
+  changeTitle(title: string) {
+    this.changeTitleString.emit(title);
+  }
+  
 }

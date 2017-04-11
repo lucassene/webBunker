@@ -5,4 +5,12 @@ import { Component } from '@angular/core';
   templateUrl: 'main.component.html'
 })
 
-export class MainComponent { }
+export class MainComponent {
+
+  pageTitle = 'The Bunker';
+
+  changeTitleString(title: string) {
+    this.pageTitle = title;
+  }
+
+ }

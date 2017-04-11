@@ -1,7 +1,7 @@
 <div class="fade-in">
-<h4 class="blue-title">Finished events</h4>
+<h4 class="blue-title">Recent events</h4>
 <div class="game-list">
-	<button [ngStyle]="{'background-image': 'url(assets/img/'+ game.event.icon +')'}" *ngFor="let game of games | gameStatus: 1:true">
+	<button [ngStyle]="{'background-image': 'url(assets/img/'+ game.event.icon +')'}" *ngFor="let game of games">
 	<div class="game-list-left">
 		<p class="item-title">{{game.event.en}}</p>
 		<p class="item-subtitle">{{game.event.eventType.en}}</p>
@@ -9,8 +9,8 @@
 	</div>
 	<div class="game-list-right">
 		<p class="item-max">{{game.inscriptions}}/{{game.event.maxGuardians}}</p>		
-		<p class="item-time">11:19</p>
-		<p class="item-date">{{game.time}}</p>
+		<p class="item-time">{{game.time | slice:11:16}}</p>
+		<p class="item-date">{{game.time | date: 'dd/MM/yyyy'}}</p>
 	</div>
 	</button>
 </div>

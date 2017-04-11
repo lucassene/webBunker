@@ -1,8 +1,8 @@
 <tab-holder>
 	<tab tabTitle="recent">
-		<recent-game-list *ngIf="games; else loading" [games]="games"></recent-game-list>
+		<game-list *ngIf="games; else loading" [games]="recentGames"></game-list>
 		<ng-template #loading><h3>Carregando...</h3></ng-template>
 	</tab>
-	<tab tabTitle="scheduled"><scheduled-game-list *ngIf="games" [games]="games"></scheduled-game-list></tab>
-	<tab tabTitle="finished"><finished-game-list *ngIf="games" [games]="games"></finished-game-list></tab>
+	<tab tabTitle="scheduled"><game-list *ngIf="games" [games]="scheduledGames"></game-list></tab>
+	<tab tabTitle="finished"><game-list *ngIf="games" [games]="finishedGames"></game-list></tab>
 </tab-holder>

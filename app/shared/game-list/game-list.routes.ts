@@ -1,9 +1,9 @@
 import { Route } from '@angular/router';
-import { RecentGameListComponent } from './index';
+import { GameListComponent } from './index';
 
 export const GameListRoutes: Route[] = [
     {
-      path: 'recent-game-list',
-      component: RecentGameListComponent
+      path: 'game-list',
+      component: GameListComponent
     }
 ];
