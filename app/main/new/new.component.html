@@ -2,61 +2,54 @@
 	<div class="blue-title" style="padding-top: 32px; padding-left: 0px;">Game information</div>
 	<div class="form-group" style="padding-top: 16px">
 		<label class="control-label col-sm-1" for="type">Type:</label>
-		<div class="col-sm-4">
+		<div class="col-sm-11">
 			<select [(ngModel)]='selectedType' (change)="onChange($event.target.value)" class="form-control" id="gameType" name="gameType">
 				<option *ngFor="let type of types | orderbyName: 'type.en'" value={{type.id}}>{{type.en}}</option>
 			</select>
 		</div>
-		<div class="col-sm-7"></div>
 	</div>
 	<div class="form-group">
 		<label class="control-label col-sm-1" for="game">Game:</label>
-		<div class="col-sm-4">
+		<div class="col-sm-11">
 			<select class="form-control" id="game">
 			<option *ngFor="let event of events | orderbyName: 'event.en'" value={{event}}>{{event.en}}</option>
 		</select>
 		</div>
-		<div class="col-sm-7"></div>
 	</div>
 	<div class="blue-title" style="padding-top: 16px; padding-left: 0px;">Day and time</div>
 	<div class="form-group" style="padding-top: 16px">
     	<label class="control-label col-sm-1" for="date">Date:</label>
-    	<div class="col-sm-4">
+    	<div class="col-sm-11">
       		<input type="date" class="form-control" id="date" placeholder="Enter date">
     	</div>
-    	<div class="col-sm-7"></div>
   	</div>
 	<div class="form-group" style="padding-top: 16px">
     	<label class="control-label col-sm-1" for="time">Time:</label>
-    	<div class="col-sm-4">
+    	<div class="col-sm-11">
       		<input type="time" class="form-control" id="time" placeholder="Enter time">
     	</div>
-    	<div class="col-sm-7"></div>
   	</div>
   	<div class="blue-title" style="padding-top: 16px; padding-left: 0px;">Other</div>
 	<div class="form-group" style="padding-top: 16px">
     	<label class="control-label col-sm-1" for="light">Light:</label>
-    	<div class="col-sm-4">
+    	<div class="col-sm-11">
       		<input type="number" class="form-control" id="light" max="400" placeholder="Max 400">
     	</div>
-    	<div class="col-sm-7"></div>
   	</div>
 	<div class="form-group" style="padding-top: 16px">
     	<label class="control-label col-sm-1" for="comment">Comment:</label>
-    	<div class="col-sm-4">
+    	<div class="col-sm-11">
       		<input type="text" class="form-control" id="light" max="400" placeholder="Optional">
     	</div>
-    	<div class="col-sm-7"></div>
   	</div>
   	<div class="blue-title" style="padding-top: 16px; padding-left: 0px;">Spots</div>
 	<div class="form-group" style="padding-top: 16px">
     	<label class="control-label col-sm-1" for="comment">Reserved:</label>
-    	<div class="col-sm-4">
+    	<div class="col-sm-11">
       		<ul class="list-group">
       			<a href="#" class="list-group-item">No members have reservations</a>
       		</ul>
     	</div>
-    	<div class="col-sm-7"></div>
   	</div>
   	
 </form>

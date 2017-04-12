@@ -2,7 +2,6 @@ import { Component, OnInit} from '@angular/core';
 
 import { GameService} from '../../services/game-service';
 import { Game } from '../../models/game';
-import { StatusJoinedPipe } from './game-status.pipe';
 
 @Component({
   selector: 'home-cmp',
@@ -15,7 +14,8 @@ export class HomeComponent implements OnInit {
   games: Game[];
   recentGames: Game[];
   scheduledGames: Game[];
-  finishedGames: Game[];
+  waitingGames: Game[];
+  forEvaluationGames: Game[];
 
   constructor(private gameService: GameService) { }
 
@@ -25,9 +25,10 @@ export class HomeComponent implements OnInit {
 
   setLists(games: Game[]) {
     this.games = games;
-    this.recentGames = StatusJoinedPipe.prototype.transform(games, 0, false);
-    this.scheduledGames = StatusJoinedPipe.prototype.transform(games, 0, true);
-    this.finishedGames = StatusJoinedPipe.prototype.transform(games, 1, true);
+    this.recentGames = this.games.filter((item) => item.status == 0 && item.joined == false);
+    this.scheduledGames = this.games.filter((item) => item.status == 0 && item.joined == true);
+    this.waitingGames = this.games.filter((item) => item.status == 1 && item.joined == true);
+    this.forEvaluationGames = this.games.filter((item) => item.status == 2 && item.joined == true && item.evaluated == false);
   }
 
   ngOnInit(): void {

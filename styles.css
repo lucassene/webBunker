@@ -127,6 +127,14 @@ option{
 	font-size: 1.1em;
 }
 
+.orange-title{
+	color: #FF9100;
+	padding-left: 16px;
+	margin: 0;
+	padding-top: 16px;
+	font-size: 1.1em;
+}
+
 .loader {
 	position: absolute;
 	left: 50%;
@@ -185,16 +193,6 @@ div.tab button.active{
 	border-bottom: 3px solid rgb(158,158,158);	
 }
 
-/* GAME LIST */
-
-div.game-list{
-	overflow: hidden;
-	background-color: transparent;
-	width: 100%;
-	padding: 8px;
-	height: 100%;
-}
-
 .fade-in {
     -webkit-animation: fadeEffect 0.75s;
     animation: fadeEffect 0.75s; /* Fading effect takes 1 second */
@@ -210,14 +208,34 @@ div.game-list{
     to {opacity: 1;}
 }
 
+/* GAME LIST */
+
+div.game-list{
+	overflow: hidden;
+	background-color: transparent;
+	width: 100%;
+	padding: 8px;
+	height: 100%;
+	white-space: nowrap;
+	display: inline-block;
+}
+
 div.game-list-left{
 	float: left;
 	padding-top: 4px;
+	text-overflow: ellipsis;
+	overflow: hidden;
+	display: inline-block;
+	max-width: 240px;
 }
 
 div.game-list-right{
 	float: right;
 	padding-top: 4px;
+	text-overflow: ellipsis;
+	overflow: hidden;
+	display: inline-block;
+	max-width: 72px;
 }
 
 div.game-list button{
@@ -235,6 +253,9 @@ div.game-list button{
 	background-position: 8px 8px;
 	background-repeat: no-repeat;
 	background-size: 54px;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	overflow: hidden;
 }
 
 div.game-list button:hover{
@@ -244,6 +265,10 @@ div.game-list button:hover{
 div.game-list-line{
 	display: inline block;
 	max-width: 18px;
+}
+
+p:active, p:visited {
+	text-decoration: none;
 }
 
 p.item-title{
@@ -268,6 +293,17 @@ p.item-creator{
 	line-height: 9px;
 	text-align: left;
 	text-overflow: ellipsis;
+}
+
+p.item-lvl{
+	color: rgba(245,245,245,0.4);
+	text-align: right;
+	text-overflow: ellipsis;
+	overflow: hidden;
+	font-size: 5em;
+	vertical-align: middle;
+	height: 100%;
+	max-height: 52px;
 }
 
 p.item-max, p.item-time, p.item-date{
@@ -398,6 +434,7 @@ p.item-max, p.item-time, p.item-date{
 	text-transform: uppercase;
 	height:50px;
 	margin: auto;
+	padding-left: 275px;
 	font-family: 'DestinyFont';
 	font-size: 1.4em;
 	overflow: hidden;
@@ -423,6 +460,39 @@ p.item-max, p.item-time, p.item-date{
     	padding-left : 0;
     	cursor: pointer;
 	}    
+}
+
+.clan-holder{
+	background-repeat: no-repeat;
+	background-position: center;
+	background-origin: content-box;
+	height: 220px;
+	padding: 16px;
+}
+
+.clan-info-holder {
+	text-align: left;
+	max-height: 72px;
+	padding-left: 32px;
+	margin-top: 110px;
+}
+
+.clan-text-holder{
+	display: inline-block;
+	vertical-align: middle;
+	padding-left: 8px;
+}
+
+.clan-title-holder{
+	display: block;
+	font-size: 1.5em;
+	color: rgba(245,245,245,0.75);
+}
+
+.clan-motto-holder{
+	display: block;
+	font-size: 1em;
+	color: rgba(245,245,245,0.45);
 }
 
 .clanheader{
@@ -467,6 +537,7 @@ p.item-max, p.item-time, p.item-date{
     position: relative;
     z-index: 1;
     height: 100%;
+    min-width: 550px;
 }
 
 .mainContainerPushLeft{
@@ -490,10 +561,16 @@ p.item-max, p.item-time, p.item-date{
     	font-size: 1em;
     	padding-left: 50px;
     }
+    .main-container{
+        margin-left : 0;
+        height: 100%;
+        min-width: 350px;
+    }
 }
 @media screen and (max-width: 768px) {
 	.page-title{
 		font-size: 1.2em;
+		padding-left: 50px;
 	}
     #toggle-sidebar{
         display:block;

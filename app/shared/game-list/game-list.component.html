@@ -1,7 +1,7 @@
 <div class="fade-in">
-<h4 class="blue-title">Recent events</h4>
+<h4 class="blue-title">{{title}}</h4>
 <div class="game-list">
-	<button [ngStyle]="{'background-image': 'url(assets/img/'+ game.event.icon +')'}" *ngFor="let game of games">
+	<button [ngStyle]="{'background-image': 'url(assets/img/'+ game.event.icon +'.png)'}" *ngFor="let game of games">
 	<div class="game-list-left">
 		<p class="item-title">{{game.event.en}}</p>
 		<p class="item-subtitle">{{game.event.eventType.en}}</p>

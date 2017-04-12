@@ -1,13 +1,14 @@
 <form class="form-horizontal fade-in">
 	<div class="blue-title" style="padding-top: 32px; padding-left: 0px;">Choose a type:</div>
 		<div class="form-group" style="padding-top: 16px">
-		<label class="control-label col-sm-1" for="type">Type:</label>
+		<label class="control-label col-sm-1" for="type">Filter:</label>
 		<div class="col-sm-11">
-			<select class="form-control" id="gameType" name="gameType">
+			<select [(ngModel)]='selectedType' (change)="onChange($event.target.value)" class="form-control" id="gameType" name="gameType">
 				<option value="0">All</option>
 				<option *ngFor="let type of types | orderbyName: 'type.en'" value={{type.id}}>{{type.en}}</option>
 			</select>
 		</div>
 	</div>
 </form>
-<game-list *ngIf="games" [games]="games"></game-list>
+<game-list title="Available events" *ngIf="games" [games]="filteredList"></game-list>
+<h3 *ngIf="!games">Carregando...</h3>

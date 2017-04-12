@@ -15,10 +15,10 @@ export class NewEventComponent implements OnInit {
   types = types;
   events = events;
 
-  selectedType = types[0].id;
+  selectedType = types[1].id;
   
   ngOnInit() {
-    this.selectedType = types[0].id;
+    this.selectedType = types[1].id;
     this.events = events.filter((item) => item.eventType.id == this.selectedType);
   }
 

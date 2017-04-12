@@ -5,11 +5,10 @@ import { OrderbyNamePipe } from './orderby-name.pipe';
 import { FormsModule } from '@angular/forms';
 
 import { GameListModule } from '../../shared/game-list/game-list.module';
-import { StatusJoinedPipe } from'./game-status.pipe';
 
 @NgModule({
     imports: [CommonModule, FormsModule, GameListModule],
-    declarations: [SearchComponent, OrderbyNamePipe, StatusJoinedPipe],
+    declarations: [SearchComponent, OrderbyNamePipe],
     exports: [SearchComponent]
 })
 

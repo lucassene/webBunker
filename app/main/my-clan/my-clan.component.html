@@ -1,1 +1,18 @@
-<h1>My clan Component</h1>
+<div class="fade-in">
+	<div class="row" style="padding-top: 16px; margin-left: 16px; margin-right: 16px;" *ngIf="clan">
+		<div class="col-sm-12 clan-holder" [ngStyle]="{'background-image': 'url(https://www.bungie.net'+ clan.background +')'}">
+			<div class="clan-info-holder">
+				<img src="{{'https://www.bungie.net' + clan.icon}}" style="max-height: 72px; display: inline-block">
+				<div class="clan-text-holder">
+					<div class="clan-title-holder">{{clan.name}}
+					</div>
+					<div class="clan-motto-holder">{{clan.description}}
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<member-list title="Members" *ngIf="members" [members]="members"></member-list>
+	<h3 *ngIf="!members">Carregando...</h3>
+</div>

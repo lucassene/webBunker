@@ -1,1 +1,14 @@
-<h1>My events Component</h1>
+<form class="form-horizontal fade-in">
+	<div class="blue-title" style="padding-top: 32px; padding-left: 0px;">Event status:</div>
+		<div class="form-group" style="padding-top: 16px">
+		<label class="control-label col-sm-1" for="type">Filter:</label>
+		<div class="col-sm-11">
+			<select [(ngModel)]='selectedStatus' (change)="onChange($event.target.value)" class="form-control" id="gameStatus" name="gameStatus">
+				<option value="99">All</option>
+				<option *ngFor="let status of statuses" value={{status.status}}>{{status.en}}</option>
+			</select>
+		</div>
+	</div>
+</form>
+<game-list title="Available events" *ngIf="games" [games]="filteredList"></game-list>
+<h3 *ngIf="!games">Carregando...</h3>
