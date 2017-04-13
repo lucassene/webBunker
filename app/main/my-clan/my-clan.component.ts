@@ -15,6 +15,7 @@ export class MyClanComponent implements OnInit {
 
   members: Member[];
   clan: Clan;
+  total: number;
 
   constructor(private memberService: MemberService, private clanService: ClanService) { }
 
@@ -30,6 +31,7 @@ export class MyClanComponent implements OnInit {
 
   setMembers(members: Member[]): void {
     this.members = members;
+    this.total = members.length;
     console.log('members lenght: ', this.members.length);
   }
 

@@ -8,14 +8,16 @@ import { Component, Input } from '@angular/core';
 export class MemberListComponent {
 
     @Input() members;
+    @Input() total;
     @Input() title;
-  
+    @Input() showTitleBar;
+
   getMemberLvl(likes: number, dislikes: number, created: number, played: number): string {
     const lfactor = likes * 16;
     const dfactor = dislikes * 16;
     const cfactor = created * 64;
     const pfactor = played * 48;
-    
+
     const xp = ( lfactor + cfactor + pfactor) - dfactor;
     const xp2 = xp / 8;
     const lvl = Math.sqrt(xp2);
@@ -24,7 +26,7 @@ export class MemberListComponent {
     if (resto > 0) {
       inteiro = inteiro + 1;
     }
-    
+
     if (inteiro < 1) {
       return '01';
     } else {

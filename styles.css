@@ -19,6 +19,15 @@ body {
 	color: rgba(245,245,245,0.75);
 }
 
+.form-group{
+	padding-left: 32px;
+	padding-right: 32px;
+}
+
+.control-label{
+	padding-bottom: 4px;
+}
+
 a:visited, a:hover, a:active{
 	text-decoration: none;
 }
@@ -56,6 +65,27 @@ option{
 	color: white;
 }
 
+.add-member-btn{
+	border: 1px solid #9E9E9E;
+	border-radius: 3px;
+	text-align: center;
+	text-decoration: none;
+	margin-top: auto;
+	margin-bottom: auto;
+	padding-top: 6px;
+	padding-left: 1px;
+	background-color: #FF9100;
+	color: black;
+	height: 32px;
+	width: 32px;
+	display: inline-block;
+}
+
+.add-member-btn:hover{
+	color: white;
+	cursor: pointer;
+}
+
 .mbtn{
 	border: 1px solid #9E9E9E;
 	padding: 16px 32px;
@@ -65,6 +95,21 @@ option{
 	display: inline-block;
 	-webkit-transition-duration: 0.3s; /* Safari */
     transition-duration: 0.3s;
+}
+
+.mbtn-enabled{
+	background-color: rgba(0, 189, 78, 0.75);
+	letter-spacing: 4px;
+	margin-left: auto;
+	margin-right: auto;
+	width: 260px;
+	height: 50px;
+}
+
+.mbtn-enabled:hover{
+	cursor: pointer;
+	border: 1px solid white;
+	color: #F5F5F5;
 }
 
 .mbtn-psn{
@@ -105,7 +150,7 @@ option{
 	background-color: #235b26;
 }
 
-.mbtn-live:active{
+.mbtn-live:active, .mbtn-enabled:active{
 	-webkit-box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.6);
 	-moz-box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.6);
 	box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.6);
@@ -121,9 +166,8 @@ option{
 
 .blue-title{
 	color: #0288D1;
-	padding-left: 16px;
 	margin: 0;
-	padding-top: 16px;
+	padding: 32px 0px 4px 16px;
 	font-size: 1.1em;
 }
 
@@ -183,19 +227,25 @@ div.tab button:hover{
 	background-color: rgba(158,158,158,0.1);
 	color: white;
 	border: none;
-	border-bottom: 3px solid rgb(158,158,158);	
+	border-bottom: 3px solid rgb(158,158,158);
 }
 
 div.tab button.active{
 	background-color: transparent;
 	color: white;
 	border: none;
-	border-bottom: 3px solid rgb(158,158,158);	
+	border-bottom: 3px solid rgb(158,158,158);
 }
 
 .fade-in {
     -webkit-animation: fadeEffect 0.75s;
     animation: fadeEffect 0.75s; /* Fading effect takes 1 second */
+}
+
+.disabled{
+	opacity: 0.25;
+	transition-duration: opacity 1.0s;
+	-webkit-transition-duration: opacity 1.0s;
 }
 
 @-webkit-keyframes fadeEffect {
@@ -236,6 +286,17 @@ div.game-list-right{
 	overflow: hidden;
 	display: inline-block;
 	max-width: 72px;
+}
+
+div.member-total{
+	display: inline-block;
+	padding-top: 32px;
+	padding-bottom: 16px;
+	padding-right: 16px;
+	float: right;
+	color: rgba(255,255,255,0.5);
+	font-size: 1em;
+	height: 52px;
 }
 
 div.game-list button{
@@ -459,13 +520,13 @@ p.item-max, p.item-time, p.item-date{
     	text-align: center;
     	padding-left : 0;
     	cursor: pointer;
-	}    
+	}
 }
 
 .clan-holder{
-	background-repeat: no-repeat;
 	background-position: center;
-	background-origin: content-box;
+	background-origin: border-box;
+	background-size: cover;
 	height: 220px;
 	padding: 16px;
 }
@@ -475,6 +536,8 @@ p.item-max, p.item-time, p.item-date{
 	max-height: 72px;
 	padding-left: 32px;
 	margin-top: 110px;
+	white-space: nowrap;
+	overflow: hidden;
 }
 
 .clan-text-holder{
@@ -487,51 +550,65 @@ p.item-max, p.item-time, p.item-date{
 	display: block;
 	font-size: 1.5em;
 	color: rgba(245,245,245,0.75);
+	text-overflow: ellipsis;
 }
 
 .clan-motto-holder{
 	display: block;
 	font-size: 1em;
 	color: rgba(245,245,245,0.45);
+	text-overflow: ellipsis;
 }
 
 .clanheader{
-	width: 100%;
-	height: 100px;
+	height: 125px;
 	padding: 16px;
-	padding-top: 58px;
+	padding-top: 76px;
 	background-color: #560606;
-	background-image: url("assets/img/default_banner.jpg");
 	background-repeat: no-repeat;
-	background-position: center; 
+	background-position: center;
+	background-origin: border-box;
+	background-size: cover;
+	white-space: normal;
+	overflow: hidden;
+	text-overflow: ellipsis;
 }
 
 .clan-logo{
 	max-width: 32px;
-	float: left;
 	display: inline-block;
 }
-
 .clan-info{
-	float: left;
+	text-align: left;
+	white-space: nowrap;
+	overflow: hidden;
+	background-repeat: no-repeat;
+	background-position: left;
+	background-origin: border-box;
+	background-size: contain;
+	max-height: 55px;
 	display: inline-block;
-	margin-top: -3px;
-	padding-left: 22px;
+	padding-left: 48px;
 }
 
 .clan-name{
 	color: rgb(245,245,245);
+	text-overflow: ellipsis;
+	display: block;
 }
 
 .clan-motto{
 	color: rgba(245,245,245,0.75);
 	font-size: 0.8em;
 	display: block;
+	text-overflow: ellipsis;
+	max-width: 184px;
 }
 
 .main-container{
   	margin: 50px 0 0 275px;
     padding: 0px;
+		padding-top: 32px;
     -ms-overflow-x: hidden;
     overflow-x: hidden;
     position: relative;
@@ -588,7 +665,7 @@ p.item-max, p.item-time, p.item-date{
         display: inline-block;
         cursor: pointer;
     }
-    
+
     .show-name{
         display: block !important;
         z-index: 1;

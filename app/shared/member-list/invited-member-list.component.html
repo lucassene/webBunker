@@ -1,0 +1,15 @@
+<div>
+<div class="game-list">
+	<button [ngStyle]="{'background-image': 'url(http://www.bungie.net'+ member.icon +')'}" (click)="onClick(member)" *ngFor="let member of members | orderbyName 'member.name'" class="fade-in">
+	<div class="game-list-left">
+		<p class="item-subtitle" style="font-size: 1.3em">{{member.name}}</p>
+		<p class="item-creator">{{member.memberTitle.en}}</p>
+	</div>
+	<div class="game-list-right" style="height: 100%; vertical-align: middle;">
+		<i *ngIf="member.membership === ''" class="glyphicon glyphicon-remove" style="color: rgba(244, 78, 53, 0.5)"></i>
+		<i *ngIf="member.membership !== '' && member.membership !== '0.25'" class="glyphicon glyphicon-minus" style="color: rgba(244, 78, 53, 0.5)"></i>
+		<i *ngIf="member.membership === '0.25'" class="glyphicon glyphicon-plus" style="color: rgba(0, 189, 78, 0.75)"></i>
+	</div>
+	</button>
+</div>
+</div>

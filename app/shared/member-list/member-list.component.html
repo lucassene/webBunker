@@ -1,10 +1,15 @@
 <div class="fade-in">
-<h4 class="blue-title">{{title}}</h4>
+	<div *ngIf="showTitleBar">
+		<h4 class="blue-title" style="display: inline-block">{{title}}</h4>
+		<div class="member-total">
+			{{total}}<img src="src/assets/img/ic_clan.png" style="padding-left: 8px">
+		</div>
+	</div>
 <div class="game-list">
-	<button [ngStyle]="{'background-image': 'url(http://www.bungie.net'+ member.icon +')'}" *ngFor="let member of members | orderbyName 'member.name'">
+	<button [ngStyle]="{'background-image': 'url(http://www.bungie.net'+ member.icon +')'}" *ngFor="let member of members | orderbyName 'member.name'" class="fade-in">
 	<div class="game-list-left">
 		<p class="item-subtitle" style="font-size: 1.3em">{{member.name}}</p>
-		<p class="item-creator">{{member.memberTitle.en}}</p>	
+		<p class="item-creator">{{member.memberTitle.en}}</p>
 	</div>
 	<div class="game-list-right" style="height: 100%">
 		<p class="item-lvl" style="font-size: 2em; margin-top: auto; margin-bottom: auto;">{{getMemberLvl(member.likes, member.dislikes, member.gamesCreated, member.gamesPlayed)}}</p>

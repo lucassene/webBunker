@@ -1,15 +1,22 @@
-import { Component, Output, EventEmitter } from '@angular/core';
+import { Component, Output, EventEmitter, OnInit } from '@angular/core';
+import { ClanService } from '../../services/clan-service';
+import { Clan } from '../../models/clan';
 
 @Component({
   selector: 'sidebar-cmp',
-  templateUrl: 'sidebar.html'
+  templateUrl: 'sidebar.html',
+  providers: [ClanService]
 })
 
-export class SidebarComponent {
-  
+export class SidebarComponent implements OnInit{
+
   @Output()
   changeTitleString = new EventEmitter<string>();
-  
+
+  clan: Clan;
+
+  constructor(private clanService: ClanService) { }
+
   isActive = false;
   showMenu: string = '';
   eventCalled() {
@@ -22,9 +29,18 @@ export class SidebarComponent {
       this.showMenu = element;
     }
   }
-  
+
+  ngOnInit(){
+    this.clanService.getClanFromWebAPI().then(clan => this.setClan(clan));
+  }
+
+  setClan(clan: Clan){
+    this.clan = clan;
+    console.log('clanName: ', this.clan.name);
+  }
+
   changeTitle(title: string) {
     this.changeTitleString.emit(title);
   }
-  
+
 }

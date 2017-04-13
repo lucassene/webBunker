@@ -5,10 +5,10 @@
 	<div class="game-list-left">
 		<p class="item-title">{{game.event.en}}</p>
 		<p class="item-subtitle">{{game.event.eventType.en}}</p>
-		<p class="item-creator">Created by {{game.creator.name}}</p>		
+		<p class="item-creator">Created by {{game.creator.name}}</p>
 	</div>
 	<div class="game-list-right">
-		<p class="item-max">{{game.inscriptions}}/{{game.event.maxGuardians}}</p>		
+		<p class="item-max">{{game.inscriptions}}/{{game.event.maxGuardians}}</p>
 		<p class="item-time">{{game.time | slice:11:16}}</p>
 		<p class="item-date">{{game.time | date: 'dd/MM/yyyy'}}</p>
 	</div>

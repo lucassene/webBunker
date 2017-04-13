@@ -18,9 +18,9 @@ export class Title {
 
 export const titles: Title[] = [
   {
-    pt: 'Novo no pedaÁo',
+    pt: 'Novo no peda√ßo',
     en: 'New on the block',
-    es: 'Nuevo no pedaÁo'
+    es: 'Nuevo no peda√ßo'
   },
   {
     pt: 'Novato de Ferro',
@@ -30,10 +30,42 @@ export const titles: Title[] = [
 ];
 
 export const defaultTitle: Title = {
-    pt: 'Novo no pedaÁo',
+    pt: 'Novo no peda√ßo',
     en: 'New on the block',
-    es: 'Nuevo no pedaÁo'
+    es: 'Nuevo no peda√ßo'
 };
+
+export const availableMember: Member = {
+  membership: '',
+  name: 'Available slot',
+  icon: '/img/profile/avatars/Destiny04.jpg',
+  platform: 2,
+  likes: 0,
+  dislikes: 0,
+  gamesCreated: 0,
+  gamesPlayed: -1,
+  memberTitle: {
+    en: 'Choose a member',
+    pt: 'Escolha um membro',
+    es: 'Selecciona un miembro'
+  }
+}
+
+export const blockedMember: Member = {
+  membership: '0.25',
+  name: '',
+  icon: '',
+  platform: 2,
+  likes: 0,
+  dislikes: 0,
+  gamesCreated: 0,
+  gamesPlayed: -2,
+  memberTitle: {
+    en: '',
+    pt: 'Vaga indispon√≠vel',
+    es: 'Slot unavailable'
+  }
+}
 
 export const members: Member[] = [
   {
