@@ -102,6 +102,7 @@ option{
 	letter-spacing: 4px;
 	margin-left: auto;
 	margin-right: auto;
+	margin-top: 16px;
 	width: 260px;
 	height: 50px;
 }
@@ -271,12 +272,11 @@ div.game-list{
 }
 
 div.game-list-left{
-	float: left;
 	padding-top: 4px;
 	text-overflow: ellipsis;
 	overflow: hidden;
 	display: inline-block;
-	max-width: 240px;
+	max-width: 320px;
 }
 
 div.game-list-right{
@@ -317,6 +317,7 @@ div.game-list button{
 	text-overflow: ellipsis;
 	white-space: nowrap;
 	overflow: hidden;
+	text-align: left;
 }
 
 div.game-list button:hover{
@@ -564,7 +565,7 @@ p.item-max, p.item-time, p.item-date{
 	height: 125px;
 	padding: 16px;
 	padding-top: 76px;
-	background-color: #560606;
+	background-color: #1c2228;
 	background-repeat: no-repeat;
 	background-position: center;
 	background-origin: border-box;
@@ -643,6 +644,16 @@ p.item-max, p.item-time, p.item-date{
         height: 100%;
         min-width: 350px;
     }
+		.clan-holder{
+			padding-left: 8px;
+			padding-right: 8px;
+		}
+		.clan-info-holder{
+			padding-left: 8px;
+		}
+		div.game-list-left{
+			max-width: 240px;
+		}
 }
 @media screen and (max-width: 768px) {
 	.page-title{
