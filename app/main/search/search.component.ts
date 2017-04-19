@@ -21,7 +21,7 @@ export class SearchComponent implements OnInit {
   constructor(private gameService: GameService) { }
 
   getGames(): void {
-    this.gameService.getGamesFromWebAPI().then(games => this.setLists(games));
+    //this.gameService.getGamesFromWebAPI().then(games => this.setLists(games));
   }
 
   setLists(games: Game[]) {

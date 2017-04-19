@@ -1,10 +1,9 @@
-import {Member} from './member';
+import {Creator} from './member';
 import {Event} from './event';
-import {Entry} from './entry';
 
-export class Game {
+export class Game{
   id: number;
-  creator: Member;
+  creator: Creator;
   event: Event;
   time: string;
   light: number;
@@ -12,8 +11,6 @@ export class Game {
   comment: string;
   reserved: number;
   inscriptions: number;
-  entries: Entry[];
   joined: boolean;
   evaluated: boolean;
-  available: number;
 }

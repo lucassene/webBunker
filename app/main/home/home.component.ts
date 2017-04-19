@@ -1,7 +1,6 @@
 import { Component, OnInit} from '@angular/core';
-
-import { GameService} from '../../services/game-service';
 import { Game } from '../../models/game';
+import { GameService} from '../../services/game-service';
 
 @Component({
   selector: 'home-cmp',
@@ -11,7 +10,7 @@ import { Game } from '../../models/game';
 
 export class HomeComponent implements OnInit {
 
-  games: Game[];
+  games: Game[]
   recentGames: Game[];
   scheduledGames: Game[];
   waitingGames: Game[];
@@ -20,11 +19,14 @@ export class HomeComponent implements OnInit {
   constructor(private gameService: GameService) { }
 
   getGames(): void {
-    this.gameService.getGamesFromWebAPI().then(games => this.setLists(games));
+    this.gameService.getGamesFromServer().then(games => this.setLists(games));
+    //this.gameService.getGamesFromServer().subscribe(games => console.log(games));
+    //console.log(this.games);
   }
 
   setLists(games: Game[]) {
     this.games = games;
+    console.log('games:', games);
     this.recentGames = this.games.filter((item) => item.status == 0 && item.joined == false);
     this.scheduledGames = this.games.filter((item) => item.status == 0 && item.joined == true);
     this.waitingGames = this.games.filter((item) => item.status == 1 && item.joined == true);

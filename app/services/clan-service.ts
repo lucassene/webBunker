@@ -17,7 +17,7 @@ export class ClanService {
 
   constructor(private http: Http) { }
 
-  getGamesFromServer(): Promise<Clan> {
+  getClanFromServer(): Promise<Clan> {
 
     /*const headers = new Headers();
     headers.append('membership', '4611686018437203239');
@@ -40,13 +40,6 @@ export class ClanService {
   private handleError(error: any): Promise<any> {
     console.error('An error occurred', error); // for demo purposes only
     return Promise.reject(error.message || error);
-  }
-
-  getClanFromWebAPI() {
-    return this.http.get(this.url)
-      .toPromise()
-      .then(response => response.json().data as Clan)
-      .catch(this.handleError);
   }
 
 }

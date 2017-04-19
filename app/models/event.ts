@@ -2,14 +2,35 @@ import {EventType} from './event-type';
 import {types} from './event-type';
 
 export class Event {
-  id: number;
-  icon: string;
-  minLight: number;
-  maxGuardians: number;
-  eventType: EventType;
-  en: string;
-  pt: string;
-  es: string;
+    id: number;
+    icon: string;
+    minLight: number;
+    maxGuardians: number;
+    eventType: EventType;
+    en: string;
+    pt: string;
+    es: string;
+
+    constructor(
+      id: number,
+      icon: string,
+      minLight: number,
+      maxGuardians: number,
+      eventType: EventType,
+      en: string,
+      pt: string,
+      es: string,
+    ) {
+      this.id = id;
+      this.icon = icon;
+      this.minLight = minLight;
+      this.maxGuardians = maxGuardians;
+      this.eventType = eventType;
+      this.en = en;
+      this.pt = pt;
+      this.es = es;
+    }
+
 }
 
 export const events: Event[] = [
@@ -20,8 +41,8 @@ export const events: Event[] = [
     maxGuardians: 3,
     eventType: types[0],
     en: 'Reciprocal Rune',
-    pt: 'Runa RecÌproca',
-    es: 'Runa RecÌproca'
+    pt: 'Runa Rec√≠proca',
+    es: 'Runa Rec√≠proca'
   },
   {
     id: 2,
@@ -60,8 +81,8 @@ export const events: Event[] = [
     maxGuardians: 3,
     eventType: types[1],
     en: 'Classic: 3x3',
-    pt: 'Cl·ssico: 3x3',
-    es: 'Cl·sico: 3x3'
+    pt: 'Cl√°ssico: 3x3',
+    es: 'Cl√°sico: 3x3'
   },
   {
     id: 6,
@@ -70,8 +91,8 @@ export const events: Event[] = [
     maxGuardians: 6,
     eventType: types[1],
     en: 'Classic: 6x6',
-    pt: 'Cl·ssico: 3x3',
-    es: 'Cl·sico: 6x6'
+    pt: 'Cl√°ssico: 3x3',
+    es: 'Cl√°sico: 6x6'
   },
   {
     id: 7,
@@ -80,8 +101,8 @@ export const events: Event[] = [
     maxGuardians: 6,
     eventType: types[1],
     en: 'Classic: Rumble',
-    pt: 'Cl·ssico: Briga',
-    es: 'Cl·sico: Disputa'
+    pt: 'Cl√°ssico: Briga',
+    es: 'Cl√°sico: Disputa'
   },
   {
     id: 8,
@@ -110,8 +131,8 @@ export const events: Event[] = [
     maxGuardians: 3,
     eventType: types[1],
     en: 'Elimination',
-    pt: 'EliminaÁ„o',
-    es: 'EliminaciÛn'
+    pt: 'Elimina√ß√£o',
+    es: 'Eliminaci√≥n'
   },
   {
     id: 11,
@@ -200,7 +221,7 @@ export const events: Event[] = [
     maxGuardians: 3,
     eventType: types[1],
     en: 'Salvage',
-    pt: 'RecuperaÁ„o',
+    pt: 'Recupera√ß√£o',
     es: 'Rescate'
   },
   {
@@ -240,8 +261,8 @@ export const events: Event[] = [
     maxGuardians: 3,
     eventType: types[2],
     en: 'Patrol the Cosmodrome',
-    pt: 'Patrulhe o CosmÛdromo',
-    es: 'Patrulla el CosmÛdromo'
+    pt: 'Patrulhe o Cosm√≥dromo',
+    es: 'Patrulla el Cosm√≥dromo'
   },
   {
     id: 24,
@@ -250,7 +271,7 @@ export const events: Event[] = [
     maxGuardians: 3,
     eventType: types[2],
     en: 'Patrol the Dreadnaught',
-    pt: 'Patrule o EncouraÁado',
+    pt: 'Patrule o Encoura√ßado',
     es: 'Patrulla el Acorazado'
   },
   {
@@ -280,7 +301,7 @@ export const events: Event[] = [
     maxGuardians: 3,
     eventType: types[2],
     en: 'Patrol Venus',
-    pt: 'Patrulhe VÍnus',
+    pt: 'Patrulhe V√™nus',
     es: 'Patrulla Venus'
   },
   {
@@ -290,7 +311,7 @@ export const events: Event[] = [
     maxGuardians: 3,
     eventType: types[3],
     en: 'Prison of Elders: 28',
-    pt: 'Pris„o dos Anciıes: 28',
+    pt: 'Pris√£o dos Anci√µes: 28',
     es: 'El Presidio de los Ancianos: 28'
   },
   {
@@ -300,7 +321,7 @@ export const events: Event[] = [
     maxGuardians: 3,
     eventType: types[3],
     en: 'Prison of Elders: 32',
-    pt: 'Pris„o dos Anciıes: 32',
+    pt: 'Pris√£o dos Anci√µes: 32',
     es: 'El Presidio de los Ancianos: 32'
   },
   {
@@ -310,7 +331,7 @@ export const events: Event[] = [
     maxGuardians: 3,
     eventType: types[3],
     en: 'Prison of Elders: 34',
-    pt: 'Pris„o dos Anciıes: 34',
+    pt: 'Pris√£o dos Anci√µes: 34',
     es: 'El Presidio de los Ancianos: 34'
   },
   {
@@ -320,7 +341,7 @@ export const events: Event[] = [
     maxGuardians: 3,
     eventType: types[3],
     en: 'Skola\'s Revenge',
-    pt: 'VinganÁa de Skolas',
+    pt: 'Vingan√ßa de Skolas',
     es: 'La Venganza de Skolas'
   },
   {
@@ -330,7 +351,7 @@ export const events: Event[] = [
     maxGuardians: 3,
     eventType: types[3],
     en: 'Prison of Elders: 41',
-    pt: 'Pris„o dos Anciıes: 41',
+    pt: 'Pris√£o dos Anci√µes: 41',
     es: 'El Presidio de los Ancianos: 41'
   },
   {
@@ -340,8 +361,8 @@ export const events: Event[] = [
     maxGuardians: 3,
     eventType: types[3],
     en: 'Challenge of Elders',
-    pt: 'Desafio dos Anciıes',
-    es: 'DesafÌo de los Ancianos'
+    pt: 'Desafio dos Anci√µes',
+    es: 'Desaf√≠o de los Ancianos'
   },
   {
     id: 34,
@@ -371,7 +392,7 @@ export const events: Event[] = [
     eventType: types[4],
     en: 'King\'s Fall: Normal',
     pt: 'A Queda do Rei: Normal',
-    es: 'CaÌda del Rey: Normal'
+    es: 'Ca√≠da del Rey: Normal'
   },
   {
     id: 37,
@@ -381,7 +402,7 @@ export const events: Event[] = [
     eventType: types[4],
     en: 'King\'s Fall: Heroic',
     pt: 'A Queda do Rei: Heroico',
-    es: 'CaÌda del Rey: Heroico'
+    es: 'Ca√≠da del Rey: Heroico'
   },
   {
     id: 38,
@@ -390,8 +411,8 @@ export const events: Event[] = [
     maxGuardians: 6,
     eventType: types[4],
     en: 'Vault of Glass: Normal',
-    pt: 'C‚mara de Cristal: Normal',
-    es: 'C·mara de Cristal: Normal'
+    pt: 'C√¢mara de Cristal: Normal',
+    es: 'C√°mara de Cristal: Normal'
   },
   {
     id: 39,
@@ -400,8 +421,8 @@ export const events: Event[] = [
     maxGuardians: 6,
     eventType: types[4],
     en: 'Vault of Glass: Heroic',
-    pt: 'C‚mara de Cristal: Heroico',
-    es: 'C·mara de Cristal: Heroico'
+    pt: 'C√¢mara de Cristal: Heroico',
+    es: 'C√°mara de Cristal: Heroico'
   },
   {
     id: 40,
@@ -410,7 +431,7 @@ export const events: Event[] = [
     maxGuardians: 3,
     eventType: types[5],
     en: 'Story: Normal',
-    pt: 'HistÛria: Normal',
+    pt: 'Hist√≥ria: Normal',
     es: 'Historia: Normal'
   },
   {
@@ -420,7 +441,7 @@ export const events: Event[] = [
     maxGuardians: 3,
     eventType: types[5],
     en: 'Story: Heroic',
-    pt: 'HistÛria: Heroica',
+    pt: 'Hist√≥ria: Heroica',
     es: 'Historia: Heroica'
   },
   {
@@ -430,8 +451,8 @@ export const events: Event[] = [
     maxGuardians: 3,
     eventType: types[6],
     en: 'Blighted Calice',
-    pt: 'C·lice Maculado',
-    es: 'C·liz Plagado'
+    pt: 'C√°lice Maculado',
+    es: 'C√°liz Plagado'
   },
   {
     id: 43,
@@ -450,7 +471,7 @@ export const events: Event[] = [
     maxGuardians: 3,
     eventType: types[6],
     en: 'Dust Palace',
-    pt: 'Pal·cio das Areias',
+    pt: 'Pal√°cio das Areias',
     es: 'Palacio de Polvo'
   },
   {
@@ -460,8 +481,8 @@ export const events: Event[] = [
     maxGuardians: 3,
     eventType: types[6],
     en: 'Echo Chamber',
-    pt: 'C‚mara do Eco',
-    es: 'C·mara del Eco'
+    pt: 'C√¢mara do Eco',
+    es: 'C√°mara del Eco'
   },
   {
     id: 46,
@@ -470,8 +491,8 @@ export const events: Event[] = [
     maxGuardians: 3,
     eventType: types[6],
     en: 'Fallen S.A.B.E.R.',
-    pt: 'S.A.B.E.R. DecaÌdo',
-    es: 'S.A.B.E.R. CaÌdo'
+    pt: 'S.A.B.E.R. Deca√≠do',
+    es: 'S.A.B.E.R. Ca√≠do'
   },
   {
     id: 47,
@@ -480,7 +501,7 @@ export const events: Event[] = [
     maxGuardians: 3,
     eventType: types[6],
     en: 'Shield Brothers',
-    pt: 'Irm„os Escudeiros',
+    pt: 'Irm√£os Escudeiros',
     es: 'Hermanos Escudo'
   },
   {
@@ -490,7 +511,7 @@ export const events: Event[] = [
     maxGuardians: 3,
     eventType: types[6],
     en: 'The Devil\'s Lair',
-    pt: 'O Covil dos DemÙnios',
+    pt: 'O Covil dos Dem√¥nios',
     es: 'Guarida de los Demonios'
   },
   {
@@ -510,8 +531,8 @@ export const events: Event[] = [
     maxGuardians: 3,
     eventType: types[6],
     en: 'Shadow Thief',
-    pt: 'O Ladr„o das Sombras',
-    es: 'El LadrÛn de Sombras'
+    pt: 'O Ladr√£o das Sombras',
+    es: 'El Ladr√≥n de Sombras'
   },
   {
     id: 51,
@@ -520,8 +541,8 @@ export const events: Event[] = [
     maxGuardians: 3,
     eventType: types[6],
     en: 'Summoning Pits',
-    pt: 'O PrecipÌcio da InvocaÁ„o',
-    es: 'Los Fosos de InvocaciÛn'
+    pt: 'O Precip√≠cio da Invoca√ß√£o',
+    es: 'Los Fosos de Invocaci√≥n'
   },
   {
     id: 52,
@@ -590,8 +611,8 @@ export const events: Event[] = [
     maxGuardians: 3,
     eventType: types[7],
     en: 'Taken Wars: Heroic',
-    pt: 'Guerra dos PossuÌdos: Heroico',
-    es: 'Guerra de los PossuÌdos: Heroico'
+    pt: 'Guerra dos Possu√≠dos: Heroico',
+    es: 'Guerra de los Possu√≠dos: Heroico'
   },
   {
     id: 59,
@@ -600,8 +621,8 @@ export const events: Event[] = [
     maxGuardians: 3,
     eventType: types[7],
     en: 'Taken Wars',
-    pt: 'Guerra dos PossuÌdos',
-    es: 'Guerra de los PossuÌdos'
+    pt: 'Guerra dos Possu√≠dos',
+    es: 'Guerra de los Possu√≠dos'
   },
   {
     id: 60,
@@ -621,7 +642,7 @@ export const events: Event[] = [
     eventType: types[8],
     en: 'Sparrow Race',
     pt: 'Corrida de Pardais',
-    es: 'Carreras de ColibriÈs'
+    es: 'Carreras de Colibri√©s'
   },
   {
     id: 62,
@@ -641,7 +662,7 @@ export const events: Event[] = [
     eventType: types[1],
     en: 'Supremacy',
     pt: 'Supremacia',
-    es: 'SupremacÌa'
+    es: 'Supremac√≠a'
   },
   {
     id: 64,
@@ -651,7 +672,7 @@ export const events: Event[] = [
         eventType: types[1],
     en: 'Inferno: Supremacy',
     pt: 'Inferno: Supremacia',
-    es: 'SupremacÌa Infernal'
+    es: 'Supremac√≠a Infernal'
   },
   {
     id: 65,
@@ -661,7 +682,7 @@ export const events: Event[] = [
     eventType: types[1],
     en: 'Rumble Supremacy',
     pt: 'Briga: Supremacia',
-    es: 'SupremacÌa Disputa'
+    es: 'Supremac√≠a Disputa'
   },
   {
     id: 66,
@@ -671,7 +692,7 @@ export const events: Event[] = [
     eventType: types[1],
     en: 'Mayhem: Supremacy',
     pt: 'Caos: Supremacia',
-    es: 'Caos: SupremacÌa'
+    es: 'Caos: Supremac√≠a'
   },
   {
     id: 67,
@@ -680,8 +701,8 @@ export const events: Event[] = [
     maxGuardians: 3,
     eventType: types[6],
     en: 'The Abomination Heist',
-    pt: 'O Golpe ‡ AbominaÁ„o',
-    es: 'El Rapto de la AbominaciÛn'
+    pt: 'O Golpe √† Abomina√ß√£o',
+    es: 'El Rapto de la Abominaci√≥n'
   },
   {
     id: 68,
@@ -690,7 +711,7 @@ export const events: Event[] = [
     maxGuardians: 3,
     eventType: types[6],
     en: 'Sepiks Perfected',
-    pt: 'Sepiks AperfeiÁoado',
+    pt: 'Sepiks Aperfei√ßoado',
     es: 'Sepiks Perfeccionado'
   },
   {
@@ -710,8 +731,8 @@ export const events: Event[] = [
     maxGuardians: 3,
     eventType: types[2],
     en: 'Patrol the Plaguelands',
-    pt: 'Patrulhe as Terras PestÌferas',
-    es: 'Patrulla las Tierras PestÌferas'
+    pt: 'Patrulhe as Terras Pest√≠feras',
+    es: 'Patrulla las Tierras Pest√≠feras'
   },
   {
     id: 71,
@@ -750,8 +771,8 @@ export const events: Event[] = [
     maxGuardians: 6,
     eventType: types[4],
     en: 'Wrath of the Machine: Normal',
-    pt: 'A Ira da M·quina: Normal',
-    es: 'La F˙ria de las M·quinas: Normal'
+    pt: 'A Ira da M√°quina: Normal',
+    es: 'La F√∫ria de las M√°quinas: Normal'
   },
   {
     id: 75,
@@ -780,7 +801,7 @@ export const events: Event[] = [
     maxGuardians: 3,
     eventType: types[9],
     en: 'Perfected Offering',
-    pt: 'Oferenda AperfeiÁoada',
+    pt: 'Oferenda Aperfei√ßoada',
     es: 'Ofrenda Perfeccionada'
   },
   {
@@ -790,8 +811,8 @@ export const events: Event[] = [
     maxGuardians: 6,
     eventType: types[4],
     en: 'Wrath of the Machine: Heroic',
-    pt: 'A Ira da M·quina: Heroico',
-    es: 'La F˙ria de las M·quinas: Heroico'
+    pt: 'A Ira da M√°quina: Heroico',
+    es: 'La F√∫ria de las M√°quinas: Heroico'
   },
   {
     id: 79,
@@ -800,7 +821,7 @@ export const events: Event[] = [
     maxGuardians: 3,
     eventType: types[1],
     en: 'Inferno: Elimination',
-    pt: 'Inferno: EliminaÁ„o',
-    es: 'Infierno: EliminaciÛn'
+    pt: 'Inferno: Elimina√ß√£o',
+    es: 'Infierno: Eliminaci√≥n'
   }
 ];

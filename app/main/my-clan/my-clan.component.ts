@@ -20,8 +20,8 @@ export class MyClanComponent implements OnInit {
   constructor(private memberService: MemberService, private clanService: ClanService) { }
 
   getData(): void {
-    this.memberService.getMembersFromWebAPI().then(members => this.setMembers(members));
-    this.clanService.getClanFromWebAPI().then(clan => this.setClan(clan));
+    //this.memberService.getMembersFromWebAPI().then(members => this.setMembers(members));
+    //this.clanService.getClanFromWebAPI().then(clan => this.setClan(clan));
   }
 
   setClan(clan: Clan): void {

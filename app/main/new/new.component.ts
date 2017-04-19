@@ -53,7 +53,7 @@ export class NewEventComponent implements OnInit {
     this.slotsAvailable = this.maxGuardians;
     this.slotsUsed = this.maxGuardians;
     this.setDummyList();
-    this.memberService.getMembersFromWebAPI().then(members => this.setMembers(members));
+    //this.memberService.getMembersFromWebAPI().then(members => this.setMembers(members));
     const today = new Date();
     this.selectedDate = today.getFullYear() + '-' + today.getMonth() + '-' + today.getDate();
 

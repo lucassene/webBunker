@@ -31,7 +31,7 @@ export class SidebarComponent implements OnInit{
   }
 
   ngOnInit(){
-    this.clanService.getClanFromWebAPI().then(clan => this.setClan(clan));
+    //this.clanService.getClanFromWebAPI().then(clan => this.setClan(clan));
   }
 
   setClan(clan: Clan){

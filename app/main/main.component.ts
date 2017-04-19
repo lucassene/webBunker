@@ -9,6 +9,8 @@ export class MainComponent {
 
   pageTitle = 'The Bunker';
 
+  isActive: boolean;
+
   changeTitleString(title: string) {
     this.pageTitle = title;
   }

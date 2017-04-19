@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-import { types } from '../../models/event-type';
+//import { types } from '../../models/event-type';
 
 import { GameService} from '../../services/game-service';
 import { Game } from '../../models/game';
@@ -13,7 +13,7 @@ import { Game } from '../../models/game';
 
 export class HistoryComponent implements OnInit {
 
-  types = types;
+  //types = types;
   games: Game[];
   filteredList: Game[];
   selectedType = 0;
@@ -21,7 +21,7 @@ export class HistoryComponent implements OnInit {
   constructor(private gameService: GameService) { }
 
   getGames(): void {
-    this.gameService.getGamesFromWebAPI().then(games => this.setLists(games));
+    //this.gameService.getGamesFromWebAPI().then(games => this.setLists(games));
   }
 
   setLists(games: Game[]) {
@@ -47,5 +47,5 @@ export class HistoryComponent implements OnInit {
       this.filteredList = this.games;
     }
   }
-  
+
 }

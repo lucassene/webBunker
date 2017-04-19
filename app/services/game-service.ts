@@ -8,49 +8,31 @@ import { Game } from '../models/game';
 @Injectable()
 export class GameService {
 
-  private serverUrl = 'https://destiny-scheduler.herokuapp.com/';
+  private serverUrl = 'http://localhost:4200/';
   private gameEndpoint = 'api/game';
-  private url = 'api/games';
 
   constructor(private http: Http) { }
 
   getGamesFromServer(): Promise<Game[]> {
-    
-    /*const headers = new Headers();
+
+    const headers = new Headers();
     headers.append('membership', '4611686018437203239');
     headers.append('platform', '2');
     headers.append('zoneId', 'America/Sao_Paulo');
     headers.append('clanId', '548691');
-    headers.append('Authorization', 'eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI0NjExNjg2MDE4NDM3MjAzMjM5IiwiZXhwIjoxNDkxNTk1NDc3fQ.56RkfNjZm3x6U9L8SYFmcLQANXetiPi2oI9pgL1NP7HjptaJ3L5ocNGJ1sooWTZs0e_KrHI6NkxrYQdybBMHMQ');
+    headers.append('Authorization', 'eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI0NjExNjg2MDE4NDM3MjAzMjM5IiwiZXhwIjoxNDkyNzE4OTM5fQ.0H6V6yi1fKMYIwlnXr3ZVY5_kCTcq6CA2RBpq0VB-Hopkw0V7AZMHei3PztZHno96d8mjnmKAEhMNJuGQxt1XA');
 
     const url = this.serverUrl + this.gameEndpoint;
     console.log('url: ' + url);
-
     return this.http.get(url, {headers: headers})
       .toPromise()
       .then(response => response.json().data as Game[])
-      .catch(this.handleError); */
-    
-    return null;
+      .catch(this.handleError);
   }
 
   private handleError(error: any): Promise<any> {
     console.error('An error occurred', error); // for demo purposes only
     return Promise.reject(error.message || error);
   }
-
-  getGamesSlowly(): Promise<Game[]> {
-    return new Promise(resolve => {
-    // Simulate server latency with 1 second delay
-    setTimeout(() => resolve(this.getGamesFromServer()), 1000);
-  });
-  }
-  
-  getGamesFromWebAPI() {
-    return this.http.get(this.url)
-      .toPromise()
-      .then(response => response.json().data as Game[])
-      .catch(this.handleError);
-  }    
 
 }
