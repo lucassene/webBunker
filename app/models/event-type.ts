@@ -1,23 +1,11 @@
 export class EventType {
-  id: number;
-  icon: string;
-  en: string;
-  pt: string;
-  es: string;
-
   constructor(
-    id: number,
-    icon: string,
-    en: string,
-    pt: string,
-    es: string
-  ) {
-    this.id = id;
-    this.icon = icon;
-    this.en = en;
-    this.pt = pt;
-    this.es = es;
-  }
+    public id: number,
+    public icon: string,
+    public en: string,
+    public pt: string,
+    public es: string
+  ) { }
 
 }
 

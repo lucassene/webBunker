@@ -1,11 +1,11 @@
 <tab-holder>
 	<tab tabTitle="recent">
-		<game-list title="Recent events" *ngIf="games; else loading" [games]="recentGames"></game-list>
+		<game-list (selectedGame)="selectedGame($event)" title="Recent events" *ngIf="hasRecent" [games]="recentGames"></game-list>
 		<ng-template #loading><h3>Carregando...</h3></ng-template>
 	</tab>
-	<tab tabTitle="scheduled"><game-list title="Scheduled events" *ngIf="games" [games]="scheduledGames"></game-list></tab>
+	<tab tabTitle="scheduled"><game-list (selectedGame)="selectedGame($event)" title="Scheduled events" *ngIf="hasScheduled" [games]="scheduledGames"></game-list></tab>
 	<tab tabTitle="finished">
-		<game-list title="Waiting for validation" *ngIf="games" [games]="waitingGames"></game-list>
-		<game-list title="Waiting for evaluation" *ngIf="games" [games]="forEvaluationGames"></game-list>
+		<game-list (selectedGame)="selectedGame($event)" title="Waiting for validation" *ngIf="hasWaiting" [games]="waitingGames"></game-list>
+		<game-list (selectedGame)="selectedGame($event)" title="Waiting for evaluation" *ngIf="hasEvaluation" [games]="forEvaluationGames"></game-list>
 	</tab>
 </tab-holder>

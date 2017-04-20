@@ -1,0 +1,13 @@
+<div class="fade-in">
+<div class="game-list">
+	<button [ngStyle]="{'background-image': 'url(http://www.bungie.net'+ entry.member.icon +')'}" *ngFor="let entry of entries" class="fade-in">
+	<div class="game-list-left">
+		<p class="item-subtitle" style="font-size: 1.3em">{{entry.member.name}}</p>
+		<p class="item-creator">{{entry.member.memberTitle.en}}</p>
+	</div>
+	<div class="game-list-right" style="height: 100%">
+		<p class="item-lvl" style="font-size: 2em; margin-top: auto; margin-bottom: auto;">{{getMemberLvl(entry.member.likes, entry.member.dislikes, entry.member.gamesCreated, entry.member.gamesPlayed)}}</p>
+	</div>
+	</button>
+</div>
+</div>

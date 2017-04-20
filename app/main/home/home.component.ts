@@ -1,6 +1,8 @@
-import { Component, OnInit} from '@angular/core';
+import { Component, OnInit, EventEmitter} from '@angular/core';
 import { Game } from '../../models/game';
 import { GameService} from '../../services/game-service';
+import { DataService } from '../../services/data-service';
+import { Router, ActivatedRoute, Params } from '@angular/router';
 
 @Component({
   selector: 'home-cmp',
@@ -16,21 +18,40 @@ export class HomeComponent implements OnInit {
   waitingGames: Game[];
   forEvaluationGames: Game[];
 
-  constructor(private gameService: GameService) { }
+  hasRecent = false;
+  hasScheduled = false;
+  hasWaiting = false;
+  hasEvaluation = false;
+
+  constructor(private gameService: GameService, private route: ActivatedRoute, private router: Router, private dataService: DataService) { }
 
   getGames(): void {
-    this.gameService.getGamesFromServer().then(games => this.setLists(games));
-    //this.gameService.getGamesFromServer().subscribe(games => console.log(games));
-    //console.log(this.games);
+    this.gameService.getGamesFromServer().subscribe(games => this.setLists(games as Game[]));
   }
 
   setLists(games: Game[]) {
     this.games = games;
-    console.log('games:', games);
+
     this.recentGames = this.games.filter((item) => item.status == 0 && item.joined == false);
+    if (this.recentGames.length >0){
+      this.hasRecent = true;
+    }
     this.scheduledGames = this.games.filter((item) => item.status == 0 && item.joined == true);
+    if (this.scheduledGames.length >0){
+      this.hasScheduled = true;
+    }
     this.waitingGames = this.games.filter((item) => item.status == 1 && item.joined == true);
+    if (this.waitingGames.length >0){
+      this.hasWaiting = true;
+    }
     this.forEvaluationGames = this.games.filter((item) => item.status == 2 && item.joined == true && item.evaluated == false);
+    if (this.forEvaluationGames.length >0){
+      this.hasEvaluation = true;
+    }
+  }
+
+  selectedGame(game: Game){
+    this.router.navigate(['/main/game-detail', game.id]);
   }
 
   ngOnInit(): void {

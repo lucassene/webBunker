@@ -22,7 +22,7 @@ export class MyEventsComponent implements OnInit {
   constructor(private gameService: GameService) { }
 
   getGames(): void {
-    //this.gameService.getGamesFromWebAPI().then(games => this.setLists(games));
+    this.gameService.getGamesFromServer().subscribe(games => this.setLists(games as Game[]));
   }
 
   setLists(games: Game[]) {

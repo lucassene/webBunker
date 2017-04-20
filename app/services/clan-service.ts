@@ -1,40 +1,47 @@
 import { Injectable } from '@angular/core';
-import { Headers, Http } from '@angular/http';
+import { Headers, Http, Response, RequestOptions } from '@angular/http';
 
-import 'rxjs/add/operator/toPromise';
+import {Observable} from 'rxjs/Observable';
+import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/catch';
 
 import { Clan } from '../models/clan';
-import { clan } from '../models/clan';
 
 @Injectable()
 export class ClanService {
 
-  private serverUrl = 'https://destiny-scheduler.herokuapp.com/';
-  private memberEndpoint = 'api/member';
-  private url = 'api/clan';
-
-  private clan = clan;
+  private serverUrl = 'http://localhost:4200/';
+  private clanEndpoint = 'api/clan/';
 
   constructor(private http: Http) { }
 
-  getClanFromServer(): Promise<Clan> {
+  getClanInfo(groupID: number): Observable<any> {
 
-    /*const headers = new Headers();
+    const headers = new Headers();
     headers.append('membership', '4611686018437203239');
     headers.append('platform', '2');
     headers.append('zoneId', 'America/Sao_Paulo');
     headers.append('clanId', '548691');
-    headers.append('Authorization', 'eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI0NjExNjg2MDE4NDM3MjAzMjM5IiwiZXhwIjoxNDkxNTk1NDc3fQ.56RkfNjZm3x6U9L8SYFmcLQANXetiPi2oI9pgL1NP7HjptaJ3L5ocNGJ1sooWTZs0e_KrHI6NkxrYQdybBMHMQ');
-
-    const url = this.serverUrl + this.gameEndpoint;
+    headers.append('Authorization', 'eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI0NjExNjg2MDE4NDM3MjAzMjM5IiwiZXhwIjoxNDkyODA1MzY5fQ.-K_LTBDQUk3JvAWZstx8JJgDTIPuB8gM2xtx2cuLKF0_44Nx1mLB7v7YRsassVBPeJXKlHRBLX5b6H2yYbwkOg');
+    const options = new RequestOptions({headers: headers});
+    const url = this.serverUrl + this.clanEndpoint + groupID;
     console.log('url: ' + url);
 
-    return this.http.get(url, {headers: headers})
-      .toPromise()
-      .then(response => response.json().data as Game[])
-      .catch(this.handleError); */
-
-    return null;
+    return this.http.get(url, options)
+      .map((response: Response) => {
+          const data = response.json();
+          let clan = new Clan(
+            data.groupId,
+            data.name,
+            data.icon,
+            data.background,
+            data.description
+          );
+          console.log(clan);
+          return clan;
+        }
+      )
+      .catch(err => this.handleError(err))
   }
 
   private handleError(error: any): Promise<any> {

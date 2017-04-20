@@ -1,9 +1,11 @@
 export class Clan {
-  groupId: number;
-  name: string;
-  icon: string;
-  background: string;
-  description: string;
+  constructor(
+    public groupId: number,
+    public name: string,
+    public icon: string,
+    public background: string,
+    public description: string,
+  ){};
 };
 
 export const clan: Clan = {

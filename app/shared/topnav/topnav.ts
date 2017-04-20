@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { Injectable } from '@angular/core';
 
 declare var $: any;
 
@@ -8,10 +9,10 @@ declare var $: any;
 })
 
 export class TopNavComponent {
-  
+
   @Input() pageTitle;
-  
-  
+
+
   rtl(): void {
     let body: any = $('body');
     body.toggleClass('rtl');
@@ -23,4 +24,10 @@ export class TopNavComponent {
     sidebar.toggleClass('sidebar-left-zero');
     mainContainer.toggleClass('main-container-ml-zero');
   }
+
+  public changeTitle(title: string){
+    console.log('called!');
+    this.pageTitle = title;
+  }
+
 }

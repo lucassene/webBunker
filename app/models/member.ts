@@ -1,31 +1,23 @@
 export class Member {
-  membership: string;
-  name: string;
-  icon: string;
-  platform: number;
-  likes: number;
-  dislikes: number;
-  gamesCreated: number;
-  gamesPlayed: number;
-  memberTitle: Title;
-}
-
-export class Creator {
-  membership: string;
-  name: string;
   constructor(
-    membership: string,
-    name: string
-  ) {
-    this.membership = membership;
-    this.name = name
-    }
+    public membership: string,
+    public name: string,
+    public icon: string,
+    public platform: number,
+    public likes: number,
+    public dislikes: number,
+    public gamesCreated: number,
+    public gamesPlayed: number,
+    public memberTitle: Title,
+  ){}
 }
 
 export class Title {
-  pt: string;
-  en: string;
-  es: string;
+  constructor(
+    public pt: string,
+    public en: string,
+    public es: string,
+  ) {}
 }
 
 export const defaultTitle: Title = {

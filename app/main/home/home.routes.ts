@@ -4,6 +4,6 @@ import { HomeComponent } from './index';
 export const HomeRoutes: Route[] = [
     {
       path: 'home',
-      component: HomeComponent
+      component: HomeComponent,
     }
 ];

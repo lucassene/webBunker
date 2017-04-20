@@ -1,4 +1,6 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
+import { Game } from '../../models/game';
 
 @Component({
   selector: 'game-list',
@@ -9,5 +11,13 @@ export class GameListComponent {
 
     @Input() games;
     @Input() title;
+
+    @Output() selectedGame = new EventEmitter<Game>();
+
+    constructor(private route: ActivatedRoute, private router: Router) {};
+
+    onClick(game: Game){
+      this.selectedGame.emit(game);
+    }
 
 }

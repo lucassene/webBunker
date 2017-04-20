@@ -2,34 +2,16 @@ import {EventType} from './event-type';
 import {types} from './event-type';
 
 export class Event {
-    id: number;
-    icon: string;
-    minLight: number;
-    maxGuardians: number;
-    eventType: EventType;
-    en: string;
-    pt: string;
-    es: string;
-
     constructor(
-      id: number,
-      icon: string,
-      minLight: number,
-      maxGuardians: number,
-      eventType: EventType,
-      en: string,
-      pt: string,
-      es: string,
-    ) {
-      this.id = id;
-      this.icon = icon;
-      this.minLight = minLight;
-      this.maxGuardians = maxGuardians;
-      this.eventType = eventType;
-      this.en = en;
-      this.pt = pt;
-      this.es = es;
-    }
+      public id: number,
+      public icon: string,
+      public minLight: number,
+      public maxGuardians: number,
+      public eventType: EventType,
+      public en: string,
+      public pt: string,
+      public es: string,
+    ) {}
 
 }
 

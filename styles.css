@@ -375,6 +375,29 @@ p.item-max, p.item-time, p.item-date{
 	text-overflow: ellipsis;
 }
 
+div.game-detail-icon{
+	background-position: 8px 8px;
+	background-repeat: no-repeat;
+	background-size: 60px;
+	height: 75px;
+	padding-top: 16px;
+}
+
+p.game-detail-item{
+	font-size: 1.2em;
+	color: rgba(245,245,245,0.7);
+	float: left;
+	display: block;
+}
+
+p.game-detail-item-right{
+	text-align: right;
+	float: right;
+	font-size: 1.2em;
+	color: rgba(245,245,245,0.5);
+	display: block;
+}
+
 #toggle-sidebar{
     position: fixed;
     top: 11px;
