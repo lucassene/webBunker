@@ -7,5 +7,5 @@
 			</select>
 	</div>
 </form>
-<game-list title="Available events" *ngIf="games" [games]="filteredList"></game-list>
-<h3 *ngIf="!games">Carregando...</h3>
+<game-list (selectedGame)="selectedGame($event)" title="Available events" *ngIf="games && games.length > 1" [games]="filteredList"></game-list>
+<div *ngIf="!filteredList || filteredList.length < 1" class="empty-list">There is no events available of this type</div>

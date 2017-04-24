@@ -6,6 +6,7 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 
 import { Clan } from '../models/clan';
+import { DataService } from './data-service';
 
 @Injectable()
 export class ClanService {
@@ -13,7 +14,7 @@ export class ClanService {
   private serverUrl = 'http://localhost:4200/';
   private clanEndpoint = 'api/clan/';
 
-  constructor(private http: Http) { }
+  constructor(private http: Http, private dataService: DataService) { }
 
   getClanInfo(groupID: number): Observable<any> {
 
@@ -22,7 +23,7 @@ export class ClanService {
     headers.append('platform', '2');
     headers.append('zoneId', 'America/Sao_Paulo');
     headers.append('clanId', '548691');
-    headers.append('Authorization', 'eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI0NjExNjg2MDE4NDM3MjAzMjM5IiwiZXhwIjoxNDkyODA1MzY5fQ.-K_LTBDQUk3JvAWZstx8JJgDTIPuB8gM2xtx2cuLKF0_44Nx1mLB7v7YRsassVBPeJXKlHRBLX5b6H2yYbwkOg');
+    headers.append('Authorization', 'eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI0NjExNjg2MDE4NDM3MjAzMjM5IiwiZXhwIjoxNDkzMTI5Nzc5fQ.G1WJnU9IYdpZ5M4nEBB9K5rgD1LxHI9Duk25iOsjAWVtDu3b7hNxHM6msbxKDSVU45OfrVV4VRLmMchHEz2yrw');
     const options = new RequestOptions({headers: headers});
     const url = this.serverUrl + this.clanEndpoint + groupID;
     console.log('url: ' + url);
@@ -37,7 +38,7 @@ export class ClanService {
             data.background,
             data.description
           );
-          console.log(clan);
+          this.dataService.setClan(clan as Clan);
           return clan;
         }
       )

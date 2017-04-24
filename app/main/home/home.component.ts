@@ -12,7 +12,7 @@ import { Router, ActivatedRoute, Params } from '@angular/router';
 
 export class HomeComponent implements OnInit {
 
-  games: Game[]
+  games: Game[];
   recentGames: Game[];
   scheduledGames: Game[];
   waitingGames: Game[];

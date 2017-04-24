@@ -1,4 +1,5 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Member } from '../../models/member';
 
 @Component({
   selector: 'member-list',
@@ -37,6 +38,12 @@ export class MemberListComponent {
         return inteiro.toString();
       }
     }
+  }
+
+  @Output() selectedMember = new EventEmitter<String>();
+
+  onClick(member: Member){
+    this.selectedMember.emit(member.membership);
   }
 
 }

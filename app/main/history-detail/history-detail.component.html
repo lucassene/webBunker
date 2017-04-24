@@ -17,7 +17,7 @@
     <div class="col-sm-3"><p class="game-detail-item-right">{{game.inscriptions}} of {{game.event.maxGuardians}}</div>
   </div>
   <div class="blue-title">Guardians</div>
-	<entry-list *ngIf="entries" [entries]="entries"></entry-list>
+	<history-list *ngIf="members" [members]="members"></history-list>
 	<div class="col-sm-12" style="text-align: center; padding-bottom: 32px">
 			<a class="mbtn mbtn-enabled" (click)="onBack()">BACK</a>
 	</div>

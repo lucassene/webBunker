@@ -29,7 +29,7 @@ export class EntryService {
     headers.append('platform', '2');
     headers.append('zoneId', 'America/Sao_Paulo');
     headers.append('clanId', '548691');
-    headers.append('Authorization', 'eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI0NjExNjg2MDE4NDM3MjAzMjM5IiwiZXhwIjoxNDkyODA1MzY5fQ.-K_LTBDQUk3JvAWZstx8JJgDTIPuB8gM2xtx2cuLKF0_44Nx1mLB7v7YRsassVBPeJXKlHRBLX5b6H2yYbwkOg');
+    headers.append('Authorization', 'eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI0NjExNjg2MDE4NDM3MjAzMjM5IiwiZXhwIjoxNDkzMTI5Nzc5fQ.G1WJnU9IYdpZ5M4nEBB9K5rgD1LxHI9Duk25iOsjAWVtDu3b7hNxHM6msbxKDSVU45OfrVV4VRLmMchHEz2yrw');
     const options = new RequestOptions({headers: headers});
     const url = this.serverUrl + this.gameEndpoint + id + this.entryEndpoint;
     console.log('url: ' + url);
@@ -66,10 +66,9 @@ export class EntryService {
           );
             objs.push(entry);
           }
-          console.log(objs);
           return objs
       })
-      .catch(err => this.handleError(err))
+      .catch(err => this.handleError(err));
     }
 
     private handleError(error: any): Promise<any> {

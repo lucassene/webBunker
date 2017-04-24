@@ -6,6 +6,8 @@ import { statuses } from '../../models/status';
 import { Status } from '../../models/status';
 import { Game } from '../../models/game';
 
+import { Router, ActivatedRoute, Params } from '@angular/router';
+
 @Component({
   selector: 'my-events-cmp',
   templateUrl: 'my-events.component.html',
@@ -19,7 +21,7 @@ export class MyEventsComponent implements OnInit {
   filteredList: Game[];
   selectedStatus = 99;
 
-  constructor(private gameService: GameService) { }
+  constructor(private gameService: GameService, private route: ActivatedRoute, private router: Router) { }
 
   getGames(): void {
     this.gameService.getGamesFromServer().subscribe(games => this.setLists(games as Game[]));
@@ -48,6 +50,10 @@ export class MyEventsComponent implements OnInit {
     } else {
       this.filteredList = this.games.filter((item) => item.status == this.selectedStatus);
     }
+  }
+
+  selectedGame(game: Game){
+    this.router.navigate(['/main/game-detail', game.id]);
   }
 
 }

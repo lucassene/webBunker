@@ -1,0 +1,4 @@
+<div class="tab tab-profile">
+  <button [ngClass]="{'active': tab.active}" *ngFor="let tab of tabs" (click)="selectTab(tab)">{{tab.tabTitle}}</button>
+</div>
+<ng-content></ng-content>

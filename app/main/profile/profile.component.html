@@ -1,1 +1,8 @@
-<h1>Profile Component</h1>
+<tab-holder>
+  <tab tabTitle="stats">
+      <stats *ngIf="profile"></stats>
+  </tab>
+  <tab tabTitle="medals">
+      <medals *ngIf="profile" [profile]="profile"></medals>
+  </tab>
+</tab-holder>

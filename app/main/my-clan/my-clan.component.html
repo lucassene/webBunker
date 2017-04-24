@@ -12,6 +12,5 @@
 			</div>
 		</div>
 	</div>
-	<member-list title="Members" showTitleBar="true" *ngIf="members" [members]="members" [total]="total"></member-list>
-	<h3 *ngIf="!members">Carregando...</h3>
+	<member-list (selectedMember)="selectedMember($event)" title="Members" showTitleBar="true" *ngIf="members" [members]="members" [total]="total"></member-list>
 </div>

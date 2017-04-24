@@ -5,6 +5,8 @@ import { types } from '../../models/event-type';
 import { GameService} from '../../services/game-service';
 import { Game } from '../../models/game';
 
+import { Router, ActivatedRoute, Params } from '@angular/router';
+
 @Component({
   selector: 'search-cmp',
   templateUrl: 'search.component.html',
@@ -18,7 +20,7 @@ export class SearchComponent implements OnInit {
   filteredList: Game[];
   selectedType = 0;
 
-  constructor(private gameService: GameService) { }
+  constructor(private gameService: GameService, private route: ActivatedRoute, private router: Router) { }
 
   getGames(): void {
     this.gameService.getGamesFromServer().subscribe(games => this.setLists(games as Game[]));
@@ -46,6 +48,10 @@ export class SearchComponent implements OnInit {
     } else {
       this.filteredList = this.games;
     }
+  }
+
+  selectedGame(game: Game){
+    this.router.navigate(['/main/game-detail', game.id]);
   }
 
 }

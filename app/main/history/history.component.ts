@@ -1,27 +1,28 @@
 import { Component, OnInit } from '@angular/core';
 
-//import { types } from '../../models/event-type';
-
-import { GameService} from '../../services/game-service';
+import { HistoryService} from '../../services/history-service';
 import { Game } from '../../models/game';
+import { types } from '../../models/event-type';
+
+import { Router, ActivatedRoute, Params } from '@angular/router';
 
 @Component({
   selector: 'history-cmp',
   templateUrl: 'history.component.html',
-  providers: [GameService]
+  providers: [HistoryService]
 })
 
 export class HistoryComponent implements OnInit {
 
-  //types = types;
+  types = types;
   games: Game[];
   filteredList: Game[];
   selectedType = 0;
 
-  constructor(private gameService: GameService) { }
+  constructor(private historyService: HistoryService, private route: ActivatedRoute, private router: Router) { }
 
   getGames(): void {
-    //this.gameService.getGamesFromWebAPI().then(games => this.setLists(games));
+    this.historyService.getHistoryGames().subscribe(games => this.setLists(games as Game[]));
   }
 
   setLists(games: Game[]) {
@@ -46,6 +47,12 @@ export class HistoryComponent implements OnInit {
     } else {
       this.filteredList = this.games;
     }
+  }
+
+  selectedGame(game: Game){
+    let historyGame: Game;
+    console.log('selected gameID: ', game.id);
+    this.router.navigate(['/main/history-detail', game.id]);
   }
 
 }

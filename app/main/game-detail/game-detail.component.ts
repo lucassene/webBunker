@@ -36,4 +36,8 @@ export class GameDetailComponent implements OnInit {
     console.log('selected game: ', this.game.id);
   }
 
+  onBack(){
+    this.router.navigate(['/main/history']);
+  }
+
 }

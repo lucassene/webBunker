@@ -1,5 +1,6 @@
 import { Component, Output, EventEmitter, OnInit } from '@angular/core';
 import { ClanService } from '../../services/clan-service';
+import { DataService } from '../../services/data-service';
 import { Clan } from '../../models/clan';
 
 @Component({
@@ -15,10 +16,12 @@ export class SidebarComponent implements OnInit{
 
   clan: Clan;
 
-  constructor(private clanService: ClanService) { }
+  constructor(private clanService: ClanService, private dataService: DataService) { }
 
   isActive = false;
   showMenu: string = '';
+  groupdID = 548691; //Temporary
+
   eventCalled() {
     this.isActive = !this.isActive;
   }
@@ -31,12 +34,11 @@ export class SidebarComponent implements OnInit{
   }
 
   ngOnInit(){
-    this.clanService.getClanInfo(548691).subscribe(clan => this.setClan(clan));
+    this.clanService.getClanInfo(this.groupdID).subscribe(clan => this.setClan(clan));
   }
 
   setClan(clan: Clan){
     this.clan = clan;
-    console.log('clanName: ', this.clan.name);
   }
 
   changeTitle(title: string) {

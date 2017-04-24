@@ -9,20 +9,25 @@ import { Game } from '../models/game';
 import { Creator } from '../models/game';
 import { Event } from '../models/event';
 import { EventType } from '../models/event-type';
+import { History } from '../models/history';
+import { Title } from '../models/member';
+import { defaultTitle } from '../models/member';
 
 import { DataService } from './data-service';
 
 @Injectable()
-export class GameService {
+export class HistoryService {
 
   private serverUrl = 'http://localhost:4200/';
-  private gameEndpoint = 'api/game';
+  private gameEndpoint = 'api/game/';
+  private historyEndpoint = 'history';
 
   private games: Game[];
+  private defaultTitle = defaultTitle;
 
   constructor(private http: Http, private dataService: DataService) { }
 
-  getGamesFromServer(): Observable<any[]> {
+  getHistoryGames(): Observable<any[]> {
 
     const headers = new Headers();
     headers.append('membership', '4611686018437203239');
@@ -31,7 +36,7 @@ export class GameService {
     headers.append('clanId', '548691');
     headers.append('Authorization', 'eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI0NjExNjg2MDE4NDM3MjAzMjM5IiwiZXhwIjoxNDkzMTI5Nzc5fQ.G1WJnU9IYdpZ5M4nEBB9K5rgD1LxHI9Duk25iOsjAWVtDu3b7hNxHM6msbxKDSVU45OfrVV4VRLmMchHEz2yrw');
     const options = new RequestOptions({headers: headers});
-    const url = this.serverUrl + this.gameEndpoint;
+    const url = this.serverUrl + this.gameEndpoint + this.historyEndpoint;
     console.log('url: ' + url);
     return this.http.get(url, options)
       .map((response: Response) => {
@@ -70,7 +75,49 @@ export class GameService {
             );
             objs.push(game);
           }
-          this.dataService.setGames(objs as Game[]);
+          this.dataService.setHistory(objs as Game[]);
+          return objs
+      })
+      .catch(err => this.handleError(err))
+  }
+
+  getGameHistory(gameID: number): Observable<any>{
+    const headers = new Headers();
+    headers.append('membership', '4611686018437203239');
+    headers.append('platform', '2');
+    headers.append('zoneId', 'America/Sao_Paulo');
+    headers.append('clanId', '548691');
+    headers.append('Authorization', 'eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI0NjExNjg2MDE4NDM3MjAzMjM5IiwiZXhwIjoxNDkzMTI5Nzc5fQ.G1WJnU9IYdpZ5M4nEBB9K5rgD1LxHI9Duk25iOsjAWVtDu3b7hNxHM6msbxKDSVU45OfrVV4VRLmMchHEz2yrw');
+    const options = new RequestOptions({headers: headers});
+    const url = this.serverUrl + this.gameEndpoint + gameID + '/' + this.historyEndpoint;
+    console.log('url: ' + url);
+    return this.http.get(url, options)
+      .map((response: Response) => {
+        const data = response.json();
+        let objs: any[] = [];
+        for (let i=0;i<data.length;i++){
+          let title: Title;
+          if(data[i].memberTitle === null){
+            console.log('memberTitle is null!');
+            title = this.defaultTitle;
+          } else {
+            title = new Title(
+              data[i].memberTitle.en,
+              data[i].memberTitle.pt,
+              data[i].memberTitle.es
+            )
+          }
+          let member = new History(
+              data[i].membership,
+              data[i].name,
+              data[i].icon,
+              data[i].totalLikes,
+              data[i].totalDislikes,
+              title
+          );
+            objs.push(member);
+          }
+          console.log(objs);
           return objs
       })
       .catch(err => this.handleError(err))

@@ -12,6 +12,8 @@ import { Membership } from '../../models/create-json';
 import { EventID } from '../../models/create-json';
 import { CreateJSON } from '../../models/create-json';
 
+import { DataService} from '../../services/data-service';
+
 @Component({
   selector: 'new-cmp',
   templateUrl: 'new.component.html',
@@ -20,7 +22,7 @@ import { CreateJSON } from '../../models/create-json';
 
 export class NewEventComponent implements OnInit {
 
-  constructor(private memberService: MemberService) { }
+  constructor(private memberService: MemberService, private dataService: DataService) { }
 
   types = types;
   events = events;
@@ -53,7 +55,12 @@ export class NewEventComponent implements OnInit {
     this.slotsAvailable = this.maxGuardians;
     this.slotsUsed = this.maxGuardians;
     this.setDummyList();
-    //this.memberService.getMembersFromWebAPI().then(members => this.setMembers(members));
+    let members = this.dataService.getMembers();
+    if (members == null || members.length){
+      this.memberService.getMembers(this.dataService.getGroupID()).subscribe(members => this.setMembers(members));
+    } else {
+      this.setMembers(members);
+    }
     const today = new Date();
     this.selectedDate = today.getFullYear() + '-' + today.getMonth() + '-' + today.getDate();
 

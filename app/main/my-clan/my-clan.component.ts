@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { Router, ActivatedRoute, Params } from '@angular/router';
 
 import { MemberService} from '../../services/member-service';
 import { ClanService } from '../../services/clan-service';
+import { DataService } from '../../services/data-service';
 import { Member } from '../../models/member';
 import { Clan } from '../../models/clan';
 
@@ -17,16 +19,11 @@ export class MyClanComponent implements OnInit {
   clan: Clan;
   total: number;
 
-  constructor(private memberService: MemberService, private clanService: ClanService) { }
+  constructor(private memberService: MemberService, private clanService: ClanService, private dataService: DataService, private route: ActivatedRoute, private router: Router) { }
 
   getData(): void {
-    //this.memberService.getMembersFromWebAPI().then(members => this.setMembers(members));
-    //this.clanService.getClanFromWebAPI().then(clan => this.setClan(clan));
-  }
-
-  setClan(clan: Clan): void {
-    this.clan = clan;
-    console.log('clan id: ', clan.groupId);
+    this.memberService.getMembers(this.dataService.getGroupID()).subscribe(members => this.setMembers(members as Member[]));
+    this.clan = this.dataService.getClan();
   }
 
   setMembers(members: Member[]): void {
@@ -37,6 +34,10 @@ export class MyClanComponent implements OnInit {
 
   ngOnInit(): void {
     this.getData();
+  }
+
+  selectedMember(membership: string){
+    this.router.navigate(['/main/profile', membership]);
   }
 
 }

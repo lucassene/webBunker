@@ -181,14 +181,15 @@ option{
 }
 
 .loader {
-	position: absolute;
-	left: 50%;
+		position: absolute;
+		left: 50%;
   	top: 50%;
-  	border: 16px solid #080e13;
+  	border: 16px solid transparent;
   	border-radius: 50%;
   	border-top: 16px solid #FF9100;
-  	width: 120px;
-  	height: 120px;
+		border-left: 16px solid #FF9100;
+  	width: 160px;
+  	height: 160px;
   	-webkit-animation: spin 1.5s linear infinite;
   	animation: spin 1.5s linear infinite;
 }
@@ -201,6 +202,22 @@ option{
 @keyframes spin {
   	0% { transform: rotate(0deg); }
   	100% { transform: rotate(360deg); }
+}
+
+div.empty-list {
+	width: 100%;
+	text-align: center;
+	height: 72px;
+	font-size: 1.2em;
+	color: rgba(245,245,245,0.4);
+	padding-top: 32px;
+	padding-bottom: 32px;
+}
+
+div.history-rates{
+	padding-bottom: 2px;
+	color: rgba(245,245,245,0.65);
+	font-size: 1.1em;
 }
 
 /* TABS */
@@ -222,6 +239,10 @@ div.tab button{
 	width: 33.33%;
 	color: rgba(245,245,245,0.4);
 	letter-spacing: 2px;
+}
+
+div.tab-profile button{
+	width: 49.8%;
 }
 
 div.tab button:hover{
@@ -259,6 +280,63 @@ div.tab button.active{
     to {opacity: 1;}
 }
 
+div.medal-item {
+	background-color: rgba(158,158,158,0.05);
+	border: 1px solid #757575;
+	padding-top: 8px;
+	padding-bottom: 8px;
+	padding-right: 16px;
+	height: 72px;
+	outline: none;
+	display: block;
+	width: 100%;
+	margin-top: 8px;
+	background-position: 8px 8px;
+	background-repeat: no-repeat;
+	background-size: 54px;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	overflow: hidden;
+	text-align: left;
+}
+
+div.medal-list-left{
+	padding-top: 8px;
+	text-overflow: ellipsis;
+	overflow: hidden;
+	display: inline-block;
+	max-width: 320px;
+}
+
+div.medal-list-right{
+		float: right;
+		padding-top: 4px;
+		text-overflow: ellipsis;
+		overflow: hidden;
+		display: inline-block;
+}
+
+img.medal {
+	height: 24px;
+	width: 24px;
+}
+
+img.medal-disabled{
+	height: 24px;
+	width: 24px;
+	opacity: 0.10;
+}
+
+div.star-holder{
+	display: block;
+}
+
+div.medal-stats{
+	display: block;
+	text-align: right;
+	font-size: 1.1em;
+	color: rgba(245,245,245,0.75);
+}
 /* GAME LIST */
 
 div.game-list{
