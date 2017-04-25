@@ -3,12 +3,12 @@ import { CommonModule } from '@angular/common';
 import { ProfileComponent } from './profile.component';
 
 import { TabComponent, TabHolderComponent } from './tabs';
-import { StatsComponent } from './stats/stats.component';
+import { StatsModule } from './stats/stats.module';
 import { MedalsComponent } from './medals/medals.component';
 
 @NgModule({
-    imports: [CommonModule],
-    declarations: [ProfileComponent, TabComponent, TabHolderComponent, StatsComponent, MedalsComponent],
+    imports: [CommonModule, StatsModule],
+    declarations: [ProfileComponent, TabComponent, TabHolderComponent, MedalsComponent],
     exports: [ProfileComponent]
 })
 

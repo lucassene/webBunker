@@ -34,7 +34,7 @@ export class HistoryService {
     headers.append('platform', '2');
     headers.append('zoneId', 'America/Sao_Paulo');
     headers.append('clanId', '548691');
-    headers.append('Authorization', 'eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI0NjExNjg2MDE4NDM3MjAzMjM5IiwiZXhwIjoxNDkzMTI5Nzc5fQ.G1WJnU9IYdpZ5M4nEBB9K5rgD1LxHI9Duk25iOsjAWVtDu3b7hNxHM6msbxKDSVU45OfrVV4VRLmMchHEz2yrw');
+    headers.append('Authorization', 'eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI0NjExNjg2MDE4NDM3MjAzMjM5IiwiZXhwIjoxNDkzMjE4NzY3fQ.hWWxR0mHbeFRF4Gc7x7hfpDyaPOVOYDPvwc-4kxUEeI6rB5QC6c7yKa94ION7tjzjilJ16w0SIVzmQkim-Z0fA');
     const options = new RequestOptions({headers: headers});
     const url = this.serverUrl + this.gameEndpoint + this.historyEndpoint;
     console.log('url: ' + url);

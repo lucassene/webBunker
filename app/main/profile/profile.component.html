@@ -1,6 +1,6 @@
 <tab-holder>
   <tab tabTitle="stats">
-      <stats *ngIf="profile"></stats>
+      <stats *ngIf="profile" [profile]="profile"></stats>
   </tab>
   <tab tabTitle="medals">
       <medals *ngIf="profile" [profile]="profile"></medals>

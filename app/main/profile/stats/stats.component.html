@@ -1,1 +1,113 @@
-<h3>Stats</h3>
+<div class="fade-in" style="padding-top: 16px">
+  <div class="game-detail-icon" [ngStyle]="{'background-image': 'url(http://www.bungie.net'+ profile.member.icon +')'}">
+    <div class="game-list-left">
+      <p class="item-title" style="font-size: 2em; line-height: 16px; padding-left: 80px;">{{profile.member.name}}</p>
+      <p class="item-subtitle" style="font-size: 1.2em; line-height: 16px; padding-left: 80px;">{{profile.member.memberTitle.en}}</p>
+    </div>
+    <div class="game-list-right" style="height: 100%; padding-right:8px;">
+      <p class="item-lvl" style="font-size: 3em; margin-top: auto; margin-bottom: auto;">{{lvlString}}</p>
+    </div>
+  </div>
+  <div class="progress">
+    <div class="progress-bar" [ngStyle]="{width: progressWidth}"></div>
+  </div>
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="chart-title">Evaluations</div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-6">
+      <div style="display: block; padding-left: 8px; padding-right: 8px">
+        <canvas baseChart
+                [data]="evalChartData"
+                [labels]="evalChartLabels"
+                [legend]="false"
+                [colors]="chartColors"
+                [chartType]="pieChartType"
+                (chartHover)="chartHovered($event)"
+                (chartClick)="chartClicked($event)"></canvas>
+      </div></div>
+    <div class="col-sm-6">
+      <div class="row">
+        <div class="col-sm-3"></div>
+        <div class="col-sm-3"></div>
+        <div class="col-sm-3" style="text-align: center; padding-bottom: 8px; color: rgba(245,245,245,0.5)">Value</div>
+        <div class="col-sm-3" style="text-align: center; color: rgba(245,245,245,0.5)">%</div>
+      </div>
+      <div class="row" *ngFor="let data of evalData" style="margin-bottom: 12px; padding-left:8px">
+        <div class="col-sm-1"><div class="chart-block" [ngStyle]="{'background-color': data.bgColor}"></div></div>
+        <div class="col-sm-5" style="color: rgba(245,245,245,0.75)">{{data.label}}</div>
+        <div class="col-sm-3" style="text-align: center; color: rgba(245,245,245,0.75)">{{data.value}}</div>
+        <div class="col-sm-3" style="text-align: center; color: rgba(245,245,245,0.75)">{{data.percent}}</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row" style="margin-top: 32px;">
+    <div class="col-sm-12">
+      <div class="chart-title">Events</div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-6">
+      <div style="display: block; padding-left: 8px; padding-right: 8px">
+        <canvas baseChart
+                [data]="eventsChartData"
+                [labels]="eventsChartLabels"
+                [legend]="false"
+                [colors]="chartColors"
+                [chartType]="pieChartType"
+                (chartHover)="chartHovered($event)"
+                (chartClick)="chartClicked($event)"></canvas>
+      </div></div>
+    <div class="col-sm-6">
+      <div class="row">
+        <div class="col-sm-3"></div>
+        <div class="col-sm-3"></div>
+        <div class="col-sm-3" style="text-align: center; padding-bottom: 8px; color: rgba(245,245,245,0.5)">Value</div>
+        <div class="col-sm-3" style="text-align: center; color: rgba(245,245,245,0.5)">%</div>
+      </div>
+      <div class="row" *ngFor="let data of eventsData" style="margin-bottom: 12px; padding-left:8px">
+        <div class="col-sm-1"><div class="chart-block" [ngStyle]="{'background-color': data.bgColor}"></div></div>
+        <div class="col-sm-5" style="color: rgba(245,245,245,0.75)">{{data.label}}</div>
+        <div class="col-sm-3" style="text-align: center; color: rgba(245,245,245,0.75)">{{data.value}}</div>
+        <div class="col-sm-3" style="text-align: center; color: rgba(245,245,245,0.75)">{{data.percent}}</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row" style="margin-top: 32px;">
+    <div class="col-sm-12">
+      <div class="chart-title">Game type</div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-6">
+      <div style="display: block; padding-left: 8px; padding-right: 8px">
+        <canvas baseChart
+                [data]="typesChartData"
+                [labels]="typesChartLabels"
+                [legend]="false"
+                [colors]="chartColors"
+                [chartType]="pieChartType"
+                (chartHover)="chartHovered($event)"
+                (chartClick)="chartClicked($event)"></canvas>
+      </div></div>
+    <div class="col-sm-6">
+      <div class="row">
+        <div class="col-sm-3"></div>
+        <div class="col-sm-3"></div>
+        <div class="col-sm-3" style="text-align: center; padding-bottom: 8px; color: rgba(245,245,245,0.5)">Value</div>
+        <div class="col-sm-3" style="text-align: center; color: rgba(245,245,245,0.5)">%</div>
+      </div>
+      <div class="row" *ngFor="let data of typesData" style="margin-bottom: 12px; padding-left:8px">
+        <div class="col-sm-1"><div class="chart-block" [ngStyle]="{'background-color': data.bgColor}"></div></div>
+        <div class="col-sm-5" style="color: rgba(245,245,245,0.75)">{{data.label}}</div>
+        <div class="col-sm-3" style="text-align: center; color: rgba(245,245,245,0.75)">{{data.value}}</div>
+        <div class="col-sm-3" style="text-align: center; color: rgba(245,245,245,0.75)">{{data.percent}}</div>
+      </div>
+    </div>
+  </div>
+
+</div>

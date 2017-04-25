@@ -335,6 +335,7 @@ div.medal-stats{
 	display: block;
 	text-align: right;
 	font-size: 1.1em;
+	line-height: 24px;
 	color: rgba(245,245,245,0.75);
 }
 /* GAME LIST */
@@ -474,6 +475,40 @@ p.game-detail-item-right{
 	font-size: 1.2em;
 	color: rgba(245,245,245,0.5);
 	display: block;
+}
+
+.progress{
+	height: 8px;
+	width: 100%;
+	background-color: #1c2228;
+	padding-left: 8px;
+	padding-right: 8px;
+}
+
+.progress-bar{
+	width: 0%;
+	background-color: #0288D1;
+	padding-left: 8px;
+	padding-right: 8px;
+}
+
+div.chart-title{
+	width: 100%;
+	font-size: 1.1em;
+	color: rgba(245,245,245,0.6);
+	border-bottom: 2px solid rgba(245,245,245,0.5);
+	height: 25px;
+	padding-left: 8px;
+	padding-right: 16px;
+	margin-bottom: 16px;
+}
+
+.chart-block{
+	width: 16px;
+	height: 16px;
+	background-color: red;
+	margin-top: auto;
+	margin-bottom: auto;
 }
 
 #toggle-sidebar{
