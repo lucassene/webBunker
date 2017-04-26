@@ -1,24 +1,32 @@
-<div *ngIf="game">
+<div *ngIf="game" class="fade-in">
 	<div class="game-detail-icon" [ngStyle]="{'background-image': 'url(assets/img/'+ game.event.icon +'.png)'}">
 		<p class="item-title" style="font-size: 2em; line-height: 16px">{{game.event.en}}</p>
 		<p class="item-subtitle" style="font-size: 1.3em; line-height: 16px">{{game.event.eventType.en}}</p>
   </div>
   <div class="blue-title">Specs</div>
-  <div class="row" style="padding-left: 32px; padding-right: 16px; padding-top: 16px;">
-    <div class="col-sm-3"><p class="game-detail-item">Date:</p></div>
-    <div class="col-sm-3"><p class="game-detail-item-right">{{game.time | date: 'dd/MM/yyyy'}}</p></div>
-    <div class="col-sm-3"><p class="game-detail-item">Time:</p></div>
-    <div class="col-sm-3"><p class="game-detail-item-right">{{game.time | slice:11:16}}</p></div>
+  <div class="row" style="padding-left: 32px; padding-right: 16px; padding-top: 16px; min-width:450px">
+		<div class=col-sm-6>
+				<div class="game-detail-item" style="width: 65%;">Date:</div>
+				<div class="game-detail-item-right" style="width: 30%">{{game.time | date: 'dd/MM/yyyy'}}</div>
+		</div>
+    <div class="col-sm-6">
+			<div class="game-detail-item" style="width: 65%;">Time:</div>
+			<div class="game-detail-item-right" style="width: 30%">{{game.time | slice:11:16}}</div>
+		</div>
   </div>
-  <div class="row" style="padding-left: 32px; padding-right: 16px; padding-top: 8px;">
-    <div class="col-sm-3"><p class="game-detail-item">Recommended light:</p></div>
-    <div class="col-sm-3"><p class="game-detail-item-right">{{game.light}}</p></div>
-    <div class="col-sm-3"><p class="game-detail-item">Enrolled guardians:</p></div>
-    <div class="col-sm-3"><p class="game-detail-item-right">{{game.inscriptions}} of {{game.event.maxGuardians}}</div>
+  <div class="row" style="padding-left: 32px; padding-right: 16px; min-width:450px">
+		<div class="col-sm-6">
+			<div class="game-detail-item" style="width: 65%;">Recommended light:</div>
+	    <div class="game-detail-item-right" style="width: 30%">{{game.light}}</div>
+		</div>
+		<div class="col-sm-6">
+			<div class="game-detail-item" style="width: 65%;">Enrolled guardians</div>
+			<div class="game-detail-item-right" style="width: 30%">{{game.inscriptions}} of {{game.event.maxGuardians}}</div>
+		</div>
   </div>
   <div class="blue-title">Guardians</div>
-	<entry-list *ngIf="entries" [entries]="entries"></entry-list>
-	<div class="col-sm-12" style="text-align: center; padding-bottom: 32px">
-			<a class="mbtn mbtn-enabled" (click)="onBack()">BACK</a>
+	<entry-list (selectedMember)="onMemberSelected($event)" *ngIf="entries" [entries]="entries"></entry-list>
+	<div *ngIf="entries" class="col-sm-12 fade-in" style="text-align: center; padding-bottom: 32px">
+			<a [ngClass]="{'mbtn-enabled': btnActive, 'mbtn-disabled': !btnActive}" style="cursor:pointer"(click)="onClick()">{{btnMessage}}</a>
 	</div>
 </div>

@@ -11,12 +11,15 @@
   <div class="progress">
     <div class="progress-bar" [ngStyle]="{width: progressWidth}"></div>
   </div>
-  <div class="row">
+    <div *ngIf="profile.favoriteEvent" class="item-subtitle" style="font-size: 1.2em; line-height: 16px; color: rgba(245,245,245,0.4); padding-left: 8px">
+      {{profile.member.name}} has achieved the title of {{profile.member.memberTitle.en}} by playing {{profile.favoriteEvent.event.en}} for {{profile.favoriteEvent.timesPlayed}} times...
+    </div>
+  <div class="row" style="margin-top: 32px" *ngIf="profile.favoriteEvent">
     <div class="col-sm-12">
       <div class="chart-title">Evaluations</div>
     </div>
   </div>
-  <div class="row">
+  <div class="row" *ngIf="profile.favoriteEvent">
     <div class="col-sm-6">
       <div style="display: block; padding-left: 8px; padding-right: 8px">
         <canvas baseChart
@@ -28,28 +31,38 @@
                 (chartHover)="chartHovered($event)"
                 (chartClick)="chartClicked($event)"></canvas>
       </div></div>
-    <div class="col-sm-6">
-      <div class="row">
-        <div class="col-sm-3"></div>
-        <div class="col-sm-3"></div>
-        <div class="col-sm-3" style="text-align: center; padding-bottom: 8px; color: rgba(245,245,245,0.5)">Value</div>
-        <div class="col-sm-3" style="text-align: center; color: rgba(245,245,245,0.5)">%</div>
-      </div>
+    <div class="col-sm-6" style="padding-left: 16px;">
+        <div class="legend-title"></div>
+        <div class="legend-title"></div>
+        <div class="legend-title">Value</div>
+        <div class="legend-title">%</div>
       <div class="row" *ngFor="let data of evalData" style="margin-bottom: 12px; padding-left:8px">
-        <div class="col-sm-1"><div class="chart-block" [ngStyle]="{'background-color': data.bgColor}"></div></div>
-        <div class="col-sm-5" style="color: rgba(245,245,245,0.75)">{{data.label}}</div>
-        <div class="col-sm-3" style="text-align: center; color: rgba(245,245,245,0.75)">{{data.value}}</div>
-        <div class="col-sm-3" style="text-align: center; color: rgba(245,245,245,0.75)">{{data.percent}}</div>
+        <div class="legend-color"><div class="chart-block" [ngStyle]="{'background-color': data.bgColor}"></div></div>
+        <div class="legend-item" style="width:38%; text-align:left">{{data.label}}</div>
+        <div class="legend-item">{{data.value}}</div>
+        <div class="legend-item">{{data.percent}}</div>
       </div>
     </div>
   </div>
 
-  <div class="row" style="margin-top: 32px;">
+  <div class="row" style="margin-top: 32px;" *ngIf="profile.favoriteEvent">
     <div class="col-sm-12">
       <div class="chart-title">Events</div>
     </div>
   </div>
-  <div class="row">
+  <div class="row" *ngIf="profile.favoriteEvent">
+    <div class="col-sm-6" style="padding-left: 16px;">
+        <div class="legend-title"></div>
+        <div class="legend-title"></div>
+        <div class="legend-title">Value</div>
+        <div class="legend-title">%</div>
+      <div class="row" *ngFor="let data of eventsData" style="margin-bottom: 12px; padding-left:8px">
+        <div class="legend-color"><div class="chart-block" [ngStyle]="{'background-color': data.bgColor}"></div></div>
+        <div class="legend-item" style="width:38%; text-align:left">{{data.label}}</div>
+        <div class="legend-item">{{data.value}}</div>
+        <div class="legend-item">{{data.percent}}</div>
+      </div>
+    </div>
     <div class="col-sm-6">
       <div style="display: block; padding-left: 8px; padding-right: 8px">
         <canvas baseChart
@@ -61,28 +74,14 @@
                 (chartHover)="chartHovered($event)"
                 (chartClick)="chartClicked($event)"></canvas>
       </div></div>
-    <div class="col-sm-6">
-      <div class="row">
-        <div class="col-sm-3"></div>
-        <div class="col-sm-3"></div>
-        <div class="col-sm-3" style="text-align: center; padding-bottom: 8px; color: rgba(245,245,245,0.5)">Value</div>
-        <div class="col-sm-3" style="text-align: center; color: rgba(245,245,245,0.5)">%</div>
-      </div>
-      <div class="row" *ngFor="let data of eventsData" style="margin-bottom: 12px; padding-left:8px">
-        <div class="col-sm-1"><div class="chart-block" [ngStyle]="{'background-color': data.bgColor}"></div></div>
-        <div class="col-sm-5" style="color: rgba(245,245,245,0.75)">{{data.label}}</div>
-        <div class="col-sm-3" style="text-align: center; color: rgba(245,245,245,0.75)">{{data.value}}</div>
-        <div class="col-sm-3" style="text-align: center; color: rgba(245,245,245,0.75)">{{data.percent}}</div>
-      </div>
-    </div>
   </div>
 
-  <div class="row" style="margin-top: 32px;">
+  <div class="row" style="margin-top: 32px;" *ngIf="profile.favoriteEvent">
     <div class="col-sm-12">
       <div class="chart-title">Game type</div>
     </div>
   </div>
-  <div class="row">
+  <div class="row" *ngIf="profile.favoriteEvent">
     <div class="col-sm-6">
       <div style="display: block; padding-left: 8px; padding-right: 8px">
         <canvas baseChart
@@ -94,20 +93,19 @@
                 (chartHover)="chartHovered($event)"
                 (chartClick)="chartClicked($event)"></canvas>
       </div></div>
-    <div class="col-sm-6">
-      <div class="row">
-        <div class="col-sm-3"></div>
-        <div class="col-sm-3"></div>
-        <div class="col-sm-3" style="text-align: center; padding-bottom: 8px; color: rgba(245,245,245,0.5)">Value</div>
-        <div class="col-sm-3" style="text-align: center; color: rgba(245,245,245,0.5)">%</div>
+      <div class="col-sm-6" style="padding-left: 16px;">
+          <div class="legend-title"></div>
+          <div class="legend-title"></div>
+          <div class="legend-title">Value</div>
+          <div class="legend-title">%</div>
+        <div class="row" *ngFor="let data of typesData" style="margin-bottom: 12px; padding-left:8px">
+          <div class="legend-color"><div class="chart-block" [ngStyle]="{'background-color': data.bgColor}"></div></div>
+          <div class="legend-item" style="width:38%; text-align:left">{{data.label}}</div>
+          <div class="legend-item">{{data.value}}</div>
+          <div class="legend-item">{{data.percent}}</div>
+        </div>
       </div>
-      <div class="row" *ngFor="let data of typesData" style="margin-bottom: 12px; padding-left:8px">
-        <div class="col-sm-1"><div class="chart-block" [ngStyle]="{'background-color': data.bgColor}"></div></div>
-        <div class="col-sm-5" style="color: rgba(245,245,245,0.75)">{{data.label}}</div>
-        <div class="col-sm-3" style="text-align: center; color: rgba(245,245,245,0.75)">{{data.value}}</div>
-        <div class="col-sm-3" style="text-align: center; color: rgba(245,245,245,0.75)">{{data.percent}}</div>
-      </div>
-    </div>
   </div>
+  <div *ngIf="!profile.favoriteEvent" class="empty-list">{{profile.member.name}} has not played any event yet.</div>
 
 </div>

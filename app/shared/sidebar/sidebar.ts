@@ -42,6 +42,7 @@ export class SidebarComponent implements OnInit{
   }
 
   changeTitle(title: string) {
+    this.isActive = !this.isActive;
     this.changeTitleString.emit(title);
   }
 

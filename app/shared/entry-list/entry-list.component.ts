@@ -1,4 +1,5 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Entry } from '../../models/entry';
 
 @Component({
   selector: 'entry-list',
@@ -8,6 +9,8 @@ import { Component, Input } from '@angular/core';
 export class EntryListComponent {
 
   @Input() entries;
+
+  @Output() selectedMember = new EventEmitter<String>();
 
   getMemberLvl(likes: number, dislikes: number, created: number, played: number): string {
     const lfactor = likes * 16;
@@ -34,6 +37,10 @@ export class EntryListComponent {
         return inteiro.toString();
       }
     }
+  }
+
+  onClick(entry: Entry){
+    this.selectedMember.emit(entry.member.membership);
   }
 
 }

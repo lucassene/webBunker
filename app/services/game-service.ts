@@ -20,16 +20,19 @@ export class GameService {
 
   private games: Game[];
 
+  private authorization = 'eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI0NjExNjg2MDE4NDM3MjAzMjM5IiwiZXhwIjoxNDkzMzA1MjI0fQ.uP_jR7Ab1xJNSVRnaCUsWTJKqF8sPyE7FclWCAcrDffmWiTSBk9Y_EqDc3uNLHA73dWcz579dnYn_eQt9aXGsg';
+  private membership = '4611686018437203239';
+
   constructor(private http: Http, private dataService: DataService) { }
 
   getGamesFromServer(): Observable<any[]> {
 
     const headers = new Headers();
-    headers.append('membership', '4611686018437203239');
+    headers.append('membership', this.membership);
     headers.append('platform', '2');
     headers.append('zoneId', 'America/Sao_Paulo');
     headers.append('clanId', '548691');
-    headers.append('Authorization', 'eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI0NjExNjg2MDE4NDM3MjAzMjM5IiwiZXhwIjoxNDkzMjE4NzY3fQ.hWWxR0mHbeFRF4Gc7x7hfpDyaPOVOYDPvwc-4kxUEeI6rB5QC6c7yKa94ION7tjzjilJ16w0SIVzmQkim-Z0fA');
+    headers.append('Authorization', this.authorization);
     const options = new RequestOptions({headers: headers});
     const url = this.serverUrl + this.gameEndpoint;
     console.log('url: ' + url);
@@ -73,6 +76,38 @@ export class GameService {
           this.dataService.setGames(objs as Game[]);
           return objs
       })
+      .catch(err => this.handleError(err))
+  }
+
+  createEvent(json: string): Observable<any>{
+    const headers = new Headers();
+    headers.append('membership', this.membership);
+    headers.append('platform', '2');
+    headers.append('zoneId', 'America/Sao_Paulo');
+    headers.append('clanId', '548691');
+    headers.append('Authorization', this.authorization);
+    headers.append('Content-Type', 'application/json')
+    const options = new RequestOptions({headers: headers});
+    const url = this.serverUrl + this.gameEndpoint;
+    console.log('url: ' + url);
+    return this.http.post(url, json, options)
+      .map((response: Response) => { return response})
+      .catch(err => this.handleError(err))
+  }
+
+  deleteEvent(id: number): Observable<any>{
+    const headers = new Headers();
+    headers.append('membership', this.membership);
+    headers.append('platform', '2');
+    headers.append('zoneId', 'America/Sao_Paulo');
+    headers.append('clanId', '548691');
+    headers.append('Authorization', this.authorization);
+    headers.append('Content-Type', 'application/json')
+    const options = new RequestOptions({headers: headers});
+    const url = this.serverUrl + this.gameEndpoint + '/' + id;
+    console.log('url: ' + url);
+    return this.http.delete(url, options)
+      .map((response: Response) => { return response})
       .catch(err => this.handleError(err))
   }
 

@@ -25,16 +25,19 @@ export class MemberService {
 
   private defaultTitle = defaultTitle;
 
+  private authorization = 'eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI0NjExNjg2MDE4NDM3MjAzMjM5IiwiZXhwIjoxNDkzMzA1MjI0fQ.uP_jR7Ab1xJNSVRnaCUsWTJKqF8sPyE7FclWCAcrDffmWiTSBk9Y_EqDc3uNLHA73dWcz579dnYn_eQt9aXGsg';
+  private membership = '4611686018437203239';
+
   constructor(private http: Http, private dataService: DataService) { }
 
   getMembers(groupID: number): Observable<any[]> {
 
     const headers = new Headers();
-    headers.append('membership', '4611686018437203239');
+    headers.append('membership', this.membership);
     headers.append('platform', '2');
     headers.append('zoneId', 'America/Sao_Paulo');
     headers.append('clanId', '548691');
-    headers.append('Authorization', 'eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI0NjExNjg2MDE4NDM3MjAzMjM5IiwiZXhwIjoxNDkzMjE4NzY3fQ.hWWxR0mHbeFRF4Gc7x7hfpDyaPOVOYDPvwc-4kxUEeI6rB5QC6c7yKa94ION7tjzjilJ16w0SIVzmQkim-Z0fA');
+    headers.append('Authorization', this.authorization);
     const options = new RequestOptions({headers: headers});
     const url = this.serverUrl + this.clanEndpoint + groupID + this.membersFullEndpoint;
 
@@ -45,7 +48,6 @@ export class MemberService {
         for (let i=0;i<data.length;i++){
           let title: Title;
           if(data[i].memberTitle === null){
-            console.log('memberTitle is null!');
             title = this.defaultTitle;
           } else {
             title = new Title(
@@ -77,17 +79,18 @@ export class MemberService {
   getMemberProfile(membership: string): Observable<any>{
 
     const headers = new Headers();
-    headers.append('membership', '4611686018437203239');
+    headers.append('membership', this.membership);
     headers.append('platform', '2');
     headers.append('zoneId', 'America/Sao_Paulo');
     headers.append('clanId', '548691');
-    headers.append('Authorization', 'eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI0NjExNjg2MDE4NDM3MjAzMjM5IiwiZXhwIjoxNDkzMjE4NzY3fQ.hWWxR0mHbeFRF4Gc7x7hfpDyaPOVOYDPvwc-4kxUEeI6rB5QC6c7yKa94ION7tjzjilJ16w0SIVzmQkim-Z0fA');
+    headers.append('Authorization', this.authorization);
     const options = new RequestOptions({headers: headers});
     const url = this.serverUrl + this.memberEndpoint + membership + this.profileEndpoint;
 
     return this.http.get(url, options)
       .map((response: Response) => {
         const data = response.json();
+        console.log(data);
         let title: Title;
         if (data.member.memberTitle === null){
           title = this.defaultTitle;
@@ -112,21 +115,9 @@ export class MemberService {
           playedTypes.push(item);
         }
 
-        let profile = new Profile(
-          new Member(
-            data.member.membership,
-            data.member.name,
-            data.member.icon,
-            data.member.platform,
-            data.member.likes,
-            data.member.dislikes,
-            data.member.gamesCreated,
-            data.member.gamesPlayed,
-            title
-          ),
-          data.evaluationsMade,
-          playedTypes as PlayedType[],
-          new FavoriteEvent(
+        let favEvent: FavoriteEvent;
+        if (data.favoriteEvent !== null){
+          favEvent = new FavoriteEvent(
             data.favoriteEvent.timesPlayed,
             new Event(
               data.favoriteEvent.event.id,
@@ -145,6 +136,24 @@ export class MemberService {
               data.favoriteEvent.event.es
             )
           )
+        }
+
+        let profile = new Profile(
+          new Member(
+            data.member.membership,
+            data.member.name,
+            data.member.icon,
+            data.member.platform,
+            data.member.likes,
+            data.member.dislikes,
+            data.member.gamesCreated,
+            data.member.gamesPlayed,
+            title
+          ),
+          data.evaluationsMade,
+          playedTypes as PlayedType[],
+          favEvent
+
         )
         console.log(profile);
         return profile;

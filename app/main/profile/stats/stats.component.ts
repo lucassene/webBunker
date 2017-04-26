@@ -81,7 +81,11 @@ export class StatsComponent implements OnInit {
   }
 
   setProgress(xp: number, xpNeeded: number){
-    this.progressWidth = (100 * xp) / xpNeeded + '%';
+    if (xp == 0) {
+        this.progressWidth = 0 + '%'
+    } else {
+        this.progressWidth = (100 * xp) / xpNeeded + '%';
+    }
     console.log('progressWidth:',this.progressWidth);
   }
 

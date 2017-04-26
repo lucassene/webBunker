@@ -10,19 +10,20 @@ import { availableMember } from '../../models/member';
 import { blockedMember } from '../../models/member';
 import { Membership } from '../../models/create-json';
 import { EventID } from '../../models/create-json';
-import { CreateJSON } from '../../models/create-json';
+import { CreateJSON, Entry } from '../../models/create-json';
 
 import { DataService} from '../../services/data-service';
+import { GameService} from '../../services/game-service';
 
 @Component({
   selector: 'new-cmp',
   templateUrl: 'new.component.html',
-  providers: [MemberService]
+  providers: [MemberService, GameService]
 })
 
 export class NewEventComponent implements OnInit {
 
-  constructor(private memberService: MemberService, private dataService: DataService) { }
+  constructor(private memberService: MemberService, private dataService: DataService, private gameService: GameService) { }
 
   types = types;
   events = events;
@@ -30,30 +31,37 @@ export class NewEventComponent implements OnInit {
   blockedMember = blockedMember;
   members: Member[];
   invitedMembers: Member[] = [];
+  invitedCount = 0;
   total = 0;
   selectedMember: Member;
   slotsUsed = 0;
   slotsAvailable = 0;
+  reservedSlots = 0;
 
   selectedType = types[1].id;
   selectedEvent: Event;
-  selectedLight: number;
-  selectedDate: string;
-  selectedTime: string;
+  selectedLight= 5;
+  selectedDate = '';
+  selectedTime = '';
 
-  creator: Membership = { membership: '4611686018437203239'};
-  entryList: Membership[] = [];
+  creator: Membership = new Membership('4611686018437203239');
+  entryList: Entry[] = [];
   EventID = 0;
+  wroteComment = '';
 
   maxGuardians = 0;
+
+  btnActive = false;
+  btnMessage= 'WAITING DATA';
 
   ngOnInit() {
     this.selectedType = types[1].id;
     this.events = events.filter((item) => item.eventType.id == this.selectedType);
     this.selectedEvent = this.events[0];
     this.maxGuardians = this.events[0].maxGuardians;
+    this.selectedLight = this.events[0].minLight;
     this.slotsAvailable = this.maxGuardians;
-    this.slotsUsed = this.maxGuardians;
+    this.slotsUsed = this.maxGuardians-1;
     this.setDummyList();
     let members = this.dataService.getMembers();
     if (members == null || members.length){
@@ -61,20 +69,20 @@ export class NewEventComponent implements OnInit {
     } else {
       this.setMembers(members);
     }
-    const today = new Date();
-    this.selectedDate = today.getFullYear() + '-' + today.getMonth() + '-' + today.getDate();
 
   }
 
   setMembers(members: Member[]): void {
     this.members = members;
-    console.log('members lenght: ', this.members.length);
-    console.log('selectedEvent: ', this.selectedEvent.en);
-    console.log('maxGuardians: ', this.maxGuardians);
+    for(let i=0;i<this.members.length;i++){
+      if (this.creator.membership === this.members[i].membership){
+        this.members.splice(i,1);
+      }
+    }
   }
 
   setDummyList(){
-    for(let i=0;i<this.maxGuardians;i++){
+    for(let i=0;i<this.maxGuardians-1;i++){
       this.invitedMembers.push(this.availableMember);
     }
   }
@@ -84,22 +92,23 @@ export class NewEventComponent implements OnInit {
     this.events = events.filter((item) => item.eventType.id == typeID);
     this.selectedEvent = this.events[0];
     this.maxGuardians = this.events[0].maxGuardians;
+    this.selectedLight = this.events[0].minLight;
     this.adjustInvitedList();
-    console.log('selectedEvent: ', this.selectedEvent.en);
-    console.log('maxGuardians: ', this.maxGuardians);
   }
 
   onEventSelected(){
     this.maxGuardians = this.selectedEvent.maxGuardians;
+    this.selectedLight = this.selectedEvent.minLight;
     this.adjustInvitedList();
-    console.log('selectedEvent: ', this.selectedEvent.en);
-    console.log('maxGuardians: ', this.maxGuardians);
   }
 
   adjustInvitedList(){
+    this.maxGuardians = this.selectedEvent.maxGuardians;
+    this.slotsAvailable = this.maxGuardians;
+    this.slotsUsed = this.maxGuardians-1 - this.invitedCount;
     console.log('maxGuardians: ', this.maxGuardians);
     console.log('invitedMembers: ', this.invitedMembers.length);
-    let diff = this.maxGuardians - this.invitedMembers.length;
+    let diff = this.maxGuardians-1 - this.invitedMembers.length;
     console.log('diff: ', diff);
     if (diff < 0){
       while(diff<0){
@@ -128,12 +137,11 @@ export class NewEventComponent implements OnInit {
         }
       }
       if (index != 99 && canAdd){
+        this.invitedCount++;
+        console.log('invited Members:',this.invitedCount);
         this.invitedMembers[index] = this.selectedMember;
-        const member: Membership = { membership: this.selectedMember.membership };
-        this.entryList.push(member);
-        console.log('entryList lenght: ', this.entryList.length);
+        this.entryList.push(new Entry(new Membership(this.selectedMember.membership)));
         this.slotsUsed--;
-        console.log('invitedMembers lenght: ', this.invitedMembers.length);
       }
   }
 
@@ -146,24 +154,27 @@ export class NewEventComponent implements OnInit {
       }
     }
 
-    for(let i=this.maxGuardians-1;i>=0;i--){
+    for(let i=this.maxGuardians-2;i>=0;i--){
       if (member.membership === this.invitedMembers[i].membership){
         if (this.invitedMembers[i].membership === ''){
           if (counter >1){
             this.invitedMembers[i] = blockedMember;
             this.slotsAvailable--;
             this.slotsUsed--;
+            this.reservedSlots++;
           }
         } else {
             this.invitedMembers[i] = availableMember;
             this.slotsUsed++;
+            this.invitedCount--;
+            this.reservedSlots--;
+            console.log('invited Members:',this.invitedCount);
             if (member.membership === '' || member.membership === '0.25'){
               this.slotsAvailable++;
             } else {
               for(let i=0;i<this.entryList.length;i++){
-                if (member.membership === this.entryList[i].membership){
+                if (member.membership === this.entryList[i].member.membership){
                   this.entryList.splice(i,1);
-                  console.log('entryList lenght: ', this.entryList.length);
                 }
               }
             }
@@ -178,6 +189,8 @@ export class NewEventComponent implements OnInit {
   onLightChange(value: number){
     if (value >400){
       value = 400;
+    } else if (value < this.selectedEvent.minLight){
+      value = this.selectedEvent.minLight;
     }
     this.selectedLight = value;
     console.log('light: ', value);
@@ -198,13 +211,59 @@ export class NewEventComponent implements OnInit {
     if (date.getTime() < today.getTime()){
       date = today;
     }
+    const next = new Date();
+    next.setMinutes(today.getMinutes()+30);
+    let min = '';
+    if (next.getMinutes() < 10){
+      min = '0' + next.getMinutes();
+    } else { min = next.getMinutes() + ''}
+    this.selectedTime = next.getHours() + ':' + min;
     let nd = date.toISOString().substr(0,date.toISOString().indexOf('T'));
-    console.log(nd);
     this.selectedDate = nd;
+    this.checkBtnState();
   }
 
   onTimeChange(value: string){
     this.selectedTime = value;
+    this.checkBtnState();
+  }
+
+  checkBtnState(){
+    if (this.selectedDate !== ''){
+      this.btnActive = true;
+      this.btnMessage= 'CREATE EVENT';
+    } else {
+      this.btnActive = false;
+      this.btnMessage= 'WAITING DATA';
+     }
+  }
+
+  onCommentChange(value: string){
+    this.wroteComment = value;
+  }
+
+  createEvent(){
+    if (this.btnActive){
+      console.log('create event called!');
+      let createJSON = new CreateJSON(
+        this.creator,
+        new EventID(this.selectedEvent.id),
+        this.selectedDate + 'T' + this.selectedTime + ':00',
+        this.selectedLight,
+        0,
+        this.wroteComment,
+        this.reservedSlots,
+        this.entryList
+      )
+      console.log(JSON.stringify(createJSON));
+      this.gameService.createEvent(JSON.stringify(createJSON)).subscribe(res => this.onCreateEvent(res));
+    }
+  }
+
+  onCreateEvent(res: Response){
+    if (res.status === 200){
+      console.log('Game crated successfully!');
+    } else { console.log('some error occurred!')}
   }
 
 }

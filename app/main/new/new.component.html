@@ -28,7 +28,7 @@
   	</div>
 	<div class="form-group">
     	<label class="control-label" for="comment">Comment:</label>
-      		<input type="text" class="form-control" id="light" max="400" placeholder="Optional">
+      		<input #comment type="text" class="form-control" id="comment" maxlength="60" placeholder="Optional" (blur)="onCommentChange(comment.value)">
   </div>
   	<div class="blue-title">Slots</div>
 	<div class="form-group">
@@ -42,7 +42,7 @@
 		<invited-member-list (changeMember)="changeMember($event)" [members]="invitedMembers"></invited-member-list>
 	</div>
 	<div class="col-sm-12" style="text-align: center; padding-bottom: 32px">
-			<a class="mbtn mbtn-enabled">CREATE EVENT</a>
+			<a [ngClass]="{'mbtn-enabled': btnActive, 'mbtn-disabled': !btnActive}" (click)="createEvent()">{{btnMessage}}</a>
 	</div>
 
 </form>

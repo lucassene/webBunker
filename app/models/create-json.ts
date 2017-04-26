@@ -1,18 +1,30 @@
 export class CreateJSON{
-  creator: Membership;
-  event: EventID;
-  time: string;
-  light: number;
-  status: number;
-  comment: string;
-  reserved: number;
-  entries: Membership[];
+  constructor(
+    public creator: Membership,
+    public event: EventID,
+    public time: string,
+    public light: number,
+    public status: number,
+    public comment: string,
+    public reserved: number,
+    public entries: Entry[]
+  ){}
+}
+
+export class Entry{
+  constructor(
+    public member: Membership
+  ) {}
 }
 
 export class Membership{
-  membership: string;
+  constructor(
+    public membership: string
+  ){}
 }
 
 export class EventID{
-  id: number;
+  constructor(
+    public id: number
+  ){}
 }

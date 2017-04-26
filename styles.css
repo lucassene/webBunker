@@ -86,7 +86,7 @@ option{
 	cursor: pointer;
 }
 
-.mbtn{
+.mbtn-enabled{
 	border: 1px solid #9E9E9E;
 	padding: 16px 32px;
 	color: #F5F5F5;
@@ -94,10 +94,7 @@ option{
 	text-decoration: none;
 	display: inline-block;
 	-webkit-transition-duration: 0.3s; /* Safari */
-    transition-duration: 0.3s;
-}
-
-.mbtn-enabled{
+	transition-duration: 0.3s;
 	background-color: rgba(0, 189, 78, 0.75);
 	letter-spacing: 4px;
 	margin-left: auto;
@@ -107,13 +104,45 @@ option{
 	height: 50px;
 }
 
+.mbtn-disabled{
+	border: 1px solid #9E9E9E;
+	padding: 16px 32px;
+	color: #F5F5F5;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	-webkit-transition-duration: 0.3s; /* Safari */
+	transition-duration: 0.3s;
+	background-color: rgba(213, 0, 0, 0.75);
+	letter-spacing: 4px;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 16px;
+	width: 260px;
+	height: 50px;
+	color: rgba(245,245,245,0.6);
+}
+
 .mbtn-enabled:hover{
 	cursor: pointer;
 	border: 1px solid white;
 	color: #F5F5F5;
 }
 
+.mbtn-disabled:hover{
+	color: rgba(245,245,245,0.6);
+	cursor: default;
+}
+
 .mbtn-psn{
+	border: 1px solid #9E9E9E;
+	padding: 16px 32px;
+	color: #F5F5F5;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	-webkit-transition-duration: 0.3s; /* Safari */
+	transition-duration: 0.3s;
 	background-color: #0288D1;
 	background-image: url("assets/img/ic_psn.png");
 	background-position: 16px;
@@ -140,6 +169,14 @@ option{
 }
 
 .mbtn-live{
+	border: 1px solid #9E9E9E;
+	padding: 16px 32px;
+	color: #F5F5F5;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	-webkit-transition-duration: 0.3s; /* Safari */
+	transition-duration: 0.3s;
 	background-color: #388E3C;
 	background-image: url("assets/img/ic_live.png");
 	background-position: 16px;
@@ -290,6 +327,7 @@ div.medal-item {
 	outline: none;
 	display: block;
 	width: 100%;
+	min-width: 390px;
 	margin-top: 8px;
 	background-position: 8px 8px;
 	background-repeat: no-repeat;
@@ -306,6 +344,7 @@ div.medal-list-left{
 	overflow: hidden;
 	display: inline-block;
 	max-width: 320px;
+	white-space: nowrap;
 }
 
 div.medal-list-right{
@@ -314,6 +353,7 @@ div.medal-list-right{
 		text-overflow: ellipsis;
 		overflow: hidden;
 		display: inline-block;
+		white-space: nowrap;
 }
 
 img.medal {
@@ -338,12 +378,64 @@ div.medal-stats{
 	line-height: 24px;
 	color: rgba(245,245,245,0.75);
 }
+
+div.legend-title{
+	width: 24%;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	text-align: center;
+	color: rgba(245,245,245,0.5);
+	padding-bottom: 16px;
+	display: inline-block;
+}
+
+div.legend-item{
+	width: 24%;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	text-align: center;
+	color: rgba(245,245,245,0.75);
+	display: inline-block;
+}
+
+div.legend-color{
+	width: 9%;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	text-align: center;
+	color: rgba(245,245,245,0.75);
+	display: inline-block;
+	padding-left: 8px;
+}
+
+div.chart-title{
+	width: 100%;
+	font-size: 1.1em;
+	color: rgba(245,245,245,0.6);
+	border-bottom: 2px solid rgba(245,245,245,0.5);
+	height: 25px;
+	padding-left: 8px;
+	padding-right: 16px;
+	margin-bottom: 16px;
+}
+
+.chart-block{
+	width: 16px;
+	height: 16px;
+	background-color: red;
+	margin-top: auto;
+	margin-bottom: auto;
+	vertical-align: middle;
+}
+
+
 /* GAME LIST */
 
 div.game-list{
 	overflow: hidden;
 	background-color: transparent;
 	width: 100%;
+	min-width: 390px;
 	padding: 8px;
 	height: 100%;
 	white-space: nowrap;
@@ -460,56 +552,39 @@ div.game-detail-icon{
 	background-size: 60px;
 	height: 75px;
 	padding-top: 16px;
+	padding-left: 16px;
+	white-space: nowrap;
+	text-overflow: ellipsis;
 }
 
-p.game-detail-item{
+.game-detail-item{
 	font-size: 1.2em;
 	color: rgba(245,245,245,0.7);
-	float: left;
-	display: block;
+	display: inline-block;
+	padding-top: 16px;
 }
 
-p.game-detail-item-right{
+.game-detail-item-right{
 	text-align: right;
-	float: right;
 	font-size: 1.2em;
 	color: rgba(245,245,245,0.5);
-	display: block;
+	display: inline-block;
 }
 
 .progress{
 	height: 8px;
 	width: 100%;
 	background-color: #1c2228;
-	padding-left: 8px;
-	padding-right: 8px;
+	margin-left: 8px;
+	margin-right: 8px;
 }
 
 .progress-bar{
 	width: 0%;
 	background-color: #0288D1;
-	padding-left: 8px;
-	padding-right: 8px;
 }
 
-div.chart-title{
-	width: 100%;
-	font-size: 1.1em;
-	color: rgba(245,245,245,0.6);
-	border-bottom: 2px solid rgba(245,245,245,0.5);
-	height: 25px;
-	padding-left: 8px;
-	padding-right: 16px;
-	margin-bottom: 16px;
-}
 
-.chart-block{
-	width: 16px;
-	height: 16px;
-	background-color: red;
-	margin-top: auto;
-	margin-bottom: auto;
-}
 
 #toggle-sidebar{
     position: fixed;
