@@ -28,6 +28,7 @@ export class SearchComponent implements OnInit {
 
   setLists(games: Game[]) {
     this.games = games.filter((item) => item.status == 0 && item.joined == false);
+    console.log('recent games size:', this.games.length);
     if (this.selectedType > 0) {
       this.filteredList = games.filter((item) => item.event.eventType.id == this.selectedType);
     } else {

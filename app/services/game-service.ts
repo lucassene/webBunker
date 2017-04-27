@@ -20,8 +20,10 @@ export class GameService {
 
   private games: Game[];
 
-  private authorization = 'eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI0NjExNjg2MDE4NDM3MjAzMjM5IiwiZXhwIjoxNDkzMzA1MjI0fQ.uP_jR7Ab1xJNSVRnaCUsWTJKqF8sPyE7FclWCAcrDffmWiTSBk9Y_EqDc3uNLHA73dWcz579dnYn_eQt9aXGsg';
+  private authorization = 'eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI0NjExNjg2MDE4NDM3MjAzMjM5IiwiZXhwIjoxNDkzMzk2OTAzfQ.WSkNNgj7Urmq1WPCEExzbMi6PYYOC4flEoUdj0Gekx12X3IY3BpIO1PqLu3PDG-2x2dly0g2xaT3K-5xVKXXfQ';
+  ///*Fernando*/private authorization = 'eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI0NjExNjg2MDE4NDQ5NzYzNzMwIiwiZXhwIjoxNDkzMzk3NDc4fQ.YGosADvWtDM1T5iUHl35JoIZdc6Sp0C3ByiiZ3izI_o7j2V8L9hqLgEahNMZ1lW-cJyJ3Wt2c-vL-yYB6of0JA';
   private membership = '4611686018437203239';
+  ///*Fernando*/private membership = '4611686018449763730';
 
   constructor(private http: Http, private dataService: DataService) { }
 
@@ -111,8 +113,38 @@ export class GameService {
       .catch(err => this.handleError(err))
   }
 
+  joinEvent(id: number): Observable<any>{
+    const headers = new Headers();
+    headers.append('membership', this.membership);
+    headers.append('platform', '2');
+    headers.append('zoneId', 'America/Sao_Paulo');
+    headers.append('clanId', '548691');
+    headers.append('Content-Type', 'application/json')
+    headers.append('Authorization', this.authorization);
+    const options = new RequestOptions({headers: headers});
+    const url = this.serverUrl + this.gameEndpoint + '/' + id + '/join';
+    console.log('url: ' + url);
+    return this.http.post(url, options)
+      .map((response: Response) => { return response})
+      .catch(err => this.handleError(err))
+  }
+
+  leaveEvent(id: number): Observable<any>{
+    const headers = new Headers();
+    headers.append('membership', this.membership);
+    headers.append('platform', '2');
+    headers.append('zoneId', 'America/Sao_Paulo');
+    headers.append('clanId', '548691');
+    headers.append('Authorization', this.authorization);
+    const options = new RequestOptions({headers: headers});
+    const url = this.serverUrl + this.gameEndpoint + '/' + id + '/leave';
+    console.log('url: ' + url);
+    return this.http.delete(url, options)
+      .map((response: Response) => { return response})
+      .catch(err => this.handleError(err))
+  }
+
   private handleError(error: any): Promise<any> {
-    console.error('An error occurred', error); // for demo purposes only
     return Promise.reject(error.message || error);
   }
 

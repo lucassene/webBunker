@@ -13,6 +13,7 @@ export class DataService {
     members: Member[];
     history: Game[];
     loggedMembership = '4611686018437203239';
+    ///*Fernando*/ loggedMembership = '4611686018449763730';
 
     setGames(games: Game[]){
       this.games = games;

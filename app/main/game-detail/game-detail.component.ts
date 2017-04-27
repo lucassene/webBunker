@@ -43,7 +43,9 @@ export class GameDetailComponent implements OnInit {
         } else { this.btnMessage = 'DELETE' }
       }
     } else if (this.game.status === 0){
-      this.btnMessage = 'JOIN';
+      if (this.game.joined){
+        this.btnMessage = 'LEAVE';
+      } else { this.btnMessage = 'JOIN'; }
     } else if (this.game.status === 1){
       this.btnMessage = 'WAITING'
       this.btnActive = false;
@@ -68,13 +70,19 @@ export class GameDetailComponent implements OnInit {
     if (this.btnMessage === 'DELETE'){
       this.gameService.deleteEvent(this.game.id).subscribe(res => this.checkSuccess(res));
     }
+    if (this.btnMessage === 'JOIN'){
+      this.gameService.joinEvent(this.game.id).subscribe(res => this.checkSuccess(res));
+    }
+    if (this.btnMessage === 'LEAVE'){
+      this.gameService.leaveEvent(this.game.id).subscribe(res => this.checkSuccess(res));
+    }
   }
 
   checkSuccess(res: Response){
     if (res.status == 200){
-      console.log('Game deleted successfully!');
+      console.log('Request done successfully');
       this._location.back();
-    } else { console.log('Game not deleted')}
+    } else { console.log('Error on request')}
   }
 
   onMemberSelected(membership: string){
