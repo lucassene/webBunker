@@ -9,7 +9,7 @@ import { Router, ActivatedRoute, Params } from '@angular/router';
 @Component({
   selector: 'history-cmp',
   templateUrl: 'history.component.html',
-  providers: [HistoryService]
+  providers: []
 })
 
 export class HistoryComponent implements OnInit {

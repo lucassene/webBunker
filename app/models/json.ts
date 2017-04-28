@@ -1,3 +1,5 @@
+import { Evaluation } from '../models/evaluation';
+
 export class CreateJSON{
   constructor(
     public creator: Membership,
@@ -26,5 +28,12 @@ export class Membership{
 export class EventID{
   constructor(
     public id: number
+  ){}
+}
+
+export class ValidateJSON{
+  constructor(
+    public entries: string[],
+    public evaluations: Evaluation[]
   ){}
 }

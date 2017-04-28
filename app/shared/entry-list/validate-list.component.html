@@ -1,0 +1,17 @@
+<div class="fade-in">
+		<div class="blue-title">Confirm event</div>
+		<div style="padding-left: 32px; padding-top: 8px">
+			<input id="checkbox" type="checkbox" class="styled-checkbox" [checked]="isChecked" (change)="onCheckBoxChange()"><label for="checkbox" class="check-label">Uncheck if this event did not happen</label>
+		</div>
+  <div class="blue-title">Guardians</div>
+	<div [ngStyle]="{'opacity': opacity}">
+<div class="game-list" *ngIf="vEntries.length > 0">
+	<button [ngStyle]="{'background-image': 'url(http://www.bungie.net'+ vEntry.entry.member.icon +')', 'opacity': vEntry.opacity}" (click)="onClick(vEntry)" *ngFor="let vEntry of vEntries" class="fade-in">
+	<div class="game-list-left">
+		<p class="item-subtitle" style="font-size: 1.3em">{{vEntry.entry.member.name}}</p>
+		<p class="item-creator">{{vEntry.entry.member.memberTitle.en}}</p>
+	</div>
+	<div class="validate-list-right" [ngStyle]="{'background-image': 'url(assets/img/'+ vEntry.icon + ')'}"></div>
+	</button>
+</div>
+</div>

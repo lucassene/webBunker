@@ -25,7 +25,7 @@ export class HistoryService {
   private games: Game[];
   private defaultTitle = defaultTitle;
 
-  private authorization = 'eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI0NjExNjg2MDE4NDM3MjAzMjM5IiwiZXhwIjoxNDkzMzk2OTAzfQ.WSkNNgj7Urmq1WPCEExzbMi6PYYOC4flEoUdj0Gekx12X3IY3BpIO1PqLu3PDG-2x2dly0g2xaT3K-5xVKXXfQ';
+  private authorization = 'eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI0NjExNjg2MDE4NDM3MjAzMjM5IiwiZXhwIjoxNDkzNDgzNTAwfQ.Zwlc3W8QlWCoNXMrdqXj6S8gVhgua_B9Op9euRUrzBODzRTylpJmsbzfgiMv6MqlLAZIwEsHKZF1F_F70tXq_w';
   private membership = '4611686018437203239';
 
   constructor(private http: Http, private dataService: DataService) { }
@@ -78,10 +78,18 @@ export class HistoryService {
             );
             objs.push(game);
           }
+          this.games = objs as Game[];
           this.dataService.setHistory(objs as Game[]);
           return objs
       })
       .catch(err => this.handleError(err))
+  }
+
+  getHistoryDetails(id: number){
+    if (this.games){
+      console.log('game data already got');
+      return this.games.find(game => game.id === id);
+    }
   }
 
   getGameHistory(gameID: number): Observable<any>{
@@ -101,7 +109,6 @@ export class HistoryService {
         for (let i=0;i<data.length;i++){
           let title: Title;
           if(data[i].memberTitle === null){
-            console.log('memberTitle is null!');
             title = this.defaultTitle;
           } else {
             title = new Title(
@@ -120,7 +127,6 @@ export class HistoryService {
           );
             objs.push(member);
           }
-          console.log(objs);
           return objs
       })
       .catch(err => this.handleError(err))

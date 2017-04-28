@@ -8,8 +8,8 @@
 		<div *ngIf="!hasScheduled" class="empty-list">There is no events available.</div>
 	</tab>
 	<tab tabTitle="finished">
-		<game-list (selectedGame)="selectedGame($event)" title="Waiting for validation" *ngIf="hasWaiting" [games]="waitingGames"></game-list>
-		<game-list (selectedGame)="selectedGame($event)" title="Waiting for evaluation" *ngIf="hasEvaluation" [games]="forEvaluationGames"></game-list>
+		<game-list (selectedGame)="selectedWaitingOrValidateGame($event)" title="Waiting for validation" *ngIf="hasWaiting" [games]="waitingGames"></game-list>
+		<game-list (selectedGame)="selectedWaitingOrValidateGame($event)" title="Waiting for evaluation" *ngIf="hasEvaluation" [games]="forEvaluationGames"></game-list>
 		<div *ngIf="!hasWaiting && !hasEvaluation" class="empty-list">There is no events available.</div>
 	</tab>
 </tab-holder>

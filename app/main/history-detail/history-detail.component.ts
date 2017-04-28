@@ -11,7 +11,7 @@ import { History } from '../../models/history';
 @Component({
   selector: 'history-detail',
   templateUrl: 'history-detail.component.html',
-  providers: [HistoryService]
+  providers: []
 })
 
 export class HistoryDetailComponent implements OnInit {
@@ -31,9 +31,17 @@ export class HistoryDetailComponent implements OnInit {
   }
 
   getGameHistory(id: number){
-    this.game = this.dataService.getHistoryByGameId(id);
     console.log('requestedHistory: ', id);
-    this.historyService.getGameHistory(id).subscribe(entries => this.setEntries(entries as History[]));
+    this.game = this.historyService.getHistoryDetails(id);
+    if (this.game){
+      this.historyService.getGameHistory(id).subscribe(entries => this.setEntries(entries as History[]));
+    } else {
+      this.historyService.getHistoryGames().subscribe(games => {
+          this.game = games.find(game => game.id === id);
+          this.historyService.getGameHistory(id).subscribe(entries => this.setEntries(entries as History[]));
+      })
+    }
+
   }
 
   onBack(){

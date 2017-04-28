@@ -6,7 +6,7 @@ import { Clan } from '../../models/clan';
 @Component({
   selector: 'sidebar-cmp',
   templateUrl: 'sidebar.html',
-  providers: [ClanService]
+  providers: []
 })
 
 export class SidebarComponent implements OnInit{

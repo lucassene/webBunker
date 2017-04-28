@@ -10,6 +10,7 @@ import { ProfileRoutes } from './profile/profile.routes';
 import { AboutRoutes} from './about/about.routes';
 import { GameDetailRoutes } from './game-detail/game-detail.routes';
 import { HistoryDetailRoutes } from './history-detail/history-detail.routes';
+import { ValidateDetailRoutes } from './validate-detail/validate-detail.routes';
 
 import { MainComponent } from './index';
 
@@ -27,7 +28,8 @@ export const MainRoutes: Route[] = [
         ...ProfileRoutes,
         ...AboutRoutes,
         ...GameDetailRoutes,
-        ...HistoryDetailRoutes
+        ...HistoryDetailRoutes,
+        ...ValidateDetailRoutes
       ]
     }
 ];

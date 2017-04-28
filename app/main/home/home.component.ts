@@ -7,7 +7,7 @@ import { Router, ActivatedRoute, Params } from '@angular/router';
 @Component({
   selector: 'home-cmp',
   templateUrl: 'home.component.html',
-  providers: [GameService]
+  providers: []
 })
 
 export class HomeComponent implements OnInit {
@@ -52,6 +52,10 @@ export class HomeComponent implements OnInit {
 
   selectedGame(game: Game){
     this.router.navigate(['/main/game-detail', game.id]);
+  }
+
+  selectedWaitingOrValidateGame(game: Game){
+    this.router.navigate(['/main/validate-detail', game.id]);
   }
 
   ngOnInit(): void {

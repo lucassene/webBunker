@@ -338,6 +338,10 @@ div.medal-item {
 	text-align: left;
 }
 
+div.medal-item: hover{
+	background-color: rgba(158,158,158,0.2);
+}
+
 div.medal-list-left{
 	padding-top: 8px;
 	text-overflow: ellipsis;
@@ -457,6 +461,18 @@ div.game-list-right{
 	overflow: hidden;
 	display: inline-block;
 	max-width: 72px;
+}
+
+div.validate-list-right{
+	float: right;
+	padding-top: 4px;
+	text-overflow: ellipsis;
+	overflow: hidden;
+	display: inline-block;
+	width: 50px;
+	height: 100%;
+	background-repeat: no-repeat;
+	background-position: center;
 }
 
 div.member-total{
@@ -584,6 +600,28 @@ div.game-detail-icon{
 	background-color: #0288D1;
 }
 
+.styled-checkbox{
+		margin-left: 16px;
+		width: 18px;
+		height: 18px;
+		border-radius: 5px;
+		background-color: transparent;
+		border: 2px solid white;
+		display: inline-block;
+		vertical-align: text-bottom;
+	}
+
+.check-label{
+		color: rgba(245,245,245,0.5);
+		padding-left: 16px;
+		display: inline-block;
+		font-weight: normal;
+		font-size: 1.2em;
+	}
+
+.styled-checkbox:checked{
+	background-color: #FF9100;
+}
 
 
 #toggle-sidebar{

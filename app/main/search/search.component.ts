@@ -10,7 +10,7 @@ import { Router, ActivatedRoute, Params } from '@angular/router';
 @Component({
   selector: 'search-cmp',
   templateUrl: 'search.component.html',
-  providers: [GameService]
+  providers: []
 })
 
 export class SearchComponent implements OnInit {

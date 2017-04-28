@@ -20,8 +20,8 @@ export class GameService {
 
   private games: Game[];
 
-  private authorization = 'eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI0NjExNjg2MDE4NDM3MjAzMjM5IiwiZXhwIjoxNDkzMzk2OTAzfQ.WSkNNgj7Urmq1WPCEExzbMi6PYYOC4flEoUdj0Gekx12X3IY3BpIO1PqLu3PDG-2x2dly0g2xaT3K-5xVKXXfQ';
-  ///*Fernando*/private authorization = 'eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI0NjExNjg2MDE4NDQ5NzYzNzMwIiwiZXhwIjoxNDkzMzk3NDc4fQ.YGosADvWtDM1T5iUHl35JoIZdc6Sp0C3ByiiZ3izI_o7j2V8L9hqLgEahNMZ1lW-cJyJ3Wt2c-vL-yYB6of0JA';
+  private authorization = 'eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI0NjExNjg2MDE4NDM3MjAzMjM5IiwiZXhwIjoxNDkzNDgzNTAwfQ.Zwlc3W8QlWCoNXMrdqXj6S8gVhgua_B9Op9euRUrzBODzRTylpJmsbzfgiMv6MqlLAZIwEsHKZF1F_F70tXq_w';
+  ///*Fernando*/private authorization = 'eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI0NjExNjg2MDE4NDQ5NzYzNzMwIiwiZXhwIjoxNDkzNDk0NzU3fQ._E7Ec0qb3X0DudssNdmwaGyl4f9mhLvkMT-eTXW5_S_uPDqQza7egO-07R1qLsZJPeBG2wo_g2Sb0npATEGfZQ';
   private membership = '4611686018437203239';
   ///*Fernando*/private membership = '4611686018449763730';
 
@@ -76,9 +76,17 @@ export class GameService {
             objs.push(game);
           }
           this.dataService.setGames(objs as Game[]);
+          this.games = objs as Game[];
           return objs
       })
       .catch(err => this.handleError(err))
+  }
+
+  getGameById(id: number): Game{
+    if (this.games){
+      console.log('game data already got');
+      return this.games.find(game => game.id === id);
+    }
   }
 
   createEvent(json: string): Observable<any>{
@@ -140,6 +148,22 @@ export class GameService {
     const url = this.serverUrl + this.gameEndpoint + '/' + id + '/leave';
     console.log('url: ' + url);
     return this.http.delete(url, options)
+      .map((response: Response) => { return response})
+      .catch(err => this.handleError(err))
+  }
+
+  validateEvent(id: number, json: string): Observable<any>{
+    const headers = new Headers();
+    headers.append('membership', this.membership);
+    headers.append('platform', '2');
+    headers.append('zoneId', 'America/Sao_Paulo');
+    headers.append('clanId', '548691');
+    headers.append('Content-Type', 'application/json')
+    headers.append('Authorization', this.authorization);
+    const options = new RequestOptions({headers: headers});
+    const url = this.serverUrl + this.gameEndpoint + '/' + id + '/validate';
+    console.log('url: ' + url);
+    return this.http.post(url, json, options)
       .map((response: Response) => { return response})
       .catch(err => this.handleError(err))
   }

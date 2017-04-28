@@ -10,19 +10,23 @@ import { GameService } from '../../services/game-service'
 
 import { Game } from '../../models/game';
 import { Entry } from '../../models/entry';
+import { Evaluation } from '../../models/evaluation';
+import { ValidateJSON } from '../../models/json';
 
 @Component({
-  selector: 'game-detail',
-  templateUrl: 'game-detail.component.html',
+  selector: 'validate-detail',
+  templateUrl: 'validate-detail.component.html',
   providers: []
 })
 
-export class GameDetailComponent implements OnInit {
+export class ValidateDetailComponent implements OnInit {
 
   game: Game;
   entries: Entry[];
   btnMessage = '';
   btnActive = true;
+  showValidate = false;
+  evalList: Evaluation[] = [];
 
   constructor(private route: ActivatedRoute, private router: Router, public dataService: DataService, private entryService: EntryService, private _location: Location, private gameService: GameService){};
 
@@ -40,6 +44,7 @@ export class GameDetailComponent implements OnInit {
       } else if (this.game.status === 1){
         if (this.entries.length > 1){
           this.btnMessage = 'VALIDATE';
+          this.showValidate = true;
         } else { this.btnMessage = 'DELETE' }
       }
     } else if (this.game.status === 0){
@@ -49,7 +54,10 @@ export class GameDetailComponent implements OnInit {
     } else if (this.game.status === 1){
       this.btnMessage = 'WAITING'
       this.btnActive = false;
-    } else { this.btnMessage = 'EVALUATE'}
+    } else {
+      this.btnMessage = 'EVALUATE';
+      this.showValidate = true;
+    }
   }
 
   setEntries(entries: Entry[]){
@@ -83,6 +91,27 @@ export class GameDetailComponent implements OnInit {
     if (this.btnMessage === 'LEAVE'){
       this.gameService.leaveEvent(this.game.id).subscribe(res => this.checkSuccess(res));
     }
+    if (this.btnMessage === 'VALIDATE'){
+      this.makeValidateRequest();
+    }
+  }
+
+  makeValidateRequest(){
+    let jsonString = '{"entries":[' + this.entries[0].member.membership;
+    for(let i=0;i<this.evalList.length;i++){
+        jsonString = jsonString + ',' + this.evalList[i].memberB;
+    }
+    jsonString = jsonString + '],"evaluations":[';
+    for(let i=0;i<this.evalList.length;i++){
+      if (i === 0){
+        jsonString = jsonString + '{"memberB":' + this.evalList[i].memberB + ',"rate":' + this.evalList[i].rate + '}';
+      } else {
+        jsonString = jsonString + ',{"memberB":' + this.evalList[i].memberB + ',"rate":' + this.evalList[i].rate + '}';
+      }
+    }
+    jsonString = jsonString + ']}';
+    console.log(jsonString);
+    this.gameService.validateEvent(this.game.id, jsonString).subscribe(res => this.checkSuccess(res));
   }
 
   checkSuccess(res: Response){
@@ -94,6 +123,33 @@ export class GameDetailComponent implements OnInit {
 
   onMemberSelected(membership: string){
     this.router.navigate(['/main/profile',membership]);
+  }
+
+  onCheckChange(isChecked: boolean){
+    if (isChecked){
+      this.btnMessage = 'VALIDATE';
+    } else { this.btnMessage = 'DELETE'}
+  }
+
+  rateChanged(e: Evaluation){
+    if (this.evalList.length <= 0){
+      this.evalList.push(e);
+    } else {
+      for (let i=0;i<this.evalList.length;i++){
+        if (this.evalList[0].memberB === e.memberB){
+          this.evalList.splice(i,1);
+        }
+      }
+      this.evalList.push(e);
+    }
+  }
+
+  removeMember(memberID: string){
+    for (let i=0;i<this.evalList.length;i++){
+      if (this.evalList[0].memberB === memberID){
+        this.evalList.splice(i,1);
+      }
+    }
   }
 
 }

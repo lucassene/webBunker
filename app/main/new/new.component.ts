@@ -1,5 +1,7 @@
 import { Component, OnInit} from '@angular/core';
+import { Location } from '@angular/common';
 
+import { Clan } from '../../models/clan';
 import { types } from '../../models/event-type';
 import { events } from '../../models/event';
 import { EventType } from '../../models/event-type';
@@ -8,22 +10,23 @@ import { MemberService} from '../../services/member-service';
 import { Member } from '../../models/member';
 import { availableMember } from '../../models/member';
 import { blockedMember } from '../../models/member';
-import { Membership } from '../../models/create-json';
-import { EventID } from '../../models/create-json';
-import { CreateJSON, Entry } from '../../models/create-json';
+import { Membership } from '../../models/json';
+import { EventID } from '../../models/json';
+import { CreateJSON, Entry } from '../../models/json';
 
 import { DataService} from '../../services/data-service';
 import { GameService} from '../../services/game-service';
+import { ClanService} from '../../services/clan-service';
 
 @Component({
   selector: 'new-cmp',
   templateUrl: 'new.component.html',
-  providers: [MemberService, GameService]
+  providers: []
 })
 
 export class NewEventComponent implements OnInit {
 
-  constructor(private memberService: MemberService, private dataService: DataService, private gameService: GameService) { }
+  constructor(private memberService: MemberService, private dataService: DataService, private gameService: GameService, private clanService: ClanService, private _location: Location) { }
 
   types = types;
   events = events;
@@ -63,13 +66,16 @@ export class NewEventComponent implements OnInit {
     this.slotsAvailable = this.maxGuardians;
     this.slotsUsed = this.maxGuardians-1;
     this.setDummyList();
+    this.clanService.getClanInfo(548691).subscribe(clan => this.getMembers(clan));
+  }
+
+  getMembers(clan: Clan){
     let members = this.dataService.getMembers();
     if (members == null || members.length){
-      this.memberService.getMembers(this.dataService.getGroupID()).subscribe(members => this.setMembers(members));
+      this.memberService.getMembers(clan.groupId).subscribe(members => this.setMembers(members));
     } else {
       this.setMembers(members);
     }
-
   }
 
   setMembers(members: Member[]): void {
@@ -263,6 +269,7 @@ export class NewEventComponent implements OnInit {
   onCreateEvent(res: Response){
     if (res.status === 200){
       console.log('Game crated successfully!');
+      this._location.back();
     } else { console.log('some error occurred!')}
   }
 

@@ -11,7 +11,7 @@ import { Router, ActivatedRoute, Params } from '@angular/router';
 @Component({
   selector: 'my-events-cmp',
   templateUrl: 'my-events.component.html',
-  providers: [GameService]
+  providers: []
 })
 
 export class MyEventsComponent implements OnInit {

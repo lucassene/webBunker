@@ -6,5 +6,14 @@ export class Entry {
     public member: Member,
     public time: string,
   ) {};
+}
+
+export class ValidationEntry{
+  constructor(
+    public entry: Entry,
+    public icon: string,
+    public opacity: string,
+    public rate: number
+  ){}
 
 }

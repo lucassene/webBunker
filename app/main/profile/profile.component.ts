@@ -7,7 +7,7 @@ import { Profile } from '../../models/profile';
 @Component({
   selector: 'profile-cmp',
   templateUrl: 'profile.component.html',
-  providers: [MemberService]
+  providers: []
 })
 
 export class ProfileComponent implements OnInit{
