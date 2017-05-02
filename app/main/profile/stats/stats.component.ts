@@ -41,16 +41,16 @@ export class StatsComponent implements OnInit {
   }
 
   getMemberLvl(likes: number, dislikes: number, created: number, played: number): string {
-    const xp = this.getMemberXP(likes, dislikes, created, played) / 8;
-    const lvl = Math.sqrt(xp);
-    this.lvl = lvl;
-    this.xpNeeded = this.getXPNeeded(lvl);
-    this.setProgress(xp, this.xpNeeded);
+    const xp = this.getMemberXP(likes, dislikes, created, played);
+    const lvl = Math.sqrt(xp/8);
+    this.lvl = lvl
     let inteiro = Math.floor(lvl);
     const resto = lvl % 1;
     if (resto > 0) {
       inteiro = inteiro + 1;
     }
+    this.xpNeeded = this.getXPNeeded(inteiro);
+    this.setProgress(xp, this.xpNeeded);
 
     if (inteiro < 1) {
       return '01';
@@ -160,6 +160,12 @@ export class StatsComponent implements OnInit {
       )
       this.typesData.push(item);
     }
+  }
+
+  getTimesMsg(value: number){
+    if (value <= 1){
+      return ' time';
+    } else { return ' times'; }
   }
 
   // events

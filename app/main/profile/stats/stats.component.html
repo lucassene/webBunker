@@ -12,7 +12,7 @@
     <div class="progress-bar" [ngStyle]="{width: progressWidth}"></div>
   </div>
     <div *ngIf="profile.favoriteEvent" class="item-subtitle" style="font-size: 1.2em; line-height: 16px; color: rgba(245,245,245,0.4); padding-left: 8px">
-      {{profile.member.name}} has achieved the title of {{profile.member.memberTitle.en}} by playing {{profile.favoriteEvent.event.en}} for {{profile.favoriteEvent.timesPlayed}} times...
+      {{profile.member.name}} has achieved the title of {{profile.member.memberTitle.en}} by playing {{profile.favoriteEvent.event.en}} for {{profile.favoriteEvent.timesPlayed}} {{getTimesMsg(profile.favoriteEvent.timesPlayed)}}...
     </div>
   <div class="row" style="margin-top: 32px" *ngIf="profile.favoriteEvent">
     <div class="col-sm-12">

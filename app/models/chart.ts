@@ -13,16 +13,16 @@ export const chartColors: Array<any> = [
       '#0A4744'
     ],
     borderColor: [
-      'rgba(245,245,245,0.25)',
-      'rgba(245,245,245,0.25)',
-      'rgba(245,245,245,0.25)',
-      'rgba(245,245,245,0.25)',
-      'rgba(245,245,245,0.25)',
-      'rgba(245,245,245,0.25)',
-      'rgba(245,245,245,0.25)',
-      'rgba(245,245,245,0.25)',
-      'rgba(245,245,245,0.25)',
-      'rgba(245,245,245,0.25)'
+      'transparent',
+      'transparent',
+      'transparent',
+      'transparent',
+      'transparent',
+      'transparent',
+      'transparent',
+      'transparent',
+      'transparent',
+      'transparent'
     ]
   }
 ]

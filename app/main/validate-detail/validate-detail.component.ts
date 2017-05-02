@@ -4,7 +4,6 @@ import { Response } from '@angular/http';
 import { Location } from '@angular/common';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 
-import { DataService } from '../../services/data-service';
 import { EntryService } from '../../services/entry-service'
 import { GameService } from '../../services/game-service'
 
@@ -27,8 +26,9 @@ export class ValidateDetailComponent implements OnInit {
   btnActive = true;
   showValidate = false;
   evalList: Evaluation[] = [];
+  isEvaluation = false;
 
-  constructor(private route: ActivatedRoute, private router: Router, public dataService: DataService, private entryService: EntryService, private _location: Location, private gameService: GameService){};
+  constructor(private route: ActivatedRoute, private router: Router, private entryService: EntryService, private _location: Location, private gameService: GameService){};
 
   ngOnInit(): void {
     let id: number;
@@ -36,27 +36,21 @@ export class ValidateDetailComponent implements OnInit {
   }
 
   setPageType(){
-    if (this.game.status == 2 && this.game.evaluated){
-      this.btnMessage = 'BACK';
-    } else if (this.game.creator.membership === this.dataService.getLoggedMember()){
-      if (this.game.status === 0){
-        this.btnMessage = 'DELETE';
-      } else if (this.game.status === 1){
-        if (this.entries.length > 1){
-          this.btnMessage = 'VALIDATE';
-          this.showValidate = true;
-        } else { this.btnMessage = 'DELETE' }
+    if (this.game.status === 1){
+      if (this.game.creator.membership !== localStorage.getItem('membership')){
+        this.btnMessage = 'WAITING'
+        this.btnActive = false;
+        this.isEvaluation = false;
+      } else {
+        this.btnMessage = 'VALIDATE';
+        this.btnActive = true;
+        this.isEvaluation = false;
+        this.showValidate = true;
       }
-    } else if (this.game.status === 0){
-      if (this.game.joined){
-        this.btnMessage = 'LEAVE';
-      } else { this.btnMessage = 'JOIN'; }
-    } else if (this.game.status === 1){
-      this.btnMessage = 'WAITING'
-      this.btnActive = false;
     } else {
       this.btnMessage = 'EVALUATE';
       this.showValidate = true;
+      this.isEvaluation = true;
     }
   }
 
@@ -79,20 +73,17 @@ export class ValidateDetailComponent implements OnInit {
   }
 
   onClick(){
-    if (this.btnMessage === 'BACK' || this.btnMessage === 'WAITING'){
+    if (this.btnMessage === 'WAITING'){
       this._location.back();
     }
     if (this.btnMessage === 'DELETE'){
       this.gameService.deleteEvent(this.game.id).subscribe(res => this.checkSuccess(res));
     }
-    if (this.btnMessage === 'JOIN'){
-      this.gameService.joinEvent(this.game.id).subscribe(res => this.checkSuccess(res));
-    }
-    if (this.btnMessage === 'LEAVE'){
-      this.gameService.leaveEvent(this.game.id).subscribe(res => this.checkSuccess(res));
-    }
     if (this.btnMessage === 'VALIDATE'){
       this.makeValidateRequest();
+    }
+    if (this.btnMessage === 'EVALUATE'){
+      this.makeEvaluationRequest();
     }
   }
 
@@ -114,6 +105,20 @@ export class ValidateDetailComponent implements OnInit {
     this.gameService.validateEvent(this.game.id, jsonString).subscribe(res => this.checkSuccess(res));
   }
 
+  makeEvaluationRequest(){
+    let jString = '[';
+    for (let i=0;i<this.evalList.length;i++){
+      if (i === 0){
+        jString = jString + '{"memberB":' + this.evalList[i].memberB + ',"rate":' + this.evalList[i].rate + '}';
+      } else {
+        jString = jString + ',{"memberB":' + this.evalList[i].memberB + ',"rate":' + this.evalList[i].rate + '}';
+      }
+    }
+    jString = jString + ']';
+    console.log(jString);
+    this.gameService.evaluateEvent(this.game.id, jString).subscribe(res => this.checkSuccess(res));
+  }
+
   checkSuccess(res: Response){
     if (res.status == 200){
       console.log('Request done successfully');
@@ -127,7 +132,9 @@ export class ValidateDetailComponent implements OnInit {
 
   onCheckChange(isChecked: boolean){
     if (isChecked){
-      this.btnMessage = 'VALIDATE';
+      if (this.isEvaluation){
+        this.btnMessage = 'EVALUATE';
+      } else { this.btnMessage = 'VALIDATE'; }
     } else { this.btnMessage = 'DELETE'}
   }
 
@@ -136,7 +143,7 @@ export class ValidateDetailComponent implements OnInit {
       this.evalList.push(e);
     } else {
       for (let i=0;i<this.evalList.length;i++){
-        if (this.evalList[0].memberB === e.memberB){
+        if (this.evalList[i].memberB === e.memberB){
           this.evalList.splice(i,1);
         }
       }
@@ -145,9 +152,11 @@ export class ValidateDetailComponent implements OnInit {
   }
 
   removeMember(memberID: string){
-    for (let i=0;i<this.evalList.length;i++){
-      if (this.evalList[0].memberB === memberID){
-        this.evalList.splice(i,1);
+    if (!this.isEvaluation){
+      for (let i=0;i<this.evalList.length;i++){
+        if (this.evalList[0].memberB === memberID){
+          this.evalList.splice(i,1);
+        }
       }
     }
   }

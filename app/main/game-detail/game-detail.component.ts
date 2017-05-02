@@ -4,7 +4,6 @@ import { Response } from '@angular/http';
 import { Location } from '@angular/common';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 
-import { DataService } from '../../services/data-service';
 import { EntryService } from '../../services/entry-service'
 import { GameService } from '../../services/game-service'
 
@@ -24,7 +23,7 @@ export class GameDetailComponent implements OnInit {
   btnMessage = '';
   btnActive = true;
 
-  constructor(private route: ActivatedRoute, private router: Router, public dataService: DataService, private entryService: EntryService, private _location: Location, private gameService: GameService){};
+  constructor(private route: ActivatedRoute, private router: Router, private entryService: EntryService, private _location: Location, private gameService: GameService){};
 
   ngOnInit(): void {
     let id: number;
@@ -34,7 +33,7 @@ export class GameDetailComponent implements OnInit {
   setPageType(){
     if (this.game.status == 2 && this.game.evaluated){
       this.btnMessage = 'BACK';
-    } else if (this.game.creator.membership === this.dataService.getLoggedMember()){
+    } else if (this.game.creator.membership === localStorage.getItem('membership')){
       if (this.game.status === 0){
         this.btnMessage = 'DELETE';
       } else if (this.game.status === 1){

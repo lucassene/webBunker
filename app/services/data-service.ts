@@ -12,8 +12,6 @@ export class DataService {
     clan: Clan;
     members: Member[];
     history: Game[];
-    loggedMembership = '4611686018437203239';
-    ///*Fernando*/ loggedMembership = '4611686018449763730';
 
     setGames(games: Game[]){
       this.games = games;
@@ -57,10 +55,6 @@ export class DataService {
 
     getHistoryByGameId(id: number){
       return this.history.find(game => game.id === id);
-    }
-
-    getLoggedMember(){
-      return this.loggedMembership;
     }
 
 

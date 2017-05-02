@@ -1,7 +1,6 @@
 import { Component, OnInit, EventEmitter} from '@angular/core';
 import { Game } from '../../models/game';
 import { GameService} from '../../services/game-service';
-import { DataService } from '../../services/data-service';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 
 @Component({
@@ -23,7 +22,7 @@ export class HomeComponent implements OnInit {
   hasWaiting = false;
   hasEvaluation = false;
 
-  constructor(private gameService: GameService, private route: ActivatedRoute, private router: Router, private dataService: DataService) { }
+  constructor(private gameService: GameService, private route: ActivatedRoute, private router: Router) { }
 
   getGames(): void {
     this.gameService.getGamesFromServer().subscribe(games => this.setLists(games as Game[]));

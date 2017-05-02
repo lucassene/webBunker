@@ -3,7 +3,6 @@ import { Router, ActivatedRoute, Params } from '@angular/router';
 
 import { MemberService} from '../../services/member-service';
 import { ClanService } from '../../services/clan-service';
-import { DataService } from '../../services/data-service';
 import { Member } from '../../models/member';
 import { Clan } from '../../models/clan';
 
@@ -19,10 +18,10 @@ export class MyClanComponent implements OnInit {
   clan: Clan;
   total: number;
 
-  constructor(private memberService: MemberService, private clanService: ClanService, private dataService: DataService, private route: ActivatedRoute, private router: Router) { }
+  constructor(private memberService: MemberService, private clanService: ClanService, private route: ActivatedRoute, private router: Router) { }
 
   getData(): void {
-    this.clanService.getClanInfo(548691).subscribe(clan => {
+    this.clanService.getClanInfo(+localStorage.getItem('groupId')).subscribe(clan => {
       this.clan = clan;
       this.memberService.getMembers(this.clan.groupId).subscribe(members => this.setMembers(members as Member[]));
     });

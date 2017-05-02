@@ -2,7 +2,6 @@ import 'rxjs/add/operator/switchMap';
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 
-import { DataService } from '../../services/data-service';
 import { HistoryService} from '../../services/history-service';
 
 import { Game } from '../../models/game';
@@ -19,7 +18,7 @@ export class HistoryDetailComponent implements OnInit {
   game: Game;
   members: History[];
 
-  constructor(private route: ActivatedRoute, private router: Router, public dataService: DataService, private historyService: HistoryService){};
+  constructor(private route: ActivatedRoute, private router: Router, private historyService: HistoryService){};
 
   ngOnInit(): void {
     let id: number;
@@ -31,7 +30,6 @@ export class HistoryDetailComponent implements OnInit {
   }
 
   getGameHistory(id: number){
-    console.log('requestedHistory: ', id);
     this.game = this.historyService.getHistoryDetails(id);
     if (this.game){
       this.historyService.getGameHistory(id).subscribe(entries => this.setEntries(entries as History[]));
@@ -46,6 +44,10 @@ export class HistoryDetailComponent implements OnInit {
 
   onBack(){
     this.router.navigate(['/main/history']);
+  }
+
+  onMemberSelected(membership: string){
+    this.router.navigate(['/main/profile',membership]);
   }
 
 }

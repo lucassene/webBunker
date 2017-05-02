@@ -24,7 +24,6 @@
 			<div class="game-detail-item-right" style="width: 30%">{{game.inscriptions}} of {{game.event.maxGuardians}}</div>
 		</div>
   </div>
-  <div class="blue-title">Guardians</div>
 	<entry-list (selectedMember)="onMemberSelected($event)" *ngIf="entries" [entries]="entries"></entry-list>
 	<div *ngIf="entries" class="col-sm-12 fade-in" style="text-align: center; padding-bottom: 32px">
 			<a [ngClass]="{'mbtn-enabled': btnActive, 'mbtn-disabled': !btnActive}" style="cursor:pointer"(click)="onClick()">{{btnMessage}}</a>

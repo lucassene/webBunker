@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Headers, Http, Response, RequestOptions } from '@angular/http';
+import * as moment from 'moment-timezone';
 
 import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
@@ -25,8 +26,11 @@ export class HistoryService {
   private games: Game[];
   private defaultTitle = defaultTitle;
 
-  private authorization = 'eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI0NjExNjg2MDE4NDM3MjAzMjM5IiwiZXhwIjoxNDkzNDgzNTAwfQ.Zwlc3W8QlWCoNXMrdqXj6S8gVhgua_B9Op9euRUrzBODzRTylpJmsbzfgiMv6MqlLAZIwEsHKZF1F_F70tXq_w';
-  private membership = '4611686018437203239';
+  private authorization = sessionStorage.getItem('authKey');
+  private membership = localStorage.getItem('membership');
+  private groupId = localStorage.getItem('groupId');
+  private zoneId = moment.tz.guess();
+  private platform = localStorage.getItem('platform');
 
   constructor(private http: Http, private dataService: DataService) { }
 
@@ -34,9 +38,9 @@ export class HistoryService {
 
     const headers = new Headers();
     headers.append('membership', this.membership);
-    headers.append('platform', '2');
-    headers.append('zoneId', 'America/Sao_Paulo');
-    headers.append('clanId', '548691');
+    headers.append('platform', this.platform);
+    headers.append('zoneId', this.zoneId);
+    headers.append('clanId', this.groupId);
     headers.append('Authorization', this.authorization);
     const options = new RequestOptions({headers: headers});
     const url = this.serverUrl + this.gameEndpoint + this.historyEndpoint;
@@ -95,9 +99,9 @@ export class HistoryService {
   getGameHistory(gameID: number): Observable<any>{
     const headers = new Headers();
     headers.append('membership', this.membership);
-    headers.append('platform', '2');
-    headers.append('zoneId', 'America/Sao_Paulo');
-    headers.append('clanId', '548691');
+    headers.append('platform', this.platform);
+    headers.append('zoneId', this.zoneId);
+    headers.append('clanId', this.groupId);
     headers.append('Authorization', this.authorization);
     const options = new RequestOptions({headers: headers});
     const url = this.serverUrl + this.gameEndpoint + gameID + '/' + this.historyEndpoint;
@@ -105,6 +109,7 @@ export class HistoryService {
     return this.http.get(url, options)
       .map((response: Response) => {
         const data = response.json();
+        const list = this.setMemberString(response.text());
         let objs: any[] = [];
         for (let i=0;i<data.length;i++){
           let title: Title;
@@ -118,7 +123,7 @@ export class HistoryService {
             )
           }
           let member = new History(
-              data[i].membership,
+              list[i],
               data[i].name,
               data[i].icon,
               data[i].totalLikes,
@@ -135,6 +140,17 @@ export class HistoryService {
   private handleError(error: any): Promise<any> {
     console.error('An error occurred', error); // for demo purposes only
     return Promise.reject(error.message || error);
+  }
+
+  setMemberString(res: string): string[]{
+    let list: string[] = [];
+    const sp = res.split('},');
+    for (let i=0;i<sp.length;i++){
+      const s = sp[i].substring(sp[i].indexOf('{'),sp[i].indexOf('}'));
+      const m = s.substring(s.indexOf(':')+1, s.indexOf(','));
+      list.push(m);
+    }
+    return list;
   }
 
 }

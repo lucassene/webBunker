@@ -25,7 +25,7 @@
 		</div>
   </div>
   <div class="blue-title">Guardians</div>
-	<history-list *ngIf="members" [members]="members"></history-list>
+	<history-list (selectedMember)="onMemberSelected($event)" *ngIf="members" [members]="members"></history-list>
 	<div class="col-sm-12" style="text-align: center; padding-bottom: 32px">
 			<a class="mbtn mbtn-enabled" (click)="onBack()">BACK</a>
 	</div>

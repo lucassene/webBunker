@@ -1,15 +1,15 @@
 <tab-holder>
 	<tab tabTitle="recent">
 		<game-list (selectedGame)="selectedGame($event)" title="Recent events" *ngIf="hasRecent" [games]="recentGames"></game-list>
-		<div *ngIf="!hasRecent" class="empty-list">There is no events available.</div>
+		<div *ngIf="!hasRecent" class="empty-list fade-in">There is no events available.</div>
 	</tab>
 	<tab tabTitle="scheduled">
 		<game-list (selectedGame)="selectedGame($event)" title="Scheduled events" *ngIf="hasScheduled" [games]="scheduledGames"></game-list>
-		<div *ngIf="!hasScheduled" class="empty-list">There is no events available.</div>
+		<div *ngIf="!hasScheduled" class="empty-list fade-in">There is no events available.</div>
 	</tab>
 	<tab tabTitle="finished">
 		<game-list (selectedGame)="selectedWaitingOrValidateGame($event)" title="Waiting for validation" *ngIf="hasWaiting" [games]="waitingGames"></game-list>
 		<game-list (selectedGame)="selectedWaitingOrValidateGame($event)" title="Waiting for evaluation" *ngIf="hasEvaluation" [games]="forEvaluationGames"></game-list>
-		<div *ngIf="!hasWaiting && !hasEvaluation" class="empty-list">There is no events available.</div>
+		<div *ngIf="!hasWaiting && !hasEvaluation" class="empty-list fade-in">There is no events available.</div>
 	</tab>
 </tab-holder>

@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 
 import { History } from '../../models/history';
 
@@ -10,6 +10,8 @@ import { History } from '../../models/history';
 export class HistoryListComponent {
 
   @Input() members;
+
+  @Output() selectedMember = new EventEmitter<String>();
 
   getGainedXP(member: History){
     const isCreator = this.getMemberPosition(member.membership);
@@ -41,4 +43,10 @@ export class HistoryListComponent {
     }
     return isCreator;
   }
+
+  onClick(entry: History){
+    console.log(entry);
+    this.selectedMember.emit(entry.membership);
+  }
+
 }

@@ -1,7 +1,6 @@
 import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
 import { Entry, ValidationEntry } from '../../models/entry';
 import { Evaluation } from '../../models/evaluation';
-import { DataService } from '../../services/data-service';
 
 @Component({
   selector: 'validate-list',
@@ -9,8 +8,6 @@ import { DataService } from '../../services/data-service';
 })
 
 export class ValidateListComponent implements OnInit{
-
-  constructor(private dataService: DataService){};
 
   shownIcon = '';
   likeIcon = 'ic_like.png';
@@ -23,13 +20,14 @@ export class ValidateListComponent implements OnInit{
   membership: string;
 
   @Input() entries;
+  @Input() isEvaluation;
 
   @Output() checkChanged = new EventEmitter<boolean>();
   @Output() rateChanged = new EventEmitter<Evaluation>();
   @Output() removeMember = new EventEmitter<string>();
 
   ngOnInit(){
-    this.membership = this.dataService.getLoggedMember();
+    this.membership = localStorage.getItem('membership');
     for (let i=0;i<this.entries.length;i++){
       let item = new ValidationEntry(
         this.entries[i],
@@ -53,7 +51,7 @@ export class ValidateListComponent implements OnInit{
       } else if (entry.icon === this.likeIcon){
         entry.icon = this.dislikeIcon;
         this.rateChanged.emit(new Evaluation(entry.entry.member.membership, -1));
-      } else if (entry.icon === this.dislikeIcon){
+      } else if (entry.icon === this.dislikeIcon && !this.isEvaluation){
         entry.icon = this.errorIcon;
         entry.opacity = '0.25';
         this.removeMember.emit(entry.entry.member.membership);

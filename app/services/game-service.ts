@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Headers, Http, Response, RequestOptions } from '@angular/http';
+import * as moment from 'moment-timezone';
 
 import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
@@ -20,10 +21,11 @@ export class GameService {
 
   private games: Game[];
 
-  private authorization = 'eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI0NjExNjg2MDE4NDM3MjAzMjM5IiwiZXhwIjoxNDkzNDgzNTAwfQ.Zwlc3W8QlWCoNXMrdqXj6S8gVhgua_B9Op9euRUrzBODzRTylpJmsbzfgiMv6MqlLAZIwEsHKZF1F_F70tXq_w';
-  ///*Fernando*/private authorization = 'eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI0NjExNjg2MDE4NDQ5NzYzNzMwIiwiZXhwIjoxNDkzNDk0NzU3fQ._E7Ec0qb3X0DudssNdmwaGyl4f9mhLvkMT-eTXW5_S_uPDqQza7egO-07R1qLsZJPeBG2wo_g2Sb0npATEGfZQ';
-  private membership = '4611686018437203239';
-  ///*Fernando*/private membership = '4611686018449763730';
+  private authorization = sessionStorage.getItem('authKey');
+  private membership = localStorage.getItem('membership');
+  private groupId = localStorage.getItem('groupId');
+  private zoneId = moment.tz.guess();
+  private platform = localStorage.getItem('platform');
 
   constructor(private http: Http, private dataService: DataService) { }
 
@@ -31,9 +33,9 @@ export class GameService {
 
     const headers = new Headers();
     headers.append('membership', this.membership);
-    headers.append('platform', '2');
-    headers.append('zoneId', 'America/Sao_Paulo');
-    headers.append('clanId', '548691');
+    headers.append('platform', this.platform);
+    headers.append('zoneId', this.zoneId);
+    headers.append('clanId', this.groupId);
     headers.append('Authorization', this.authorization);
     const options = new RequestOptions({headers: headers});
     const url = this.serverUrl + this.gameEndpoint;
@@ -92,11 +94,11 @@ export class GameService {
   createEvent(json: string): Observable<any>{
     const headers = new Headers();
     headers.append('membership', this.membership);
-    headers.append('platform', '2');
-    headers.append('zoneId', 'America/Sao_Paulo');
-    headers.append('clanId', '548691');
+    headers.append('platform', this.platform);
+    headers.append('zoneId', this.zoneId);
+    headers.append('clanId', this.groupId);
     headers.append('Authorization', this.authorization);
-    headers.append('Content-Type', 'application/json')
+    headers.append('Content-Type', 'application/json');
     const options = new RequestOptions({headers: headers});
     const url = this.serverUrl + this.gameEndpoint;
     console.log('url: ' + url);
@@ -108,11 +110,11 @@ export class GameService {
   deleteEvent(id: number): Observable<any>{
     const headers = new Headers();
     headers.append('membership', this.membership);
-    headers.append('platform', '2');
-    headers.append('zoneId', 'America/Sao_Paulo');
-    headers.append('clanId', '548691');
+    headers.append('platform', this.platform);
+    headers.append('zoneId', this.zoneId);
+    headers.append('clanId', this.groupId);
     headers.append('Authorization', this.authorization);
-    headers.append('Content-Type', 'application/json')
+    headers.append('Content-Type', 'application/json');
     const options = new RequestOptions({headers: headers});
     const url = this.serverUrl + this.gameEndpoint + '/' + id;
     console.log('url: ' + url);
@@ -124,15 +126,15 @@ export class GameService {
   joinEvent(id: number): Observable<any>{
     const headers = new Headers();
     headers.append('membership', this.membership);
-    headers.append('platform', '2');
-    headers.append('zoneId', 'America/Sao_Paulo');
-    headers.append('clanId', '548691');
-    headers.append('Content-Type', 'application/json')
+    headers.append('platform', this.platform);
+    headers.append('zoneId', this.zoneId);
+    headers.append('clanId', this.groupId);
     headers.append('Authorization', this.authorization);
+    headers.append('Content-Type', 'application/json');
     const options = new RequestOptions({headers: headers});
     const url = this.serverUrl + this.gameEndpoint + '/' + id + '/join';
     console.log('url: ' + url);
-    return this.http.post(url, options)
+    return this.http.post(url, null, options)
       .map((response: Response) => { return response})
       .catch(err => this.handleError(err))
   }
@@ -140,9 +142,9 @@ export class GameService {
   leaveEvent(id: number): Observable<any>{
     const headers = new Headers();
     headers.append('membership', this.membership);
-    headers.append('platform', '2');
-    headers.append('zoneId', 'America/Sao_Paulo');
-    headers.append('clanId', '548691');
+    headers.append('platform', this.platform);
+    headers.append('zoneId', this.zoneId);
+    headers.append('clanId', this.groupId);
     headers.append('Authorization', this.authorization);
     const options = new RequestOptions({headers: headers});
     const url = this.serverUrl + this.gameEndpoint + '/' + id + '/leave';
@@ -155,13 +157,29 @@ export class GameService {
   validateEvent(id: number, json: string): Observable<any>{
     const headers = new Headers();
     headers.append('membership', this.membership);
-    headers.append('platform', '2');
-    headers.append('zoneId', 'America/Sao_Paulo');
-    headers.append('clanId', '548691');
+    headers.append('platform', this.platform);
+    headers.append('zoneId', this.zoneId);
+    headers.append('clanId', this.groupId);
     headers.append('Content-Type', 'application/json')
     headers.append('Authorization', this.authorization);
     const options = new RequestOptions({headers: headers});
     const url = this.serverUrl + this.gameEndpoint + '/' + id + '/validate';
+    console.log('url: ' + url);
+    return this.http.post(url, json, options)
+      .map((response: Response) => { return response})
+      .catch(err => this.handleError(err))
+  }
+
+  evaluateEvent(id: number, json: string): Observable<any>{
+    const headers = new Headers();
+    headers.append('membership', this.membership);
+    headers.append('platform', this.platform);
+    headers.append('zoneId', this.zoneId);
+    headers.append('clanId', this.groupId);
+    headers.append('Content-Type', 'application/json')
+    headers.append('Authorization', this.authorization);
+    const options = new RequestOptions({headers: headers});
+    const url = this.serverUrl + this.gameEndpoint + '/' + id + '/evaluations';
     console.log('url: ' + url);
     return this.http.post(url, json, options)
       .map((response: Response) => { return response})

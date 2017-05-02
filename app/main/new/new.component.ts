@@ -48,6 +48,7 @@ export class NewEventComponent implements OnInit {
   selectedTime = '';
 
   creator: Membership = new Membership('4611686018437203239');
+  //creator: Membership = new Membership('4611686018449763730');
   entryList: Entry[] = [];
   EventID = 0;
   wroteComment = '';

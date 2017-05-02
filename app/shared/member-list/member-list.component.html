@@ -5,8 +5,17 @@
 			{{total}}<img src="src/assets/img/ic_clan.png" style="padding-left: 8px">
 		</div>
 	</div>
+	<div class="form-inline" style="padding-top: 16px;">
+		<div style="float: right; padding-right: 8px">
+			<label class="control-label" for="type" style="padding-right: 16px">Order by:</label>
+				<select [(ngModel)]='value'class="form-control" id="orderBy" name="orderBy" (change)="onChange($event.target.value)">
+					<option value="0">Name</option>
+					<option value="1">Level</option>
+				</select>
+		</div>
+	</div>
 <div class="game-list">
-	<button [ngStyle]="{'background-image': 'url(http://www.bungie.net'+ member.icon +')'}" (click)="onClick(member)" *ngFor="let member of members | orderbyName 'member.name'" class="fade-in">
+	<button [ngStyle]="{'background-image': 'url(http://www.bungie.net'+ member.icon +')'}" (click)="onClick(member)" *ngFor="let member of members" class="fade-in">
 	<div class="game-list-left">
 		<p class="item-subtitle" style="font-size: 1.3em">{{member.name}}</p>
 		<p class="item-creator">{{member.memberTitle.en}}</p>

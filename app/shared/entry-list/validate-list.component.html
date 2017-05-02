@@ -1,7 +1,7 @@
 <div class="fade-in">
-		<div class="blue-title">Confirm event</div>
-		<div style="padding-left: 32px; padding-top: 8px">
-			<input id="checkbox" type="checkbox" class="styled-checkbox" [checked]="isChecked" (change)="onCheckBoxChange()"><label for="checkbox" class="check-label">Uncheck if this event did not happen</label>
+		<div class="blue-title" *ngIf="!isEvaluation">Confirm event</div>
+		<div style="padding-left: 32px; padding-top: 8px" *ngIf="!isEvaluation">
+			<input id="checkbox" type="checkbox" class="styled-checkbox" [checked]="isChecked" (change)="onCheckBoxChange()" ><label for="checkbox" class="check-label">Uncheck if this event did not happen</label>
 		</div>
   <div class="blue-title">Guardians</div>
 	<div [ngStyle]="{'opacity': opacity}">

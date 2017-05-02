@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Headers, Http, Response, RequestOptions } from '@angular/http';
+import * as moment from 'moment-timezone';
 
 import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
@@ -16,8 +17,11 @@ export class ClanService {
   private serverUrl = 'http://localhost:4200/';
   private clanEndpoint = 'api/clan/';
 
-  private authorization = 'eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI0NjExNjg2MDE4NDM3MjAzMjM5IiwiZXhwIjoxNDkzNDgzNTAwfQ.Zwlc3W8QlWCoNXMrdqXj6S8gVhgua_B9Op9euRUrzBODzRTylpJmsbzfgiMv6MqlLAZIwEsHKZF1F_F70tXq_w';
-  private membership = '4611686018437203239';
+  private authorization = sessionStorage.getItem('authKey');
+  private membership = localStorage.getItem('membership');
+  private groupId = localStorage.getItem('groupId');
+  private zoneId = moment.tz.guess();
+  private platform = localStorage.getItem('platform');
 
   private clan: Clan;
 
@@ -31,9 +35,9 @@ export class ClanService {
     } else {
       const headers = new Headers();
       headers.append('membership', this.membership);
-      headers.append('platform', '2');
-      headers.append('zoneId', 'America/Sao_Paulo');
-      headers.append('clanId', '548691');
+      headers.append('platform', this.platform);
+      headers.append('zoneId', this.zoneId);
+      headers.append('clanId', this.groupId);
       headers.append('Authorization', this.authorization);
       const options = new RequestOptions({headers: headers});
       const url = this.serverUrl + this.clanEndpoint + groupID;
