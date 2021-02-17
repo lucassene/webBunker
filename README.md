@@ -1,5 +1,5 @@
 # Web Bunker
-> (Abandoned) A web version of the Destiny Event Scheduler made with Angular.
+> (Abandoned) A web version of the Destiny Event Scheduler made in Angular.
 
 A web version with all the funcions found in the Destiny Event Scheduler.
 
